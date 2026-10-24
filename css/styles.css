@@ -652,3 +652,16 @@ pre.code, .lab-out, .table-wrap, .fig { scrollbar-width: thin; scrollbar-color: 
 .ec-t { font: 700 1.15rem/1.3 var(--serif); }
 .ec-m { font-size: .86rem; color: var(--muted); }
 @media (max-width: 760px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } .hero-plot { max-width: 420px; } }
+
+/* Portada: guías hermanas */
+.home-links { margin-top: 44px; }
+.also-h { font: 700 1.35rem/1.3 var(--serif); margin: 0 0 12px; }
+.also { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.also li { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; }
+.also li:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.also-main { display: grid; gap: 4px; padding: 14px 16px 10px; text-decoration: none; color: var(--ink); font-family: var(--sans); flex: 1; }
+.also-main b { font-size: 1rem; }
+.also-main span { font-size: .86rem; color: var(--muted); }
+.also-repo { padding: 7px 16px 10px; font: 600 .8rem var(--mono); color: var(--accent-ink); text-decoration: none; border-top: 1px dashed var(--line); }
+.also-repo:hover { text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) { .also li:hover { transform: none; } }
