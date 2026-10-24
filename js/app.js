@@ -1,6 +1,6 @@
-/* Motor de la guía: índice, rutas por hash, progreso, cuestionarios, repaso, simulacros por parcial, taller de gráficas, fórmulas y laboratorios. */
+/* Motor de la guía: índice, rutas por hash, progreso, cuestionarios, repaso, simulacros por parcial, parciales reales resueltos, integral, taller de gráficas, fórmulas y laboratorios. */
 (() => {
-  const { UNITS, LESSONS, LABS } = window.GUIDE;
+  const { UNITS, LESSONS, LABS, EXAMS, INTEGRAL } = window.GUIDE;
   // Solo los módulos que ya tienen lecciones cargadas
   const MODULES = window.GUIDE.MODULES.filter((m) => LESSONS.some((l) => l.module === m.id));
   const $ = (s, el = document) => el.querySelector(s);
@@ -33,7 +33,15 @@
 
   // Todas las preguntas con su id, módulo y lección
   const QUESTIONS = LESSONS.flatMap((l) => (l.quiz || []).map((q, i) => ({ ...q, id: `${l.id}:${i}`, lesson: l, module: l.module })));
-  const qById = Object.fromEntries(QUESTIONS.map((q) => [q.id, q]));
+  // Preguntas del integral: cada una apunta (l) a la lección que conviene releer si se falla
+  const lessonById = Object.fromEntries(LESSONS.map((l) => [l.id, l]));
+  const INT_QS = INTEGRAL.questions.map((q, i) => ({ ...q, id: `int:${i}`, lesson: lessonById[q.l] || LESSONS[0], module: (lessonById[q.l] || LESSONS[0]).module }));
+  const qById = Object.fromEntries([...QUESTIONS, ...INT_QS].map((q) => [q.id, q]));
+  // Parciales reales: cada ejercicio con exam: ['1p-2024#5'] queda enlazado a la pregunta 5 de ese parcial
+  const examById = Object.fromEntries(EXAMS.map((e) => [e.id, e]));
+  const EXS = LESSONS.flatMap((l) => (l.exercises || []).map((ex) => ({ ex, l })));
+  const examChips = (list) => list.map((k) => examById[k.split('#')[0]]).filter(Boolean)
+    .filter((e, i, a) => a.indexOf(e) === i).map((e) => `<a class="chip acc" href="#/parciales">${e.short}</a>`).join('');
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -105,9 +113,12 @@
     else if (id.startsWith('simulacro')) renderExam(UNITS.find((u) => u.id === id.slice(10)));
     else if (id === 'graficas') renderGraphs();
     else if (id === 'formulas') renderFormulas();
+    else if (id === 'parciales') renderParciales();
+    else if (id === 'integral') renderIntegral();
     else renderHome();
     renderToc($('#search').value);   // abre el módulo de la página actual
     closeMenu();
+    if (id !== 'integral') { clearInterval(timerId); timerId = null; }
     window.scrollTo(0, 0);
     main.focus({ preventScroll: true });
   }
@@ -128,6 +139,7 @@
     const nEx = LESSONS.reduce((a, l) => a + (l.exercises?.length || 0), 0);
     const nOfficial = LESSONS.reduce((a, l) => a + (l.exercises || []).filter((e) => e.official).length, 0);
     const nLabs = LESSONS.reduce((a, l) => a + (l.labs?.length || 0), 0);
+    const nPx = EXS.filter(({ ex }) => ex.exam).length;
 
     const stops = MODULES.map((m, i) => {
       const total = lessonsOf(m.id).length;
@@ -168,7 +180,7 @@
             <div>
               <p class="hero-kicker">Economía 2026, UTN-FRT · Cátedra Ing. Ramón A. Aranda</p>
               <h1>Economía con las <em>curvas en la mano</em>.</h1>
-              <p class="lede">En los parciales lo que más puntaje suma son las gráficas. Esta guía las pone a moverse: ${LESSONS.length} lecciones, ${nLabs} laboratorios interactivos, ${QUESTIONS.length} preguntas de repaso y ${nEx} ejercicios resueltos paso a paso, ${nOfficial} de ellos de los trabajos prácticos de la cátedra.</p>
+              <p class="lede">En los parciales lo que más puntaje suma son las gráficas. Esta guía las pone a moverse: ${LESSONS.length} lecciones, ${nLabs} laboratorios interactivos, ${QUESTIONS.length} preguntas de repaso y ${nEx} ejercicios resueltos paso a paso: ${nOfficial} de los trabajos prácticos y ${nPx} preguntas de <a href="#/parciales">${EXAMS.length} parciales reales</a> de la cátedra.</p>
             </div>
             <div class="hero-plot" aria-hidden="true">${heroPlot}</div>
           </div>
@@ -179,6 +191,7 @@
           </ol>
           <div class="hero-actions">
             <a class="btn primary" href="#/${resume.id}">${done.size ? 'Seguir con' : 'Empezar con'} “${resume.title}”</a>
+            <a class="btn" href="#/parciales">Parciales resueltos</a>
             <a class="btn" href="#/graficas">Taller de gráficas</a>
             <a class="btn" href="#/formulas">Fórmulas</a>
             <button class="btn" type="button" data-act="also">También probá…</button>
@@ -188,6 +201,8 @@
         </header>
         <div class="exam-cards">
           ${UNITS.map((u) => `<a class="exam-card" data-u="${u.id}" href="#/simulacro/${u.id}"><span class="ec-k">${u.title}</span><span class="ec-t">Simulacro de ${u.name}</span><span class="ec-m">${Math.min(20, nP(u.id))} preguntas de ${nP(u.id)}, corregido al final</span></a>`).join('')}
+          <a class="exam-card" data-u="px" href="#/parciales"><span class="ec-k">Parciales reales</span><span class="ec-t">Lo que toma la cátedra</span><span class="ec-m">${EXAMS.length} parciales y recuperatorios, ${nPx} preguntas resueltas y lo que más se repite</span></a>
+          <a class="exam-card" data-u="int" href="#/integral"><span class="ec-k">Integral</span><span class="ec-t">Integral de todo el año</span><span class="ec-m">${Math.min(25, INT_QS.length)} preguntas de ${INT_QS.length} y ${INTEGRAL.cases.length} problemas tipo parcial, con 120 minutos</span></a>
         </div>
         ${units}
         <section class="home-links">
@@ -201,7 +216,7 @@
             <li>Mové los deslizadores de cada gráfica y anticipá qué va a pasar antes de soltarlo. Así se entrena el parcial.</li>
             <li>Respondé las preguntas del final. Las que falles van a la sección <a href="#/repaso">Repasar</a>.</li>
             <li>Resolvé los ejercicios de los TP sin mirar la solución, con lápiz y papel, y dibujá la gráfica.</li>
-            <li>Al cerrar un tema, hacé su cuestionario. Antes de cada parcial, su simulacro y la hoja de <a href="#/formulas">fórmulas</a>.</li>
+            <li>Al cerrar un tema, hacé su cuestionario. Antes de cada parcial, resolvé los <a href="#/parciales">parciales reales</a>, el simulacro y repasá la hoja de <a href="#/formulas">fórmulas</a>. Para el recuperatorio integral, el <a href="#/integral">integral</a>.</li>
           </ol>
           <p class="kbd-line">Atajos: <kbd>←</kbd> <kbd>→</kbd> para moverte entre lecciones, <kbd>/</kbd> para buscar.</p>
         </section>
@@ -236,13 +251,15 @@
           ${f.name ? `<p class="file-name">${f.name}</p>` : ''}
           <pre class="code" data-lang="${f.lang}">${esc(f.code.trim())}</pre>
         </div>`).join('');
-      const tag = ex.official ? `TP ${ex.official.split('.')[0]}, ejercicio ${ex.official.split('.')[1]}` : `Práctica ${++practice}`;
+      const tag = ex.tag || (ex.official ? `TP ${ex.official.split('.')[0]}, ejercicio ${ex.official.split('.')[1]}` : ex.exam ? 'Pregunta de parcial' : `Práctica ${++practice}`);
+      const px = !ex.official && ex.exam;
       return `
-        <article class="exercise${ex.official ? ' official' : ''}">
+        <article class="exercise${ex.official ? ' official' : px ? ' parcial' : ''}">
           <header class="ex-head">
-            <span class="ex-tag">${tag}</span>
+            <span class="ex-tag${px ? ' px' : ''}">${tag}</span>
             ${ex.level ? `<span class="ex-level" data-level="${ex.level}">${LEVEL[ex.level]}</span>` : ''}
           </header>
+          ${ex.exam ? `<p class="ex-exams">${ex.official ? '<span class="chip">También tomado en</span>' : '<span class="chip">Tomado en</span>'}${examChips(ex.exam)}</p>` : ''}
           <h3>${ex.title}</h3>
           <div class="ex-prompt">${ex.prompt}</div>
           ${ex.hints ? `<details class="hint"><summary>Ver pistas</summary><ul>${ex.hints.map((h) => `<li>${h}</li>`).join('')}</ul></details>` : ''}
@@ -337,14 +354,14 @@
   // ---------- Cuestionarios ----------
   const shuffle = (a) => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   // mode 'inline': corrige cada pregunta al responder. 'exam': corrige todo al final.
-  function renderQuiz(el, qs, { mode, onFinish } = {}) {
+  function renderQuiz(el, qs, { mode, onFinish, from } = {}) {
     const letters = 'ABCDEF';
-    // Las opciones se muestran en orden aleatorio para que la posición no delate la respuesta
-    const order = Object.fromEntries(qs.map((q) => [q.id, shuffle(q.o.map((_, i) => i))]));
+    // Las opciones se muestran en orden aleatorio para que la posición no delate la respuesta (salvo Verdadero/Falso)
+    const order = Object.fromEntries(qs.map((q) => [q.id, q.o.join() === 'Verdadero,Falso' ? [0, 1] : shuffle(q.o.map((_, i) => i))]));
     el.innerHTML = `<ol class="quiz ${mode}">${qs.map((q, n) => `
       <li class="q" data-id="${q.id}">
         <fieldset>
-          <legend><span class="q-n">${n + 1}.</span> ${q.q}${mode === 'exam' || mode === 'review' ? `<span class="q-from">${q.lesson.title}</span>` : ''}</legend>
+          <legend><span class="q-n">${n + 1}.</span> ${q.q}${q.exam ? '<span class="q-src px">tomada en parcial</span>' : ''}${q.src ? `<span class="q-src">${q.src}</span>` : ''}${(mode === 'exam' || mode === 'review') && from !== false ? `<span class="q-from">${q.lesson.title}</span>` : ''}</legend>
           <div class="q-opts">${order[q.id].map((i, k) => `
             <label class="opt"><input type="radio" name="q-${q.id}" value="${i}"><span class="opt-l" aria-hidden="true">${letters[k]}</span><span class="opt-t">${q.o[i]}</span></label>`).join('')}
           </div>
@@ -454,7 +471,7 @@
         <h1>Repasar</h1>
         ${qs.length ? `<p class="tldr">Estas son las ${qs.length} preguntas que respondiste mal la última vez. Cuando aciertes una, sale de la lista.</p><div class="quiz-mount"></div>`
           : `<p class="tldr">No tenés preguntas pendientes. Cada vez que falles una, en una lección o en un cuestionario, aparece acá para que la vuelvas a intentar.</p>
-             <p><a class="btn primary" href="#/simulacro/p1">Simulacro del 1er parcial</a> <a class="btn" href="#/simulacro/p2">Simulacro del 2do parcial</a></p>`}
+             <p><a class="btn primary" href="#/simulacro/p1">Simulacro del 1er parcial</a> <a class="btn" href="#/simulacro/p2">Simulacro del 2do parcial</a> <a class="btn" href="#/integral">Integral</a></p>`}
       </article>`;
     if (qs.length) renderQuiz($('.quiz-mount', main), qs, { mode: 'review' });
   }
@@ -510,6 +527,70 @@
             <div class="cards">${F.filter((f) => f.m === m.id).map((f) => `<div class="card"><b>${f.n}</b><div class="f">${f.f}</div>${f.d ? `<p class="muted-s">${f.d}</p>` : ''}</div>`).join('')}</div>`).join('')}
         </section>`).join('')}
       </article>`;
+  }
+
+  // ---------- Parciales reales: cada pregunta con su resolución y lo que más se repite ----------
+  function renderParciales() {
+    document.title = 'Parciales resueltos, Economizar';
+    const withExam = EXS.filter(({ ex }) => ex.exam);
+    const n = withExam.reduce((a, { ex }) => a + ex.exam.length, 0);
+    // Ranking: preguntas que aparecen en más de un parcial
+    const top = withExam.filter(({ ex }) => ex.exam.length > 1).sort((a, b) => b.ex.exam.length - a.ex.exam.length);
+    const byMod = MODULES.map((m) => ({ m, k: withExam.filter(({ l }) => l.module === m.id).reduce((a, { ex }) => a + ex.exam.length, 0) })).filter((x) => x.k).sort((a, b) => b.k - a.k);
+    const item = (e, [num, text]) => {
+      const hit = withExam.find(({ ex }) => ex.exam.includes(`${e.id}#${num}`));
+      return `<details class="exam-q"><summary>${num}. ${text}${hit ? ` <small>· Tema ${modOf(hit.l.module).tema}</small>` : ''}</summary>
+        ${hit ? `${renderExercises({ exercises: [hit.ex] })}<p class="q-link"><a href="#/${hit.l.id}">Ver la teoría: “${hit.l.title}”</a></p>` : '<p class="muted-s">Sin resolución cargada.</p>'}</details>`;
+    };
+    const groups = [...UNITS, { id: 'int', title: 'Recuperatorios', name: 'e integrales' }];
+    main.innerHTML = `
+      <article class="lesson exams-page">
+        <p class="crumb">Para el parcial</p>
+        <h1>Parciales resueltos</h1>
+        <p class="tldr">Los ${EXAMS.length} parciales y recuperatorios de la cátedra que tenemos, pregunta por pregunta y resueltos como se espera en el examen. Muchas preguntas salen textuales de los ejercicios de Blanco y de los TP: por eso conviene empezar por las que <mark>se repiten</mark>.</p>
+        <h2>Lo que más se repite</h2>
+        <ol class="freq">${top.map(({ ex, l }) => `<li><span class="n">×${ex.exam.length}</span><span><a href="#/${l.id}">${ex.title}</a><small>Tema ${modOf(l.module).tema} · ${[...new Set(ex.exam.map((k) => examById[k.split('#')[0]]?.short))].join(', ')}</small></span></li>`).join('')}</ol>
+        <h2>Qué temas pesan más</h2>
+        <ol class="freq">${byMod.map(({ m, k }) => `<li><span class="n">${k}</span><span><a href="#/${lessonsOf(m.id)[0].id}">Tema ${m.tema}: ${m.title}</a><small>${k === 1 ? 'pregunta' : 'preguntas'} en ${n} en total</small></span></li>`).join('')}</ol>
+        ${groups.map((u) => { const ex = EXAMS.filter((e) => e.unit === u.id); return ex.length ? `<section data-u="${u.id}"><h2><span class="unit-tag">${u.title}</span>${u.name}</h2>
+          ${ex.map((e) => `<details class="exam-block" data-u="${u.id}"><summary><b>${e.title}</b><span>${e.sub} · ${e.items.length} preguntas</span></summary>
+            <div class="exam-body">${e.note ? `<p class="muted-s">${e.note}</p>` : ''}${e.items.map((it) => item(e, it)).join('')}</div></details>`).join('')}</section>` : ''; }).join('')}
+      </article>`;
+    main.querySelectorAll('.lab-mount').forEach((el) => el.remove());
+  }
+
+  // ---------- Integral: 25 preguntas difíciles de todo el año, problemas tipo parcial y 120 minutos ----------
+  let timerId = null;
+  function renderIntegral() {
+    document.title = 'Integral, Economizar';
+    document.body.dataset.unit = 'int';
+    const qs = shuffle(INT_QS).slice(0, 25);
+    const cases = renderExercises({ exercises: INTEGRAL.cases.map((c, i) => ({ ...c, tag: `Problema ${i + 1}`, level: 3 })) });
+    main.innerHTML = `
+      <article class="lesson quiz-page">
+        <p class="crumb">Práctica personalizada · <a href="#/simulacro/p1">simulacro del 1er parcial</a> · <a href="#/simulacro/p2">del 2do parcial</a> · <a href="#/parciales">parciales reales</a></p>
+        <h1>Integral</h1>
+        <p class="tldr">Como el recuperatorio integral de la cátedra: <mark>${qs.length} preguntas de Micro y Macro</mark>, elegidas al azar entre ${INT_QS.length}, que cruzan temas y castigan las confusiones típicas. Después, ${INTEGRAL.cases.length} problemas como los del parcial, con gráfico y justificación.</p>
+        <div class="int-rules note warn"><p><strong>Reglas.</strong> Tenés 120 minutos. Para aprobar necesitás 60 %. En los problemas, una respuesta sin justificar o sin gráfico no suma: corregite con la grilla de cada solución. Varias opciones son “casi correctas”: buscá la que es correcta <em>siempre</em>, no la que suena mejor.</p></div>
+        <div class="int-head"><button class="btn primary" type="button" id="intStart">Empezar el reloj</button><span class="timer" id="intTimer" hidden>120:00</span></div>
+        <section class="int-part"><h2>Parte teórica</h2><div class="quiz-mount"></div></section>
+        <section class="int-part practice"><h2>Parte práctica</h2><p class="sec-lede">Resolvé cada problema en papel, completo y con los gráficos, antes de abrir la solución.</p>${cases}</section>
+      </article>`;
+    const mount = $('.quiz-mount', main);
+    renderQuiz(mount, qs, { mode: 'exam', from: false, onFinish: () => { clearInterval(timerId); timerId = null; } });
+    $('#intStart').addEventListener('click', (e) => {
+      e.currentTarget.remove();
+      const t = $('#intTimer');
+      t.hidden = false;
+      const end = Date.now() + 120 * 60 * 1000;
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        const left = Math.max(0, end - Date.now());
+        t.textContent = `${String(Math.floor(left / 60000)).padStart(2, '0')}:${String(Math.floor((left % 60000) / 1000)).padStart(2, '0')}`;
+        t.classList.toggle('low', left < 10 * 60 * 1000);
+        if (!left) { clearInterval(timerId); timerId = null; t.textContent = 'Tiempo cumplido'; $('[data-act="grade"]', mount)?.click(); }
+      }, 1000);
+    });
   }
 
   // ---------- Laboratorios ----------

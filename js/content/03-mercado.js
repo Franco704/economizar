@@ -1,7 +1,8 @@
 /* Tema IV: Demanda y oferta. Diapositivas "TEMA IV DEMANDA Y OFERTA 2026", Blanco cap. 2, Mankiw caps. 4. TP 3 (ejercicios 1 a 9, 11 y 13). */
 (() => {
   const { LESSONS, h } = window.GUIDE;
-  const { note, def, table, chart, eq, frac, num, lab } = h;
+  const { note, def, table, chart, eq, frac, num, lab, flow } = h;
+  const D = (x) => 9 - 0.8 * x, S = (x) => 1 + 0.8 * x;
 
   const shifters = [
     { id: 'r', label: 'Renta de los consumidores (bien normal)', curve: 'd', min: -3, max: 3, step: 1, value: 0, k: 6 },
@@ -314,6 +315,93 @@
         { q: '¿Cuál de estos factores produce un movimiento a lo largo de la curva de oferta?', o: ['Una mejora técnica', 'Un subsidio', 'Un aumento del precio del bien', 'Más empresas'], a: 2, e: 'El precio del propio bien es la variable endógena.' },
       ],
       sources: [{ title: 'Diapositivas del Tema IV', ref: 'Cátedra de Economía', points: ['Variables exógenas (ceteris paribus) y endógena.', 'Desplazamiento = variación de la demanda; movimiento = variación de la cantidad demandada.', 'Desplazamiento simultáneo.'] }],
+    },
+
+    {
+      id: 'ajuste-equilibrio',
+      module: 't4',
+      title: 'Del desequilibrio al nuevo equilibrio: cómo analizar cualquier cambio',
+      keywords: 'fuerzas del mercado exceso de oferta exceso de demanda ajuste proceso nuevo equilibrio subasta lonja equilibrio económico contable cantidades deseadas realizadas método pasos arroz salarios agrícolas renta bien inferior semilla margarina mantequilla demanda vertical oferta vertical cualquier precio',
+      tldr: 'Si el precio no es el de equilibrio, el mercado lo empuja: con <mark>exceso de oferta</mark> baja, con <mark>exceso de demanda</mark> sube. Para analizar un cambio, el parcial pide <strong>describir el proceso</strong>: qué curva se mueve, qué exceso aparece al precio viejo, cómo reacciona el precio y dónde termina. Las compras siempre igualan a las ventas (equilibrio contable); el equilibrio que importa es el <strong>económico</strong>, el de las intenciones.',
+      goals: ['Explicar por qué las fuerzas del mercado llevan el precio al equilibrio.', 'Distinguir equilibrio económico de equilibrio contable.', 'Aplicar el método de pasos para analizar cualquier cambio, describiendo el proceso de ajuste.', 'Resolver el caso del arroz (Blanco 2.7.2) con sus tres gráficos.', 'Analizar demandas y ofertas verticales u horizontales.'],
+      body: `
+        <h2>Las fuerzas del mercado empujan el precio hacia el equilibrio</h2>
+        <p>El ejemplo de Blanco es el mercado de bacalao fresco:</p>
+        ${table(['Precio (€/kg)', 'Cantidad demandada (t)', 'Cantidad ofrecida (t)', 'Situación', 'El precio…'], [
+          ['10', '1.000', '5.000', 'Exceso de oferta de 4.000', 'tiende a bajar'],
+          ['8', '2.000', '4.000', 'Exceso de oferta de 2.000', 'tiende a bajar'],
+          ['<strong>7</strong>', '<strong>3.000</strong>', '<strong>3.000</strong>', '<strong>Equilibrio</strong>', 'se mantiene'],
+          ['6', '4.000', '2.000', 'Exceso de demanda de 2.000', 'tiende a subir'],
+        ])}
+        <ul>
+          <li><strong>Precio por encima del equilibrio</strong>: los vendedores no pueden vender todo lo que quieren y rebajan el precio para colocar el producto. Al bajar, los consumidores quieren comprar más y los productores producir menos: las posiciones se acercan. El precio baja mientras persista el exceso de oferta.</li>
+          <li><strong>Precio por debajo</strong>: los compradores no consiguen todo lo que quieren y algunos ofrecen pagar más para asegurarse el producto. Al subir, se demanda menos y se ofrece más. El precio sube mientras persista el exceso de demanda.</li>
+        </ul>
+        ${note('Pregunta del 1er parcial 3K2 2022 (es la 2.6.6 de Blanco): “Si en un mercado existe exceso de demanda, el precio: a) tenderá a bajar; b) se mantendrá estable; c) tenderá a subir; d) necesitará algún tipo de regulación estatal”. Respuesta: <strong>c</strong>. Los compradores insatisfechos pujan, y el mercado se corrige solo: no hace falta regulación.', 'exam')}
+        <p>En algunos mercados el ajuste se ve: subastas, lonjas de pescado, la bolsa. Si una subasta arranca por debajo del equilibrio, los compradores pujan hacia arriba; si arranca por encima, el vendedor baja el precio hasta que alguien acepta. En la mayoría de los mercados las pujas no son explícitas, pero el proceso existe igual.</p>
+        <h2>Equilibrio económico y equilibrio contable</h2>
+        ${table(['', 'Equilibrio económico', 'Equilibrio contable'], [
+          ['Compara', 'Variables <strong>deseadas</strong> (planeadas): lo que se quiere comprar y vender', 'Variables <strong>realizadas</strong> (medidas): lo que efectivamente se compró y vendió'],
+          ['Se cumple', 'Solo al precio de equilibrio', '<strong>Siempre</strong>: no hay compra sin venta'],
+          ['Ejemplo', 'A 7 €, se quiere comprar y vender 3.000', 'Con un precio máximo de 6 €, se compran y venden 2.000 aunque se quieran comprar 4.000'],
+        ])}
+        <p>El concepto relevante en economía es el <strong>económico</strong>. Por eso es falso decir que “un mercado está en equilibrio cuando las cantidades compradas coinciden con las vendidas” (Blanco 2.5.6): eso pasa siempre.</p>
+
+        <h2>El método para analizar cualquier cambio</h2>
+        ${flow('1. ¿Qué variable cambió? ¿Afecta a la demanda, a la oferta o a las dos?', '2. ¿Hacia dónde se desplaza la curva?', '3. Al precio inicial, ¿aparece exceso de oferta o de demanda?', '4. ¿Cómo reacciona el precio y cómo responden compradores y vendedores?', '5. Nuevo equilibrio: comparar P y X con los iniciales')}
+        ${note('La consigna típica dice “<em>describiendo el proceso generado hasta alcanzar el nuevo equilibrio. Utilice gráficos</em>”. Si solo ponés “P ↑ y X ↓” te falta la mitad: hay que nombrar el exceso que aparece al precio viejo y cómo lo corrige el precio. Ese es el paso 3 y 4.', 'warn')}
+
+        <h2>El caso del arroz (Blanco 2.7.2, 1er parcial Ingeniería Civil 2022)</h2>
+        <p><em>Suponga que el mercado del arroz es competitivo. Analice los efectos sobre el precio y la cantidad de equilibrio de los siguientes cambios, describiendo el proceso hasta el nuevo equilibrio.</em></p>
+        <h3>a) Se incrementan los salarios de los trabajadores agrícolas</h3>
+        ${chart({ x: [0, 10], y: [0, 10], curves: [{ f: D, cls: 'c-d', label: 'D' }, { f: S, cls: 'c-s', ghost: true, label: 'O₀' }, { f: (x) => 3 + 0.8 * x, cls: 'c-s', label: 'O₁' }],
+          areas: [{ pts: [[2.5, 4.85], [5, 4.85], [5, 5.15], [2.5, 5.15]], cls: 'a-bad', label: 'exceso de demanda', at: [3.6, 4.3] }],
+          points: [{ x: 5, y: 5, cls: 'pl-old', label: 'E₀', pos: 'e' }, { x: 3.75, y: 6, cls: 'c-eq', label: 'E₁' }], guides: [{ x: 5, y: 5, xt: 'X₀', yt: 'P₀' }, { x: 3.75, y: 6, xt: 'X₁', yt: 'P₁' }] },
+          'Sube un costo de producción: la oferta se desplaza a la izquierda. A P₀ se demanda X₀ pero se ofrece menos: exceso de demanda. El precio sube hasta E₁.')}
+        <p>El salario es el precio de un factor: aumentan los <strong>costos de producción</strong> y la <strong>oferta se desplaza a la izquierda</strong>. Si el precio siguiera en P₀, los productores ofrecerían menos de lo que los consumidores quieren comprar: aparece un <strong>exceso de demanda</strong>. Los compradores insatisfechos pujan, el precio sube; al subir, algunos consumidores dejan de comprar y los productores, con el nuevo precio, ofrecen algo más. El proceso termina en E₁: <strong>precio mayor y cantidad menor</strong>.</p>
+        <h3>b) Aumenta la renta de los individuos (el arroz es un bien inferior)</h3>
+        ${chart({ x: [0, 10], y: [0, 10], curves: [{ f: D, cls: 'c-d', ghost: true, label: 'D₀' }, { f: (x) => 7 - 0.8 * x, cls: 'c-d', label: 'D₁' }, { f: S, cls: 'c-s', label: 'O' }],
+          areas: [{ pts: [[2.5, 4.85], [5, 4.85], [5, 5.15], [2.5, 5.15]], cls: 'a-warn', label: 'exceso de oferta', at: [3.7, 5.8] }],
+          points: [{ x: 5, y: 5, cls: 'pl-old', label: 'E₀', pos: 'e' }, { x: 3.75, y: 4, cls: 'c-eq', label: 'E₁', pos: 'sw' }], guides: [{ x: 5, y: 5, xt: 'X₀', yt: 'P₀' }, { x: 3.75, y: 4, xt: 'X₁', yt: 'P₁' }] },
+          'Con más renta se consume menos de un bien inferior: la demanda se desplaza a la izquierda. A P₀ sobra arroz y el precio baja hasta E₁.')}
+        <p>Al ser inferior, con más renta los consumidores reemplazan el arroz por bienes que consideran mejores: la <strong>demanda se desplaza a la izquierda</strong>. Al precio inicial se ofrece más de lo que se quiere comprar: <strong>exceso de oferta</strong>. Los vendedores rebajan el precio; al bajar, se demanda algo más y se ofrece menos, hasta E₁: <strong>precio menor y cantidad menor</strong>.</p>
+        <h3>c) Se descubre una semilla más productiva</h3>
+        ${chart({ x: [0, 10], y: [0, 10], curves: [{ f: D, cls: 'c-d', label: 'D' }, { f: S, cls: 'c-s', ghost: true, label: 'O₀' }, { f: (x) => -1 + 0.8 * x, dom: [1.25, 10], cls: 'c-s', label: 'O₁' }],
+          areas: [{ pts: [[5, 4.85], [7.5, 4.85], [7.5, 5.15], [5, 5.15]], cls: 'a-warn', label: 'exceso de oferta', at: [6.4, 5.8] }],
+          points: [{ x: 5, y: 5, cls: 'pl-old', label: 'E₀', pos: 'w' }, { x: 6.25, y: 4, cls: 'c-eq', label: 'E₁', pos: 'se' }], guides: [{ x: 5, y: 5, xt: 'X₀', yt: 'P₀' }, { x: 6.25, y: 4, xt: 'X₁', yt: 'P₁' }] },
+          'Una mejora técnica desplaza la oferta a la derecha: a P₀ hay exceso de oferta y el precio baja hasta E₁.')}
+        <p>Una semilla más productiva es una <strong>mejora tecnológica</strong>: se produce más con los mismos recursos y la <strong>oferta se desplaza a la derecha</strong>. Al precio inicial hay <strong>exceso de oferta</strong>; el precio baja, los consumidores compran más, y el nuevo equilibrio tiene <strong>precio menor y cantidad mayor</strong>. Los precios transmiten a los consumidores la información de que ahora producir arroz es más barato.</p>
+        ${table(['Caso', 'Curva', 'Al precio inicial', 'P', 'X'], [['a) Salarios agrícolas ↑', 'O ←', 'Exceso de demanda', '↑', '↓'], ['b) Renta ↑ (inferior)', 'D ←', 'Exceso de oferta', '↓', '↓'], ['c) Semilla más productiva', 'O →', 'Exceso de oferta', '↓', '↑']])}
+
+        <h2>Un caso de bienes relacionados: margarina y manteca</h2>
+        <p>Blanco 2.6.8: si baja el precio de la margarina, ¿qué pasa en el mercado de la manteca? Son <strong>sustitutos</strong>: la demanda de manteca se desplaza a la izquierda y caen su precio y su cantidad. Fijate que en el mercado de la margarina, en cambio, hay un movimiento a lo largo de su demanda.</p>
+
+        <h2>Curvas verticales y horizontales</h2>
+        <div class="figs-2">
+          ${h.plot({ x: [0, 10], y: [0, 10], h: 240, curves: [{ pts: [[5, 0.3], [5, 9.6]], cls: 'c-d', label: 'D' }, { f: S, cls: 'c-s', label: 'O' }], points: [{ x: 5, y: 5, cls: 'c-eq', label: 'E' }], alt: 'Demanda vertical' })}
+          ${h.plot({ x: [0, 10], y: [0, 10], h: 240, curves: [{ f: D, cls: 'c-d', ghost: true, label: 'D₀' }, { f: (x) => 11 - 0.8 * x, cls: 'c-d', label: 'D₁' }, { pts: [[5, 0.3], [5, 9.6]], cls: 'c-s', label: 'O fija' }], points: [{ x: 5, y: 5, cls: 'pl-old', label: 'E₀', pos: 'w' }, { x: 5, y: 7, cls: 'c-eq', label: 'E₁', pos: 'e' }], alt: 'Oferta vertical' })}
+        </div>
+        <p class="muted-s">Izquierda: demanda vertical (perfectamente inelástica). Derecha: oferta fija (las entradas de un estadio, los terrenos frente al mar): si sube la demanda, solo sube el precio.</p>
+        <ul>
+          <li><strong>Demanda vertical</strong> (paralela al eje de precios): se compra la misma cantidad a cualquier precio. Es la de quien dice “<em>tengo que conseguirlo a cualquier precio</em>”, como la insulina para un diabético. Pregunta del parcial de Civil 2022: la respuesta es “paralela al eje de las y o de los precios”.</li>
+          <li><strong>Demanda horizontal</strong> (paralela al eje de cantidades): a un precio apenas mayor la cantidad demandada cae a cero. Es la que enfrenta cada empresa en competencia perfecta (Tema VIII).</li>
+          <li><strong>Oferta vertical</strong>: la cantidad no puede cambiar. Cualquier desplazamiento de la demanda se traduce solo en precio.</li>
+        </ul>
+        <p>Las elasticidades del Tema VI generalizan esta idea: cuanto más empinada la curva que no se mueve, más se ajusta el precio y menos la cantidad.</p>`,
+      quiz: [
+        { q: 'A un precio superior al de equilibrio hay…', o: ['exceso de demanda y el precio sube', 'exceso de oferta y el precio baja', 'escasez permanente', 'equilibrio contable pero no económico, y el precio no cambia'], a: 1, e: 'Los vendedores no pueden colocar todo y rebajan.' },
+        { q: 'Si en un mercado existe exceso de demanda, el precio…', o: ['tenderá a bajar', 'se mantendrá estable', 'tenderá a subir', 'necesitará algún tipo de regulación estatal'], a: 2, e: 'Blanco 2.6.6, tomada en el 1er parcial 3K2 2022.', src: 'Blanco 2.6.6', exam: ['1p-2022-3k2#4'] },
+        { q: 'Un mercado está en equilibrio económico cuando…', o: ['lo comprado coincide con lo vendido', 'lo que se desea comprar coincide con lo que se desea vender', 'el precio no cambia hace mucho', 'el Estado fija el precio'], a: 1, e: 'Lo comprado y lo vendido coinciden siempre (equilibrio contable).' },
+        { q: 'Suben los salarios de los trabajadores agrícolas. En el mercado del arroz…', o: ['P ↓ y X ↑', 'P ↑ y X ↓', 'P ↑ y X ↑', 'no pasa nada'], a: 1, e: 'Oferta a la izquierda; exceso de demanda al precio viejo.' },
+        { q: 'El arroz es inferior y aumenta la renta. Al precio inicial aparece…', o: ['exceso de demanda', 'exceso de oferta', 'escasez', 'nada'], a: 1, e: 'La demanda cae: sobra arroz y el precio baja.' },
+        { q: 'Si baja el precio de la margarina, en el mercado de la manteca…', o: ['aumentan la cantidad y el precio', 'disminuyen la cantidad y el precio', 'aumenta la cantidad y baja el precio', 'sube el precio y baja la cantidad'], a: 1, e: 'Son sustitutos: cae la demanda de manteca.', src: 'Blanco 2.6.8' },
+        { q: '“Tengo que conseguirlo a cualquier precio.” La curva de demanda de esa persona es…', o: ['normal, con pendiente negativa', 'paralela al eje de las cantidades', 'elástica', 'paralela al eje de los precios'], a: 3, e: 'Vertical: perfectamente inelástica.', exam: ['1p-2022-civ#6'] },
+        { q: 'La oferta de entradas de un estadio es fija y aumenta la demanda. Con seguridad…', o: ['sube el precio y la cantidad no cambia', 'sube la cantidad', 'baja el precio', 'no cambia nada'], a: 0, e: 'Con oferta vertical todo el ajuste es en precio.' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 2 (2.3.9 a 2.3.12 y ejercicios 2.6.6, 2.6.8 y 2.7.2)', points: ['Las fuerzas del mercado empujan el precio hacia el equilibrio (Tabla 2.4 del bacalao).', 'Variaciones del equilibrio: del exceso al nuevo precio (Tablas 2.5 y 2.6).', 'Equilibrio económico (variables deseadas) frente a equilibrio contable (variables realizadas).', 'El mercado del arroz.'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, cap. 4', points: ['Análisis de los cambios del equilibrio en pasos: qué curva, hacia dónde, comparar equilibrios.'] },
+      ],
     },
   );
 })();

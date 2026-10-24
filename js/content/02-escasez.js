@@ -1,7 +1,15 @@
 /* Tema III: Escasez y costo de oportunidad. Diapositivas "TEMA III ESCASEZ Y COSTO DE OPORTUNIDAD", Blanco cap. 1, Mankiw caps. 1-3. TP 1 y TP 2. */
 (() => {
   const { LESSONS, h } = window.GUIDE;
-  const { note, def, table, chart, eq, frac, num, plot, fig, lab } = h;
+  const { note, def, table, chart, eq, frac, num, plot, fig, lab, flow } = h;
+  // 1er parcial 2024: alimentos (tierra 9) y máquinas (capital 12) según el trabajo; 6 trabajadores en total
+  const FA = [0, 3200, 5040, 6580, 7810, 9400, 10000], FM = [0, 1000, 2460, 3260, 4100, 4840, 5290];
+  const P24 = FA.map((a, la) => [a, FM[6 - la]]);
+  // Tramos de G (todo alimentos) hacia A (todo máquinas): máquinas ganadas, alimentos resignados y su cociente
+  const CO24 = [5, 4, 3, 2, 1, 0].map((i) => {
+    const [a0, m0] = P24[i + 1], [a1, m1] = P24[i];
+    return [`${'ABCDEFG'[i + 1]} → ${'ABCDEFG'[i]}`, num(m1 - m0), num(a0 - a1), `<strong>${num((a0 - a1) / (m1 - m0))}</strong>`];
+  });
 
   // TP 2, ejercicio 1: producción de A (tierra 9 fija) y de B (capital 12 fijo) según el trabajo asignado
   const TA = [0, 4500, 7200, 10800, 12600, 13500, 13950, 14175];
@@ -193,7 +201,10 @@
           ['Portugal', '0,17 / 0,16 = 1,06 L', '0,16 / 0,17 = <strong>0,94 m</strong>'],
         ])}
         <p>A Inglaterra la tela le “cuesta” menos vino: ventaja comparativa en <strong>tela</strong>. A Portugal el vino le cuesta menos tela: ventaja comparativa en <strong>vino</strong>.</p>
-        ${lab(0)}`,
+        ${lab(0)}
+        <h2>¿Exportar o importar?</h2>
+        <p>Un país <strong>exporta</strong> el bien en el que tiene ventaja comparativa e <strong>importa</strong> aquel en el que no la tiene. Inglaterra exporta tela e importa vino; Portugal, al revés. El comercio conviene a los dos si el precio del intercambio queda <strong>entre</strong> los dos costos de oportunidad: por ejemplo, 1 m de tela por 0,8 L de vino. Inglaterra recibe 0,8 L por algo que le cuesta 0,57 L; Portugal consigue la tela a 0,8 L cuando producirla le costaría 1,06 L.</p>
+        ${note('Pregunta del 1er parcial 2023: “Si un país tiene ventaja comparativa para producir un bien, ¿tendería a exportarlo o importarlo?”. Respuesta: <strong>exportarlo</strong>, porque lo produce con menor costo de oportunidad que sus socios; con lo que obtiene a cambio importa lo que a él le costaría más producir. Con comercio, ambos países pueden consumir combinaciones que quedan <em>fuera</em> de su propia FPP (Mankiw, cap. 3).', 'exam')}`,
       labs: [
         {
           type: 'calc', title: 'Calculadora: ¿cuántas horas se ahorran especializándose?', intro: 'Horas por unidad y consumos del TP 1, ejercicio 6. Probá cambiarlos.',
@@ -398,6 +409,78 @@
         { q: 'Cae la utilización de la capacidad instalada de la industria. En el modelo de FPP la economía…', o: ['se aleja hacia un punto interior', 'pasa a un punto inaccesible', 'expande su frontera', 'queda sobre la frontera'], a: 0, e: 'Hay capacidad ociosa: ineficiencia.' },
       ],
       sources: [{ title: 'Diapositivas del Tema III', ref: 'Cátedra de Economía', points: ['Crecimiento económico: capital físico, humano y cambio tecnológico.', 'Inversión productiva: resignar consumo presente por producción futura.', 'Ejemplo de los países P, M y R.'] }],
+    },
+
+    {
+      id: 'fpp-parcial',
+      module: 't3',
+      title: 'La FPP en el parcial: de la tabla al costo de oportunidad creciente',
+      keywords: 'fpp tabla parcial armas alimentos máquinas puntos fuera dentro sobre cóncava convexa costo de oportunidad creciente rendimientos decrecientes desplazamientos terremoto emigración desempleo recursos ociosos escasez países ricos pobres',
+      tldr: 'El ejercicio de FPP del parcial siempre sigue el mismo camino: <mark>armar las combinaciones</mark> repartiendo el trabajo, <mark>graficar</mark>, <mark>clasificar puntos</mark>, decir por qué es <strong>cóncava</strong> y <mark>calcular costos de oportunidad</mark>. Acá está resuelto entero con la tabla del 1er parcial 2024, más la lista de desplazamientos que toman siempre.',
+      goals: ['Resolver de punta a punta un ejercicio de FPP con tabla.', 'Explicar qué significa un punto sobre, dentro y fuera de la frontera.', 'Relacionar la concavidad con los rendimientos decrecientes y el costo de oportunidad creciente.', 'Decidir cómo se mueve la FPP en los casos típicos (y cuándo no se mueve).'],
+      body: `
+        <h2>El enunciado (1er parcial 2024)</h2>
+        <p>Un país decide entre producir alimentos (con 9 unidades de tierra) y máquinas (con 12 de capital). Tiene <strong>6 unidades de trabajo</strong> para repartir:</p>
+        ${table(['Trabajo (L)', '0', '1', '2', '3', '4', '5', '6'], [['Alimentos', ...FA.map((x) => num(x))], ['Máquinas', ...FM.map((x) => num(x))]])}
+        <h2>Paso 1: armar las combinaciones</h2>
+        <p>La regla es una sola: <strong>L<sub>A</sub> + L<sub>M</sub> = 6</strong>. Si alimentos usa 2 trabajadores, máquinas usa 4. Se lee la columna correspondiente de cada tabla.</p>
+        ${table(['Punto', 'L<sub>A</sub>', 'L<sub>M</sub>', 'Alimentos', 'Máquinas'], P24.map(([a, m], i) => ['ABCDEFG'[i], i, 6 - i, num(a), num(m)]))}
+        <h2>Paso 2: graficar</h2>
+        ${chart({ x: [0, 11000], y: [0, 6000], xl: 'Alimentos', yl: 'Máquinas', alt: 'FPP del primer parcial 2024',
+          curves: [{ pts: P24, cls: 'c-fpp', label: 'FPP' }],
+          points: [...P24.map(([x, y], i) => ({ x, y, cls: 'c-fpp', r: 3.5, label: 'ABCDEFG'[i], pos: i < 3 ? 'ne' : 'e' })), { x: 5040, y: 2460, cls: 'c-warn', label: 'H (ineficiente)', pos: 'sw' }, { x: 7810, y: 4100, cls: 'c-err', label: 'I (inaccesible)' }] },
+          'Los 7 puntos de la tabla unidos forman la frontera. H usa solo 4 trabajadores; I necesitaría 8.')}
+        <h2>Paso 3: puntos sobre, dentro y fuera</h2>
+        ${table(['Punto', 'Ejemplo', 'Qué indica'], [
+          ['<strong>Sobre</strong> la frontera', 'Cualquiera de A a G, por ejemplo D (6.580; 3.260)', '<strong>Eficiente</strong>: se usan todos los recursos con la mejor tecnología. Para tener más de un bien hay que renunciar al otro'],
+          ['<strong>Dentro</strong> de la frontera', 'H (5.040; 2.460): 2 trabajadores en alimentos + 2 en máquinas', '<strong>Ineficiente</strong>: hay recursos ociosos (2 trabajadores desempleados) o mal usados. Se podría producir más de algo sin resignar nada'],
+          ['<strong>Fuera</strong> de la frontera', 'I (7.810; 4.100): 4 trabajadores en cada bien', '<strong>Inaccesible</strong> con los recursos y la tecnología actuales. Solo se alcanzaría con crecimiento (más factores o mejor tecnología). Con comercio internacional, un país puede <em>consumir</em> fuera de su FPP aunque no pueda producir ahí'],
+        ])}
+        <h2>Paso 4: costo de oportunidad por tramos</h2>
+        <p>“Pasar de producir X a Y unidades de máquinas” es moverse entre dos puntos. El costo de oportunidad es lo que se resigna del otro bien por cada unidad ganada:</p>
+        ${eq(`CO de una máquina = ${frac('alimentos que se resignan', 'máquinas que se ganan')} = ${frac('|ΔA|', 'ΔM')}`)}
+        ${table(['Tramo', 'Máquinas ganadas', 'Alimentos resignados', 'CO de 1 máquina'], CO24)}
+        <p>El ejercicio d) del parcial (“pasar de 3.260 a 4.100 máquinas”, de D a C) da <strong>1.540 / 840 = 1,83 alimentos por máquina</strong>. El enunciado decía 3.200, pero ese valor no está en la tabla de máquinas: es un error de tipeo (3.200 aparece en la de alimentos). Aclararlo en el examen suma.</p>
+        ${note('Fijate la última columna: <strong>cada máquina adicional cuesta más alimentos</strong> (0,60 → 1,09 → 1,54 → 1,83 → 2,49 → 7,11). Eso es costo de oportunidad creciente, y es lo que hace que la frontera sea cóncava.', 'exam')}
+        <h2>Paso 5: ¿cóncava o convexa? ¿Por qué?</h2>
+        <p>La FPP es <strong>cóncava respecto del origen</strong> (se “abomba” hacia afuera). Significa que el costo de oportunidad es <strong>creciente</strong>. La cadena que conviene escribir, que además responde la pregunta del recuperatorio de diciembre de 2024:</p>
+        ${flow('Se pasa trabajo de alimentos a máquinas', 'En máquinas, cada trabajador nuevo tiene menos capital fijo: aporta menos (rendimientos decrecientes)', 'En alimentos se pierden trabajadores que aportaban cada vez más', 'Cada máquina extra cuesta más alimentos', 'Costo de oportunidad creciente → FPP cóncava')}
+        <ul>
+          <li><strong>Ley de rendimientos decrecientes</strong> (Blanco): si se produce con cantidades fijas de un factor (la tierra en alimentos, el capital en máquinas) y se agregan unidades sucesivas de otro (trabajo), llega un momento en que los incrementos de producción son cada vez menores. En la tabla: el primer trabajador en alimentos agrega 3.200; el sexto, solo 600.</li>
+          <li><strong>Factores no igualmente aptos</strong>: los primeros recursos que se pasan a máquinas son los que menos servían para alimentos; al final hay que sacar a los mejores agricultores.</li>
+          <li>Si los factores fueran perfectamente adaptables y no hubiera rendimientos decrecientes, el costo de oportunidad sería <strong>constante</strong> y la FPP una <strong>recta</strong>. Con costo decreciente sería convexa.</li>
+        </ul>
+        ${note('Los datos del parcial tienen pequeñas irregularidades (el 5.º trabajador en alimentos agrega 1.590, más que el 4.º), pero el costo de oportunidad por tramo crece igual: la conclusión no cambia. Si te toca algo así, decilo.', 'tip')}
+        <h2>¿Cuándo se mueve la frontera? Los casos que toman</h2>
+        <p>Es el ejercicio 1.9.2 de Blanco, que se tomó tal cual en el 1er parcial 2023, más los casos del parcial de Ingeniería Civil 2022:</p>
+        ${table(['Situación', 'La FPP…', 'Por qué'], [
+          ['Mejora la tecnología (de todos los bienes)', '<strong>se desplaza hacia afuera</strong> en ambos ejes', 'Con los mismos recursos se produce más de todo'],
+          ['Mejora tecnológica en un solo bien', '<strong>rota hacia afuera</strong> sobre el eje de ese bien', 'El máximo del otro bien no cambia (lección anterior)'],
+          ['Se produce una inversión en maquinaria', 'se desplaza hacia afuera', 'Hay más capital: más recursos'],
+          ['Se amplía la educación y la formación profesional', 'se desplaza hacia afuera', 'Más capital humano'],
+          ['Un terremoto destruye varias fábricas', '<strong>se desplaza hacia adentro</strong>', 'Hay menos capital'],
+          ['Una parte de los trabajadores emigra', 'se desplaza hacia adentro', 'Hay menos trabajo'],
+          ['Disminuyen los recursos productivos', 'se desplaza hacia adentro', 'Blanco 1.6.6'],
+          ['Personas desempleadas encuentran empleo', '<strong>no se desplaza</strong>', 'Los recursos ya existían: la economía pasa de un punto interior a uno más cercano a la frontera'],
+          ['Las empresas usan máquinas que estaban improductivas', 'no se desplaza', 'Ídem: se usan recursos ociosos'],
+          ['Al caer las ventas, cierran plantas esperando mejores tiempos', 'no se desplaza', 'Las plantas siguen existiendo: la economía se mueve hacia un punto interior'],
+        ])}
+        ${note('La trampa más frecuente: “disminuye el desempleo, entonces la FPP se desplaza a la derecha”. Es <strong>falso</strong> (Blanco 1.5.11): la frontera mide lo que se <em>puede</em> producir; usar recursos ociosos cambia lo que se produce, no lo que se puede producir.', 'warn')}
+        <h2>¿Los países ricos también enfrentan escasez?</h2>
+        <p><strong>Sí.</strong> La escasez no depende de cuánto se tenga, sino de que los recursos no alcanzan para todo lo que se desea, porque los deseos crecen con lo que se tiene (Maslow). Un país rico tiene una FPP más grande, pero sigue teniendo una frontera: más hospitales implica menos de otra cosa. También enfrenta escasez de tiempo, de tierra o de trabajo calificado. La diferencia está en qué necesidades quedan sin cubrir, no en que exista o no el problema de elegir.</p>`,
+      quiz: [
+        { q: 'Con 6 trabajadores, ¿qué combinación es inaccesible en la tabla del parcial 2024?', o: ['(6.580; 3.260)', '(5.040; 2.460)', '(7.810; 4.100)', '(0; 5.290)'], a: 2, e: '7.810 alimentos usa 4 trabajadores y 4.100 máquinas otros 4: hacen falta 8.' },
+        { q: 'Al pasar de D (6.580; 3.260) a C (5.040; 4.100), el costo de oportunidad de una máquina es…', o: ['0,55 alimentos', '1,83 alimentos', '840 máquinas', '1.540 alimentos'], a: 1, e: '1.540 alimentos resignados / 840 máquinas ganadas.' },
+        { q: 'Si cada máquina adicional cuesta cada vez más alimentos, la FPP es…', o: ['una recta', 'cóncava respecto del origen', 'convexa respecto del origen', 'vertical'], a: 1, e: 'Costo de oportunidad creciente.' },
+        { q: 'Algunas personas desempleadas encuentran empleo. La FPP…', o: ['se desplaza hacia afuera', 'se desplaza hacia adentro', 'no se desplaza: la economía se acerca a la frontera', 'rota'], a: 2, e: 'Los recursos ya existían.', src: 'Blanco 1.9.2 d' },
+        { q: 'Un terremoto destruye varias fábricas. La FPP…', o: ['se desplaza hacia adentro', 'se desplaza hacia afuera', 'no cambia', 'rota sobre un eje'], a: 0, e: 'Hay menos capital.' },
+        { q: 'Un punto fuera de la FPP indica…', o: ['desempleo', 'una combinación que no se puede producir con los recursos y la tecnología actuales', 'eficiencia', 'que sobran recursos'], a: 1, e: 'Solo con crecimiento (o, para consumir, con comercio).' },
+        { q: 'Si los factores fueran perfectamente adaptables a ambas producciones y sin rendimientos decrecientes, la FPP sería…', o: ['cóncava', 'convexa', 'recta', 'un punto'], a: 2, e: 'Costo de oportunidad constante.' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 1 (1.3.6 y ejercicios 1.8.2, 1.9.2 y 1.9.3)', points: ['Combinaciones accesibles, inaccesibles, eficientes e ineficientes.', 'La frontera no se desplaza cuando se usan recursos que estaban ociosos.', 'Casos de desplazamiento: tecnología, inversión, educación, terremoto, emigración, cierre de plantas.'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, caps. 2 y 3', points: ['La FPP como modelo; el comercio permite consumir fuera de la propia frontera.'] },
+      ],
     },
   );
 })();

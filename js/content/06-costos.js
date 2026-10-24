@@ -213,5 +213,84 @@
       ],
       sources: [{ title: 'Diapositivas del Tema VII', ref: 'Cátedra de Economía', points: ['Relación matemática entre productividades y costos.', 'Relación entre función de producción, costos y curva de oferta.'] }],
     },
+
+    {
+      id: 'empresa-escala-beneficio',
+      module: 't7',
+      title: 'Etapas, costos y escala: la empresa a corto y a largo plazo',
+      keywords: 'empresa objetivo maximizar beneficio rendimientos a escala crecientes constantes decrecientes largo plazo economías de escala deseconomías óptimo técnico óptimo de explotación mínimo costo total medio etapas productividad costo marginal desplazamiento curvas de costos precio factores tecnología beneficio contable económico normal extraordinario',
+      tldr: 'A corto plazo manda la <mark>productividad del factor variable</mark>: sus etapas se ven al revés en los costos (cuando el PMe es máximo, el CVMe es mínimo). A largo plazo todos los factores varían y lo que importa son los <mark>rendimientos a escala</mark>. Las curvas de costos se desplazan si cambian la tecnología o los precios de los factores, y el resultado final se mide con el <strong>beneficio económico</strong>.',
+      goals: ['Relacionar cada etapa de la producción con el comportamiento de los costos (pregunta del 1er parcial 2025).', 'Distinguir óptimo técnico (mín CVMe) de mínimo del CTMe.', 'Clasificar rendimientos a escala con tablas y funciones.', 'Distinguir rendimientos a escala de rendimientos decrecientes del factor variable.', 'Predecir cómo se desplazan las curvas de costos.'],
+      body: `
+        <h2>La empresa y su objetivo</h2>
+        <p>Para Blanco, la empresa es la unidad que combina factores para producir bienes y servicios que vende en el mercado. La economía supone que su objetivo es <strong>maximizar el beneficio</strong> (Blanco 5.5.13: verdadero). Es una simplificación: en la realidad los directivos pueden buscar crecer, sobrevivir o tener prestigio, y no siempre conocen sus costos con precisión. Pero el supuesto predice bien cómo reaccionan las empresas ante cambios de precios y costos.</p>
+        <h2>Etapas de la producción y costos: la misma historia contada dos veces</h2>
+        <p><em>1er parcial 2025: “Explique analítica y gráficamente la relación entre productividad y costos marginales y detalle las distintas etapas de la productividad.”</em></p>
+        ${eq(`CMg = ${frac('w', 'PMg')} &nbsp;&nbsp;&nbsp; CVMe = ${frac('w', 'PMe')}`, 'Con w = salario constante')}
+        ${table(['Tramo', 'Productividades', 'Costos (espejo)'], [
+          ['Rendimientos marginales crecientes (comienzo de la etapa I)', 'PMg sube', 'CMg baja'],
+          ['Máximo del PMg', 'Empiezan los rendimientos marginales decrecientes', '<strong>Mínimo del CMg</strong>'],
+          ['Resto de la etapa I', 'PMg baja pero PMg > PMe: el PMe sube', 'CMg sube pero CMg < CVMe: el CVMe baja'],
+          ['<strong>Óptimo técnico</strong> (fin de la etapa I)', 'PMe máximo, PMg = PMe', '<strong>CVMe mínimo</strong>, CMg = CVMe'],
+          ['Etapa II (la racional)', 'PMe y PMg bajan, PMg ≥ 0', 'CVMe y CMg suben'],
+          ['<strong>Máximo técnico</strong> (fin de la etapa II)', 'PT máximo, PMg = 0', 'CMg → infinito: con más trabajo ya no se produce más'],
+          ['Etapa III', 'PMg < 0', 'No tiene sentido producir ahí: la curva de costos no existe'],
+        ])}
+        <div class="figs-2">
+          ${plot({ x: [0, 12], y: [-20, 140], h: 240, xl: 'L', yl: 'PMe, PMg', curves: [{ f: (l) => 10 * l + 100 - l * l, dom: [0.01, 12], cls: 'c-pme', label: 'PMe' }, { f: (l) => 20 * l + 100 - 3 * l * l, dom: [0, 11], cls: 'c-pmg', label: 'PMg' }], vlines: [{ x: 5, cls: 'pl-faint', label: 'II' }, { x: 10, cls: 'pl-faint', label: 'III' }], points: [{ x: 3.33, y: 133.3, cls: 'c-pmg', label: 'máx PMg', pos: 'nw' }, { x: 5, y: 125, cls: 'c-unit', label: 'óptimo técnico' }], alt: 'Etapas de la producción' })}
+          ${plot({ x: [0, 12], y: [0, 30], h: 240, xl: 'X', yl: '$', curves: [{ f: (x) => 10 - 4 * x + 0.6 * x * x, cls: 'c-cmg', label: 'CMg' }, { f: (x) => 10 - 2 * x + 0.2 * x * x, dom: [0, 12], cls: 'c-cvme', label: 'CVMe' }, { f: (x) => 10 - 2 * x + 0.2 * x * x + 20 / x, dom: [0.9, 12], cls: 'c-ctme', label: 'CTMe' }], points: [{ x: 3.33, y: 3.33, cls: 'c-cmg', label: 'mín CMg', pos: 'sw' }, { x: 5, y: 5, cls: 'c-unit', label: 'mín CVMe', pos: 'se' }, { x: 6.3, y: 8.51, cls: 'c-ctme', label: 'mín CTMe', pos: 'n' }], alt: 'Costos de corto plazo' })}
+        </div>
+        <p class="muted-s">Izquierda: productividades (X = 10L² + 100L − L³). Derecha: costos de la lección de costos. Cada máximo de una productividad es un mínimo de su costo espejo.</p>
+        <h2>Óptimo técnico y mínimo del costo total medio no son lo mismo</h2>
+        <p><em>Otra versión del 1er parcial 2025: “Explique analítica y gráficamente la relación entre productividad media y costo total medio. ¿Qué es el óptimo técnico?”</em></p>
+        ${eq(`CTMe = CFMe + CVMe = ${frac('CF', 'X')} + ${frac('w', 'PMe')}`)}
+        <ul>
+          <li>El <strong>óptimo técnico</strong> es el nivel de trabajo que hace <strong>máxima la productividad media</strong> (donde PMg = PMe). Como CVMe = w/PMe, ahí el <strong>costo variable medio es mínimo</strong>.</li>
+          <li>El <strong>costo total medio</strong> no es mínimo ahí: le suma el CFMe, que sigue bajando al producir más. Su mínimo está <strong>más a la derecha</strong>, donde el CMg ya creció hasta alcanzarlo. A ese punto se lo llama <strong>óptimo de explotación</strong>, y en competencia perfecta es el <strong>punto de nivelación</strong> (Tema VIII).</li>
+          <li>Por eso es falso que “el mínimo del costo medio se da al mismo nivel de producción que el mínimo del costo variable medio” (TP 5, ejercicio 9, y el parcial de 2025): solo coincidirían sin costos fijos.</li>
+        </ul>
+        ${note('Si la productividad media es decreciente, el costo variable medio es creciente (Blanco 5.5.14 dice “el coste medio es decreciente”: falso). Y si el costo medio crece, es porque el marginal está por encima del medio (Blanco 5.5.3: verdadero).', 'exam')}
+
+        <h2>Largo plazo: los rendimientos a escala</h2>
+        <p>A largo plazo la empresa puede cambiar <strong>todos</strong> los factores. La pregunta ya no es qué aporta un trabajador más, sino qué pasa con la producción si se multiplican <strong>todos</strong> los factores por un mismo número λ (la escala):</p>
+        ${table(['Si los factores se multiplican por λ y la producción…', 'Rendimientos a escala', 'Ejemplo'], [
+          ['se multiplica por más que λ', '<strong>Crecientes</strong>', 'Una planta el doble de grande produce más del doble (especialización, aprovechamiento de equipos grandes)'],
+          ['se multiplica exactamente por λ', '<strong>Constantes</strong>', 'Duplicar la planta duplica la producción'],
+          ['se multiplica por menos que λ', '<strong>Decrecientes</strong>', 'Una empresa demasiado grande se vuelve difícil de coordinar'],
+        ])}
+        <p>Las dos funciones del ejercicio 5.8.5 de Blanco, con K y L multiplicados por 1, 2, 3…:</p>
+        ${table(['Escala (λ)', '1', '2', '3', '4', '5', '6'], [['X₁', '2,3', '4,6', '6,9', '9,2', '11,5', '13,8'], ['X₂', '3,5', '9,8', '18,1', '27,8', '38,9', '51,2']])}
+        ${chart({ x: [0, 6.5], y: [0, 55], xl: 'Escala λ', yl: 'Producción', curves: [{ pts: [1, 2, 3, 4, 5, 6].map((k) => [k, 2.3 * k]), cls: 'c-s', label: 'X₁: constantes' }, { pts: [[1, 3.5], [2, 9.8], [3, 18.1], [4, 27.8], [5, 38.9], [6, 51.2]], cls: 'c-d', label: 'X₂: crecientes' }] }, 'X₁ crece en la misma proporción que la escala (una recta desde el origen); X₂ crece más que proporcionalmente.')}
+        <p>Con funciones del tipo X = A · L<sup>a</sup> · K<sup>b</sup> alcanza con sumar los exponentes: <strong>a + b = 1</strong> constantes, <strong>&gt; 1</strong> crecientes, <strong>&lt; 1</strong> decrecientes. Blanco 5.8.2: 20L<sup>0,75</sup>K<sup>0,25</sup> (suma 1) constantes; 20L<sup>0,5</sup>K<sup>0,35</sup> (0,85) decrecientes; 20L<sup>0,75</sup>K<sup>0,75</sup> (1,5) crecientes.</p>
+        ${note('<strong>No confundir</strong>: los rendimientos a escala son de <strong>largo plazo</strong> (varían todos los factores). La ley de rendimientos decrecientes es de <strong>corto plazo</strong> (hay un factor fijo). Una misma función puede tener rendimientos constantes a escala y, a la vez, productividad marginal decreciente del trabajo: X = K<sup>0,25</sup>L<sup>0,75</sup> con K = 81 fijo da X = 3L<sup>0,75</sup>, cuyo PMg = 2,25/L<sup>0,25</sup> baja con L (Blanco 5.8.3).', 'warn')}
+        <h3>Escala y costos a largo plazo</h3>
+        <p>Los rendimientos a escala se ven en el costo medio de largo plazo: con rendimientos crecientes, producir en mayor escala abarata cada unidad (<strong>economías de escala</strong>); con constantes, el costo medio no cambia; con decrecientes, sube (<strong>deseconomías de escala</strong>). Por eso la curva de costo medio de largo plazo suele tener forma de U: economías de escala al principio y deseconomías cuando la empresa crece demasiado (Mankiw, cap. 13).</p>
+        <h2>¿Cuándo se desplazan las curvas de costos?</h2>
+        ${table(['Cambio', 'Curvas de costos', 'Consecuencia'], [
+          ['Mejora tecnológica', 'Se desplazan <strong>hacia abajo</strong>', 'Con PMg más alto, el CMg baja: la oferta de la empresa aumenta'],
+          ['Suben los precios de los factores', 'Se desplazan <strong>hacia arriba</strong>', 'La oferta se reduce'],
+          ['Todos los factores suben un 10 %', 'El CMg se multiplica por 1,1 (Blanco 5.7.4)', 'CMg₁ = 1,1w / PMg = 1,1 · CMg₀'],
+          ['Cambia el precio del producto', 'Las curvas de costos no se mueven', 'La empresa se mueve <em>a lo largo</em> de su CMg (Tema VIII)'],
+        ])}
+        <p>Ante un incremento del precio de los factores, la que se desplaza hacia arriba es la curva de <strong>costo marginal</strong>, no la de productividad (Blanco 5.6.10: la productividad depende de la tecnología, no de los precios).</p>
+        <h2>Ingresos y beneficio</h2>
+        ${eq('IT = P · X &nbsp;&nbsp;&nbsp; Beneficio = IT − CT', 'Blanco 5.3.14')}
+        ${table(['', 'Beneficio contable', 'Beneficio económico'], [['Resta', 'Solo los costos que figuran en la contabilidad (explícitos)', 'Los costos económicos: explícitos más implícitos (costo de oportunidad)'], ['Si es cero…', 'La empresa “no gana nada” en los libros', 'Gana <strong>lo mismo</strong> que en su mejor alternativa: <strong>beneficio normal</strong>'], ['Si es positivo…', '', '<strong>Extraordinario</strong>: gana más que en cualquier alternativa'], ['Si es negativo…', '', '<strong>Pérdida</strong>: le iría mejor en otra actividad']])}
+        <p>Un beneficio económico nulo <strong>no</strong> significa que la empresa gane menos que en otras actividades: gana exactamente lo mismo (Blanco 5.5.11 es falso). Es la idea que el Tema VIII usa para explicar la entrada y salida de empresas.</p>`,
+      quiz: [
+        { q: 'En el óptimo técnico…', o: ['la productividad marginal es máxima', 'el producto medio es máximo', 'el producto total es máximo', 'el costo total medio es mínimo'], a: 1, e: 'Y por eso el CVMe es mínimo (no el CTMe).', src: 'Blanco 5.6.9' },
+        { q: 'El mínimo del costo marginal corresponde al…', o: ['máximo del producto marginal', 'máximo del producto medio', 'máximo del producto total', 'mínimo del CTMe'], a: 0, e: 'CMg = w/PMg.' },
+        { q: 'Una función tiene rendimientos crecientes a escala cuando…', o: ['los factores crecen en mayor proporción que la producción', 'los factores crecen en menor proporción que la producción', 'la producción crece al aumentar la empresa', 'la productividad del factor variable es creciente'], a: 1, e: 'La producción crece más que la escala.', src: 'Blanco 5.6.5' },
+        { q: 'X = 20 L<sup>0,5</sup> K<sup>0,35</sup> tiene rendimientos a escala…', o: ['crecientes', 'constantes', 'decrecientes', 'negativos'], a: 2, e: '0,5 + 0,35 = 0,85 < 1.', src: 'Blanco 5.8.2' },
+        { q: 'Al largo plazo corresponde el estudio de…', o: ['los rendimientos a escala', 'la productividad marginal de un factor variable', 'el costo fijo', 'el costo fijo medio'], a: 0, e: 'A largo plazo todos los factores varían.', src: 'Blanco 5.6.4' },
+        { q: 'Ante un incremento del precio de los factores…', o: ['la productividad marginal sube', 'la productividad marginal baja', 'la curva de costo marginal se desplaza hacia arriba', 'la curva de costo marginal se desplaza hacia abajo'], a: 2, e: 'La productividad depende de la tecnología, no de los precios.', src: 'Blanco 5.6.10' },
+        { q: 'Cuando el costo total medio es decreciente…', o: ['el costo marginal es inferior al costo total medio', 'el costo marginal es siempre decreciente', 'el costo marginal es superior al CTMe', 'el CMg es igual al CTMe'], a: 0, e: 'La última unidad cuesta menos que el promedio y lo baja.', src: 'Blanco 5.6.11' },
+        { q: 'Un beneficio económico nulo significa que la empresa…', o: ['gana menos que en cualquier otra actividad', 'gana lo mismo que en su mejor alternativa', 'no cubre sus costos variables', 'debe cerrar'], a: 1, e: 'Es el beneficio normal.' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 5 (5.3.2, 5.3.5, 5.3.12 a 5.3.14 y ejercicios)', points: ['Naturaleza y objetivo de la empresa.', 'Rendimientos a escala: crecientes, constantes y decrecientes (5.8.2 y 5.8.5).', 'Relación entre productividades y costos; desplazamiento de las curvas de costos.', 'Beneficio contable y económico; normal, extraordinario y pérdida.'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, cap. 13', points: ['Costos a largo plazo, economías y deseconomías de escala.'] },
+      ],
+    },
   );
 })();

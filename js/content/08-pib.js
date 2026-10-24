@@ -190,5 +190,79 @@
       ],
       sources: [{ title: 'Diapositivas del Tema X', ref: 'Cátedra de Economía', points: ['PNB, PNN y RN; críticas al PIB; IDH; World Happiness Report; FNB; Better Life OCDE.'] }],
     },
+
+    {
+      id: 'pib-a-fondo',
+      module: 't10',
+      title: 'El PIB a fondo: qué entra, qué no y de la producción a la renta disponible',
+      keywords: 'pib qué incluye autoconsumo economía sumergida segunda mano mayordomo cocinero variable flujo fondo stock precios de mercado coste de los factores impuestos indirectos directos depreciación bruto neto interior nacional renta personal disponible ahorro transferencias beneficios no distribuidos cotizaciones per cápita población total verdadero falso',
+      tldr: 'El PIB mide la producción <mark>final</mark>, <mark>corriente</mark> y <mark>de mercado</mark> de un territorio en un período. Por eso quedan afuera el autoconsumo, la economía sumergida, los bienes usados y los intermedios. A partir del PIB se llega a la <strong>renta disponible</strong> de las familias, que se reparte entre <strong>consumo y ahorro</strong>. Los verdadero/falso del 2do parcial salen de esta lista.',
+      goals: ['Decidir si una operación entra o no en el PIB y justificar.', 'Distinguir variables flujo y fondo; precios de mercado y costo de los factores; bruto y neto; interior y nacional.', 'Recorrer el camino PIB → PNB → PNN → RN → renta personal → renta disponible con números.', 'Resolver los verdadero/falso del 2do parcial 2024 sobre el PIB.'],
+      body: `
+        ${note('El 2do parcial 2024 (3K3) tomó tres verdadero/falso que son los 10.5.1 a 10.5.3 de Blanco: “El PIB nominal sólo se incrementa cuando aumentan las cantidades físicas…” (<strong>falso</strong>), “El PIB incluye el valor de bienes de consumo y de bienes de inversión” (<strong>verdadero</strong>) y “El PIB puede obtenerse agregando el valor añadido de todas las empresas” (<strong>verdadero</strong>).', 'exam')}
+        <h2>¿Entra o no entra?</h2>
+        <p>Blanco 10.7.3 propone casos para razonar con la definición. La pregunta es siempre la misma: ¿es producción <strong>final</strong>, <strong>de este período</strong>, que se <strong>intercambia en el mercado</strong> y se registra?</p>
+        ${table(['Operación', '¿Entra?', 'Por qué'], [
+          ['Las comidas que hace un cocinero profesional en el restaurante', '<strong>Sí</strong>', 'Es un servicio que se vende en el mercado'],
+          ['Las comidas que el mismo cocinero hace en su casa', 'No', 'Autoconsumo: no hay transacción (como el trabajo doméstico)'],
+          ['La cosecha de alcachofas que un agricultor vendió', '<strong>Sí</strong>', 'Producción vendida en el mercado'],
+          ['La parte de la cosecha que el agricultor se comió', 'No', 'Autoconsumo'],
+          ['Marihuana vendida clandestinamente', 'No', 'Economía sumergida e ilegal: no se registra'],
+          ['La venta de un auto de segunda mano', 'No', 'Se produjo en otro período: contarlo sería contarlo dos veces (sí entra la comisión del vendedor, que es un servicio de este período)'],
+          ['La harina que un molino vende a una panadería', 'No (por separado)', 'Es un bien intermedio: ya está dentro del valor del pan'],
+          ['Un auto nuevo que la fábrica no vendió', '<strong>Sí</strong>', 'Inversión en existencias'],
+          ['Compra de acciones de una empresa', 'No', 'Inversión financiera: es un cambio de manos de un activo'],
+          ['Una jubilación', 'No', 'Transferencia: no paga ningún bien o servicio producido'],
+        ])}
+        <p>El caso del mayordomo (Blanco 10.7.2): “si una mujer se casa con su mayordomo, disminuye la producción agregada del país”. Es <strong>cierto</strong> si deja de pagarle: el mayordomo hace el mismo trabajo, pero ya no es una transacción de mercado y pasa a ser autoconsumo. Es una muestra de por qué el PIB no mide todo el bienestar.</p>
+        ${note('Si la economía sumergida es importante, el PIB <strong>subestima</strong> la producción real (Blanco 10.5.15: es falso que la sobreestime). Y el PIB <strong>se mide en dinero</strong> (pesos, euros), no en toneladas ni en porcentaje (Blanco 10.6.1).', 'warn')}
+        <h2>Cuatro pares de conceptos</h2>
+        ${table(['Par', 'Diferencia', 'Lo que se toma'], [
+          ['<strong>Flujo</strong> y <strong>fondo</strong> (stock)', 'Un flujo se mide por período (el PIB del año, el ahorro del año); un fondo, en un momento (la riqueza, el capital de un país)', 'El PIB es un flujo'],
+          ['<strong>Nominal</strong> y <strong>real</strong>', 'Precios corrientes contra precios constantes de un año base', 'El nominal puede crecer solo por precios; para el crecimiento se usa el real (Blanco 10.5.4)'],
+          ['A <strong>precios de mercado</strong> y a <strong>costo de los factores</strong>', 'El primero incluye los impuestos indirectos (netos de subvenciones); el segundo no', 'La renta nacional se mide a costo de los factores (Blanco 10.5.7 y 10.6.3)'],
+          ['<strong>Bruto</strong> y <strong>neto</strong>', 'El neto descuenta la depreciación del capital', 'PIN = PIB − depreciación; restar impuestos directos no da el neto (Blanco 10.5.13)'],
+          ['<strong>Interior</strong> y <strong>nacional</strong>', 'Territorio contra residentes', 'PIB = PNB + RFEN − RFNE (Blanco 10.6.6)'],
+        ])}
+        <h2>De la producción a la renta que llega a las familias</h2>
+        <p>Además de las magnitudes de la lección anterior (PNB, PNN, RN), Blanco define dos que importan para el consumo:</p>
+        ${eq('Renta personal = RN − beneficios no distribuidos − impuestos sobre sociedades − cotizaciones a la seguridad social + transferencias', 'Lo que reciben efectivamente las familias')}
+        ${eq('Renta disponible = Renta personal − impuestos directos sobre las personas = Consumo privado + Ahorro privado', 'Lo que pueden gastar o ahorrar')}
+        <p>Ejemplo resuelto (Blanco 10.8.5, economía sin relaciones con el exterior): transferencias 30, impuestos directos sobre las personas 40, consumo privado 180, consumo público 70, formación bruta de capital 48, depreciación 18, beneficios no distribuidos 15, impuestos indirectos 10, cotizaciones 5, impuestos sobre sociedades 10.</p>
+        ${table(['Magnitud', 'Cálculo', 'Valor'], [
+          ['PIB (a precios de mercado)', 'C + I + G = 180 + 48 + 70', '<strong>298</strong>'],
+          ['PNB', 'Igual al PIB: no hay rentas con el exterior', '298'],
+          ['PNN', '298 − depreciación 18', '280'],
+          ['Renta nacional', '280 − impuestos indirectos 10', '270'],
+          ['Inversión neta', '48 − 18', '30'],
+          ['Renta personal', '270 − 15 − 10 − 5 + 30', '270'],
+          ['Renta disponible', '270 − 40', '<strong>230</strong>'],
+          ['Ahorro neto de las familias', '230 − consumo 180', '50'],
+          ['Ahorro neto de las empresas', 'Beneficios no distribuidos', '15'],
+        ])}
+        ${note('La renta personal disponible tiene solo dos usos: consumo privado y ahorro privado (Blanco 10.5.14: verdadero). Los beneficios no distribuidos no forman parte de la renta personal (Blanco 10.6.8): se quedan en la empresa.', 'tip')}
+        <h2>Detalles que suelen preguntarse</h2>
+        <ul>
+          <li>El PIB per cápita se calcula sobre la <strong>población total</strong>, no sobre la población activa (Blanco 10.5.6).</li>
+          <li>Productos intermedios son los que unas empresas compran a otras para usarlos en la producción, no los “de tecnología vieja” (Blanco 10.5.5).</li>
+          <li>Las transferencias son pagos del Estado sin contraprestación (Blanco 10.5.10).</li>
+          <li>El valor añadido de una empresa es el valor de su producción menos el de los bienes intermedios que compra (Blanco 10.6.5). Sumar los valores añadidos evita la doble contabilización y da el mismo resultado que sumar los bienes finales.</li>
+        </ul>`,
+      quiz: [
+        { q: 'El PIB nominal sólo se incrementa cuando aumentan las cantidades físicas de bienes y servicios que produce un país.', o: ['Verdadero', 'Falso'], a: 1, e: 'También sube si suben los precios.', src: 'Blanco 10.5.1', exam: ['2p-2024-3k3#1'] },
+        { q: 'El Producto Interior Bruto incluye el valor de bienes de consumo y de bienes de inversión.', o: ['Verdadero', 'Falso'], a: 0, e: 'C + I + G + XN.', src: 'Blanco 10.5.2', exam: ['2p-2024-3k3#1'] },
+        { q: 'El PIB de un país puede obtenerse agregando el valor añadido de todas las empresas.', o: ['Verdadero', 'Falso'], a: 0, e: 'Es el enfoque de la producción.', src: 'Blanco 10.5.3', exam: ['2p-2024-3k3#1'] },
+        { q: 'Las comidas que un cocinero profesional prepara en su casa para su familia…', o: ['entran en el PIB como consumo', 'no entran: son autoconsumo', 'entran como inversión', 'entran como gasto público'], a: 1, e: 'No hay transacción de mercado.' },
+        { q: 'La producción a precios de mercado se diferencia de la producción a costo de los factores en que…', o: ['la primera incluye los impuestos indirectos y la segunda no', 'la segunda incluye los impuestos indirectos', 'la primera incluye los impuestos directos', 'la segunda incluye los impuestos directos'], a: 0, e: 'Los impuestos indirectos encarecen los precios sin pagar a ningún factor.', src: 'Blanco 10.6.3' },
+        { q: 'El PNB se diferencia del PNN en que el primero incluye…', o: ['los impuestos directos', 'las transferencias', 'los intereses de la deuda', 'la depreciación'], a: 3, e: 'Bruto = antes de descontar la depreciación.', src: 'Blanco 10.6.4' },
+        { q: 'Si se conoce el PNB, el PIB se obtiene…', o: ['sumando RFEN y RFNE', 'restando RFEN y RFNE', 'sumando RFEN y restando RFNE', 'restando RFEN y sumando RFNE'], a: 2, e: 'El PIB agrega lo que producen los extranjeros en el país y quita lo que producen los nacionales afuera.', src: 'Blanco 10.6.6' },
+        { q: 'En los países con economía sumergida importante, el PIB…', o: ['sobreestima la producción', 'subestima la producción', 'la mide exactamente', 'no se puede calcular'], a: 1, e: 'Esa producción existe pero no se registra.', src: 'Blanco 10.5.15' },
+        { q: 'La renta disponible de las familias se destina a…', o: ['consumo e inversión', 'consumo privado y ahorro privado', 'impuestos y transferencias', 'exportaciones'], a: 1, e: 'Blanco 10.5.14.', src: 'Blanco 10.5.14' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 10 (10.3.6 a 10.3.9 y ejercicios 10.5 a 10.8)', points: ['Qué se incluye en el PIB: autoconsumo, economía sumergida, segunda mano (10.7.3); el mayordomo (10.7.2).', 'Variables flujo y fondo; precios de mercado y coste de los factores; bruto y neto.', 'Renta personal y renta disponible; ejercicio numérico 10.8.5.'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, cap. 23', points: ['Qué se incluye y qué se excluye del PIB.'] },
+      ],
+    },
   );
 })();

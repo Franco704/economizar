@@ -1,7 +1,7 @@
 /* Tema VI: Elasticidad. Diapositivas "TEMA VI ELASTICIDAD 2026", Blanco cap. 3, Mankiw cap. 5. TP 4. */
 (() => {
   const { LESSONS, h } = window.GUIDE;
-  const { note, def, table, chart, eq, frac, num, lab, plot } = h;
+  const { note, def, table, chart, eq, frac, num, lab, plot, flow } = h;
 
   LESSONS.push(
     {
@@ -138,6 +138,105 @@
         { q: 'Si el Estado reduce la oferta de drogas, el gasto total de los consumidores adictos…', o: ['baja mucho', 'aumenta', 'no cambia', 'se vuelve cero'], a: 1, e: 'La demanda es muy inelástica.' },
       ],
       sources: [{ title: 'Diapositivas del Tema VI', ref: 'Cátedra de Economía', points: ['Elasticidad e ingresos totales; ingreso máximo sin considerar costos.', 'Aplicaciones: drogas y transporte público.'] }],
+    },
+
+    {
+      id: 'elasticidad-parcial',
+      module: 't6',
+      title: 'Elasticidad en el parcial: porcentajes, gasto y casos típicos',
+      keywords: 'elasticidad parcial porcentaje cantidad demandada ingresos totales gasto 30 15 gerente baja precios 25 20 ventas demanda rectilínea máximo ingreso punto medio precio elasticidad dada 150 elasticidad renta pronóstico 1000 unidades cualquier precio buenas cosechas paradoja abundancia agricultores aumento demanda ingresos disminución oferta',
+      tldr: 'Casi todas las preguntas de elasticidad del parcial se resuelven con tres herramientas: <mark>E = %ΔX / %ΔP</mark>, la <mark>regla del ingreso total</mark> (si precio y gasto se mueven en el mismo sentido, la demanda es inelástica) y la <mark>multiplicación de factores</mark> para combinar porcentajes: (1 + %ΔP)(1 + %ΔX) = 1 + %ΔIT. Acá están resueltos todos los casos que tomó la cátedra.',
+      goals: ['Combinar variaciones porcentuales de precio, cantidad e ingreso sin errores.', 'Decidir si una baja de precios conviene para los ingresos.', 'Encontrar el precio que da una elasticidad determinada en una demanda lineal.', 'Pronosticar ventas con la elasticidad renta.', 'Explicar cuándo una buena cosecha perjudica a los agricultores y cuándo un cambio de demanda u oferta sube el ingreso.'],
+      body: `
+        <h2>La convención de signo</h2>
+        <p>Blanco define la elasticidad precio con un signo menos delante, para que dé un número <strong>positivo</strong>:</p>
+        ${eq(`ε<sub>p</sub> = − ${frac('dX', 'dP')} · ${frac('P', 'X')} &nbsp;&nbsp; (positiva)`, 'Blanco y las diapositivas')}
+        <p>Mankiw y otros textos la dejan negativa y la leen en valor absoluto. Da lo mismo, siempre que se interprete bien: <strong>elástica si es mayor que 1</strong> en valor absoluto. Con esta convención, “si la elasticidad precio es 0,9 la demanda es elástica” es <strong>falso</strong> (Blanco 3.5.14): es inelástica.</p>
+
+        <h2>Combinar porcentajes: la cuenta que más se equivoca</h2>
+        <p>El ingreso total (gasto de los consumidores) es IT = P · X. Si el precio cambia un p % y la cantidad un q %, el ingreso nuevo es:</p>
+        ${eq(`IT<sub>1</sub> = P<sub>0</sub>(1 + p) · X<sub>0</sub>(1 + q) &nbsp;⇒&nbsp; <strong>1 + %ΔIT = (1 + %ΔP) · (1 + %ΔX)</strong>`, 'Exacta')}
+        <p>Para cambios chicos vale la aproximación %ΔIT ≈ %ΔP + %ΔX. Lo que <strong>nunca</strong> vale es multiplicar los porcentajes entre sí (%ΔIT = %ΔP · %ΔX): con 15 % y −30 % daría −4,5 %, un número sin sentido.</p>
+        ${note('En una resolución que circula del parcial se escribió “%ΔIT = %ΔP · %ΔX” y se obtuvo %ΔP = −50 %. Es un error: si la cantidad cae 30 % y el ingreso sube 15 %, el precio tuvo que <strong>subir</strong>, no bajar. La conclusión (inelástica) era correcta, pero por casualidad: corregí la cuenta como se muestra abajo.', 'warn')}
+
+        <h2>Caso 1: la cantidad cae 30 % y el ingreso sube 15 %</h2>
+        <p><em>1er parcial 2023 y recuperatorio 2024: “Un cambio en el precio causa que la cantidad demandada de un bien disminuya 30 %, mientras que los ingresos totales del bien aumentan 15 %. ¿La curva de demanda es elástica o inelástica? Explique.”</em></p>
+        ${flow('1,15 = (1 + p) · 0,70', '1 + p = 1,15 / 0,70 = 1,643', 'El precio subió 64,3 %', 'ε = 30 % / 64,3 % = 0,47 < 1', 'Inelástica')}
+        <p>Con el método arco (más preciso para un cambio tan grande): si P pasa de 100 a 164,3 y X de 100 a 70, ε = (30 / 85) / (64,3 / 132,1) = 0,353 / 0,486 = <strong>0,73</strong>. También menor que 1.</p>
+        ${note('<strong>El atajo que vale el punto entero</strong>: subió el precio (porque cayó la cantidad, y la demanda tiene pendiente negativa) y subió el ingreso. Precio e ingreso en el <strong>mismo sentido</strong> ⇒ demanda <strong>inelástica</strong>. Si fueran en sentido contrario, elástica. Explicalo así y después hacé la cuenta.', 'exam')}
+
+        <h2>Caso 2: el gerente baja los precios (1er parcial 2025)</h2>
+        <p><em>“Si el gerente de una empresa propone una baja de los precios para aumentar las ventas, cuando la cantidad vendida aumenta un 20 % luego que bajaron los precios un 25 %, ¿es la decisión correcta?”</em></p>
+        ${table(['Variante del enunciado', 'Ingreso nuevo / ingreso viejo', 'ε (arco)', 'Demanda', '¿Correcta para el ingreso?'], [
+          ['Baja 25 %, cantidad +20 % (tema 3)', '0,75 · 1,20 = <strong>0,90</strong> (−10 %)', '18,2 % / 28,6 % = 0,64', 'Inelástica', '<strong>No</strong>: vende más unidades pero ingresa 10 % menos'],
+          ['Propone <em>subir</em> precios con los mismos datos (otro tema)', 'Con demanda inelástica, subir el precio aumenta el ingreso', '0,64', 'Inelástica', '<strong>Sí</strong>'],
+          ['Baja 15 %, cantidad +20 % (otro tema 2025)', '0,85 · 1,20 = <strong>1,02</strong> (+2 %)', '18,2 % / 16,2 % = 1,12', 'Elástica', '<strong>Sí</strong>, si el objetivo es el ingreso'],
+        ])}
+        <p>Matices que conviene escribir: “ventas” puede significar unidades (que siempre suben al bajar el precio) o pesos facturados (que dependen de la elasticidad). Y aun con ingreso mayor, producir más cuesta más: la decisión correcta para el <strong>beneficio</strong> depende también de los costos (Tema VIII). La pregunta apunta al ingreso.</p>
+
+        <h2>Caso 3: la demanda rectilínea y el máximo ingreso</h2>
+        <p><em>Recuperatorio de diciembre 2024: “Dada una curva de demanda rectilínea, ¿en qué punto los vendedores tendrán mayores ingresos? Grafique y justifique.”</em></p>
+        ${chart({ x: [0, 160], y: [0, 160], curves: [{ f: (x) => 150 - x, dom: [0, 150], cls: 'c-d', label: 'X = 150 − P' }],
+          points: [{ x: 50, y: 100, cls: 'c-el', label: 'ε = 2 (elástica)' }, { x: 75, y: 75, cls: 'c-unit', label: 'ε = 1: IT máximo' }, { x: 100, y: 50, cls: 'c-inel', label: 'ε = 0,5 (inelástica)' }],
+          guides: [{ x: 75, y: 75, xt: '75', yt: '75' }] },
+          'Arriba del punto medio la demanda es elástica: bajar el precio sube el ingreso. Abajo es inelástica: bajarlo lo reduce. El máximo está en el punto medio.')}
+        <ul>
+          <li>Con X = a − bP: IT = P(a − bP) = aP − bP². El máximo está donde dIT/dP = a − 2bP = 0 ⇒ <strong>P = a / 2b</strong>, la mitad del precio máximo, y X = a/2, la mitad de la cantidad máxima: el <strong>punto medio</strong>.</li>
+          <li>Ahí la elasticidad vale exactamente 1. A la izquierda (precios altos) es elástica; a la derecha, inelástica. La elasticidad <strong>crece al aumentar el precio</strong> (Blanco 3.6.5).</li>
+          <li>Justificación económica (Blanco 3.8.3 c): cuanto más alto el precio, más sustitutos encuentran los consumidores.</li>
+        </ul>
+
+        <h2>Caso 4: ¿a qué precio la elasticidad vale tanto?</h2>
+        <p><em>Blanco 3.8.3, en la recopilación de parciales: “La curva de demanda de un bien es Xd = 150 − P. a) Calcule el precio para el que la elasticidad es 0,5. b) Es 1. c) Es 2.”</em></p>
+        ${eq(`ε = − ${frac('dX', 'dP')} · ${frac('P', 'X')} = 1 · ${frac('P', '150 − P')} &nbsp;⇒&nbsp; P = ${frac('150 ε', '1 + ε')}`)}
+        ${table(['ε buscada', 'Ecuación', 'Precio', 'Cantidad'], [['0,5', 'P / (150 − P) = 0,5', '<strong>50</strong>', '100'], ['1', 'P / (150 − P) = 1', '<strong>75</strong>', '75'], ['2', 'P / (150 − P) = 2', '<strong>100</strong>', '50']])}
+        <p>En general, con X = a − bP: ε = bP / (a − bP), y despejando, <strong>P = ε · a / [b (1 + ε)]</strong>.</p>
+
+        <h2>Caso 5: pronosticar con la elasticidad renta</h2>
+        <p><em>1er parcial Civil 2022: “Un empresario que fabrica un producto cuya elasticidad ingreso es +2 vende 1.000 unidades mensuales. Si se espera que los ingresos de la comunidad aumenten un 3 %…”</em></p>
+        <p>%ΔX = E<sub>R</sub> · %ΔR = 2 · 3 % = 6 % ⇒ 1.000 · 1,06 = <strong>1.060 unidades</strong> (opción d). Es un bien de lujo: las ventas crecen el doble que la renta.</p>
+
+        <h2>Caso 6: el gasto aumenta cuando baja el precio</h2>
+        <p>Si al bajar el precio el gasto de los consumidores (= ingreso de los vendedores) <strong>aumenta</strong>, precio y gasto se movieron en sentido contrario: la demanda es <strong>elástica</strong> (opción b del parcial de Civil 2022). Decir “bien inferior” o “bien normal” no corresponde: eso se decide con la elasticidad renta, no con la precio (Blanco 3.8.1 d).</p>
+
+        <h2>Caso 7: ¿cuándo un cambio de demanda o de oferta sube el ingreso?</h2>
+        <p><em>1er parcial 2025: “¿En qué casos un aumento de la demanda producirá un aumento en los ingresos?”</em> y su espejo, <em>“¿En qué caso una disminución de la oferta producirá un aumento en los ingresos?”</em></p>
+        <div class="figs-2">
+          ${h.plot({ x: [0, 10], y: [0, 10], h: 250, curves: [{ f: (x) => 9 - 0.8 * x, cls: 'c-d', ghost: true, label: 'D₀' }, { f: (x) => 11 - 0.8 * x, cls: 'c-d', label: 'D₁' }, { f: (x) => 1 + 0.8 * x, cls: 'c-s', label: 'O' }], areas: [{ pts: [[0, 0], [6.25, 0], [6.25, 6], [0, 6]], cls: 'a-it' }], points: [{ x: 5, y: 5, cls: 'pl-old', label: 'E₀', pos: 'w' }, { x: 6.25, y: 6, cls: 'c-eq', label: 'E₁' }], alt: 'Aumento de la demanda: suben precio y cantidad' })}
+          ${h.plot({ x: [0, 10], y: [0, 10], h: 250, curves: [{ f: (x) => 9.5 - 1.8 * x, dom: [0, 5.2], cls: 'c-d', label: 'D inelástica' }, { f: (x) => 1 + 0.5 * x, cls: 'c-s', ghost: true, label: 'O₀' }, { f: (x) => 3 + 0.5 * x, cls: 'c-s', label: 'O₁' }], areas: [{ pts: [[0, 0], [2.83, 0], [2.83, 4.41], [0, 4.41]], cls: 'a-it' }], points: [{ x: 3.7, y: 2.85, cls: 'pl-old', label: 'E₀', pos: 'e' }, { x: 2.83, y: 4.41, cls: 'c-eq', label: 'E₁' }], alt: 'Caída de la oferta con demanda inelástica' })}
+        </div>
+        <ul>
+          <li><strong>Aumento de la demanda</strong>: con una oferta de pendiente positiva, suben el precio <em>y</em> la cantidad, así que el ingreso P·X <strong>siempre aumenta</strong>. Lo que cambia es cómo: si la oferta es inelástica, sobre todo por precio; si es elástica, sobre todo por cantidad. En los casos extremos también aumenta: con oferta vertical solo sube P; con oferta horizontal solo sube X.</li>
+          <li><strong>Disminución de la oferta</strong>: sube el precio y cae la cantidad. El ingreso aumenta <strong>solo si la demanda es inelástica</strong> (el precio sube proporcionalmente más de lo que cae la cantidad). Es el caso de la sequía del TP 4.</li>
+        </ul>
+
+        <h2>Caso 8: ¿pueden ser malas las buenas cosechas?</h2>
+        <p><em>Blanco 3.9.21, tomado en el 1er parcial 3K2 2022 y en el de 2024: “¿Es posible que los años de buenas cosechas sean perjudiciales para los agricultores? ¿Qué condiciones deben darse para ello? ¿Se dan generalmente? Razone y dibuje el gráfico.”</em></p>
+        ${chart({ x: [0, 10], y: [0, 10], curves: [{ f: (x) => 9.5 - 1.8 * x, dom: [0, 5.2], cls: 'c-d', label: 'D inelástica' }, { f: (x) => 3 + 0.5 * x, cls: 'c-s', ghost: true, label: 'O₀' }, { f: (x) => 1 + 0.5 * x, cls: 'c-s', label: 'O₁ (buena cosecha)' }],
+          areas: [{ pts: [[0, 0], [2.83, 0], [2.83, 4.41], [0, 4.41]], cls: 'a-warn' }, { pts: [[0, 0], [3.7, 0], [3.7, 2.85], [0, 2.85]], cls: 'a-it' }],
+          points: [{ x: 2.83, y: 4.41, cls: 'pl-old', label: 'E₀ (IT = 12,5)', pos: 'e' }, { x: 3.7, y: 2.85, cls: 'c-eq', label: 'E₁ (IT = 10,5)', pos: 'e' }], guides: [{ x: 2.83, y: 4.41, xt: 'X₀', yt: 'P₀' }, { x: 3.7, y: 2.85, xt: 'X₁', yt: 'P₁' }] },
+          'La buena cosecha desplaza la oferta a la derecha. Con demanda inelástica el precio cae mucho y la cantidad sube poco: el rectángulo del ingreso se achica (de 12,5 a 10,5).')}
+        <ol>
+          <li><strong>Sí, es posible</strong>: es la “paradoja de la abundancia”.</li>
+          <li><strong>Condiciones</strong>: a) la buena cosecha debe ser general (de muchos productores), de modo que <strong>la oferta del mercado se desplace a la derecha</strong> y el precio baje; b) la <strong>demanda debe ser inelástica</strong>: la caída porcentual del precio supera al aumento porcentual de la cantidad vendida, y el ingreso total P·X de los agricultores, en conjunto, disminuye.</li>
+          <li><strong>¿Se dan?</strong> Generalmente sí para los alimentos básicos: son de primera necesidad, tienen pocos sustitutos y la gente consume una cantidad bastante fija (aunque el pan esté a mitad de precio, no se come el doble). Por eso la demanda de granos es típicamente inelástica.</li>
+        </ol>
+        ${note('Detalles que suman: la condición es sobre la elasticidad de la <strong>demanda</strong>, no de la oferta (lo que se desplaza es la oferta). Y es un resultado <strong>colectivo</strong>: un productor que tiene una buena cosecha cuando los demás no, gana. Si el país es pequeño y vende al mundo, la demanda que enfrenta es casi perfectamente elástica y una buena cosecha local sí lo beneficia.', 'tip')}`,
+      quiz: [
+        { q: 'La cantidad demandada cae 30 % y el ingreso total sube 15 %. ¿Cuánto cambió el precio?', o: ['−50 %', '+45 %', '+64,3 %', '+15 %'], a: 2, e: '1,15 / 0,70 = 1,643.' },
+        { q: 'En el caso anterior, la demanda es…', o: ['elástica', 'inelástica', 'unitaria', 'perfectamente elástica'], a: 1, e: 'Precio e ingreso suben juntos.', exam: ['1p-2023#6', 'rec-2024#4'] },
+        { q: 'Una empresa baja sus precios 25 % y vende 20 % más. Su ingreso…', o: ['sube 5 %', 'baja 10 %', 'baja 5 %', 'no cambia'], a: 1, e: '0,75 · 1,20 = 0,90.' },
+        { q: 'Si la elasticidad precio de la demanda es 2 y el precio sube 2 %, los ingresos de los productores…', o: ['aumentan', 'disminuyen', 'no cambian', 'son máximos'], a: 1, e: 'Demanda elástica: la cantidad cae 4 %.', src: 'Blanco 3.6.4' },
+        { q: 'Xd = 150 − P. ¿A qué precio la elasticidad es 2?', o: ['50', '75', '100', '125'], a: 2, e: 'P/(150 − P) = 2 ⇒ P = 100.', src: 'Blanco 3.8.3' },
+        { q: 'Elasticidad ingreso +2, ventas de 1.000 unidades, los ingresos de la comunidad suben 3 %. Las ventas serán…', o: ['menores', 'iguales', '964', '1.060'], a: 3, e: '2 · 3 % = 6 %.', exam: ['1p-2022-civ#7'] },
+        { q: 'Si el gasto en un bien aumenta cuando baja su precio…', o: ['la demanda es inelástica', 'la demanda es elástica', 'es un bien inferior', 'es un bien normal'], a: 1, e: 'Precio y gasto en sentido contrario.', exam: ['1p-2022-civ#8'] },
+        { q: 'Una buena cosecha general perjudica a los agricultores si…', o: ['la oferta es inelástica', 'la demanda es inelástica', 'la demanda es elástica', 'el bien es de lujo'], a: 1, e: 'El precio cae proporcionalmente más de lo que sube la cantidad.' },
+        { q: 'En una curva de demanda rectilínea…', o: ['la elasticidad es máxima en el punto central', 'la elasticidad decrece al aumentar el precio', 'la elasticidad crece al aumentar el precio', 'la elasticidad es la misma en todos los puntos'], a: 2, e: 'P/X crece al subir por la recta.', src: 'Blanco 3.6.5' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 3 (3.3.6, 3.3.7 y ejercicios 3.6, 3.8.3 y 3.9.21)', points: ['Elasticidad precio con signo positivo; relación con los ingresos de los vendedores.', 'La elasticidad cambia a lo largo de una demanda rectilínea y es unitaria en su punto medio.', '¿Es posible que los años de buenas cosechas sean perjudiciales para los agricultores?'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, cap. 5', points: ['Ingreso total y elasticidad; “¿Pueden ser malas las buenas noticias para la agricultura?”.'] },
+      ],
     },
 
     {

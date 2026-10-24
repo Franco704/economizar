@@ -4,10 +4,11 @@ Guía de estudio de **Economía 2026 (UTN-FRT)**, cátedra Ing. Ramón A. Aranda
 
 - **Primer parcial, Microeconomía**: qué es la economía, escasez y FPP, oferta y demanda, precios máximos y mínimos e impuestos, elasticidad, producción y costos, competencia perfecta.
 - **Segundo parcial, Macroeconomía**: PIB, dinero, Banco Central, inflación, desigualdad y pobreza.
-- 42 lecciones a partir de las diapositivas de la cátedra y la bibliografía (Blanco y Mankiw).
+- 55 lecciones a partir de las diapositivas de la cátedra y la bibliografía (Blanco y Mankiw), con lecciones “a fondo” por tema: fallos del mercado, flujo circular, la FPP del parcial, el ajuste al equilibrio, excedentes y bienestar, elasticidad en el parcial, escala y costos, nivelación y cierre, PIB, dinero bancario, política monetaria, inflación y desigualdad.
 - 28 laboratorios interactivos: curvas que se desplazan, equilibrio, controles de precios, impuestos, elasticidad e ingreso total, FPP, producción, costos, decisión de la empresa, largo plazo, multiplicador monetario, mercado de dinero y curva de Lorenz.
-- Los ejercicios de los TP 1 a 6 con pistas y solución paso a paso (51 ejercicios en total).
-- 226 preguntas de repaso, cuestionario por tema, simulacro por parcial, repaso de las falladas, taller de gráficas y hoja de fórmulas.
+- Los ejercicios de los TP 1 a 6 con pistas y solución paso a paso (51 ejercicios).
+- **Parciales resueltos**: 15 parciales y recuperatorios reales de la cátedra (2022 a 2025), pregunta por pregunta, con lo que más se repite y qué temas pesan más (52 ejercicios nuevos).
+- 489 preguntas de repaso, incluido el banco de verdadero/falso y opción múltiple de Blanco (de donde salen muchas preguntas de parcial), cuestionario por tema, simulacro por parcial, **integral** con reloj (preguntas que cruzan temas y 6 problemas con grilla de corrección), repaso de las falladas, taller de gráficas y hoja de fórmulas.
 
 Sitio en GitHub Pages: [franco704.github.io/economizar](https://franco704.github.io/economizar/)
 

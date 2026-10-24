@@ -274,5 +274,191 @@
         { title: 'Principios de Economía', ref: 'Mankiw, cap. 1', points: ['Los diez principios de la economía.'] },
       ],
     },
+
+    {
+      id: 'fallos-de-mercado',
+      module: 't2',
+      title: 'Autoridad o mercado: la mano invisible y los fallos del mercado',
+      keywords: 'autoridad mercado mano invisible adam smith intercambio voluntario propiedad privada precio información incentivo racionamiento fallos del mercado poder de mercado externalidades efectos externos coase pigou bienes públicos polizón equidad eficiencia estabilidad keynes fallos del estado historia pensamiento',
+      tldr: 'Una sociedad que se especializa necesita coordinarse, y hay dos formas básicas: la <mark>autoridad</mark> y el <mark>mercado</mark>. En el mercado los precios transmiten información, crean incentivos y racionan lo escaso: es la “mano invisible” de Adam Smith. Pero falla con <strong>poder de mercado, externalidades y bienes públicos</strong>, y puede dar una distribución injusta o ajustar muy lento. Por eso el Estado interviene, aunque también puede equivocarse.',
+      goals: ['Comparar el sistema de autoridad con el de mercado.', 'Explicar las tres funciones del precio con un ejemplo.', 'Explicar cómo el mercado responde qué, cómo y para quién producir.', 'Reconocer los tres fallos del mercado y la solución de cada uno.', 'Relacionar las causas de la intervención del Estado con eficiencia, equidad y estabilidad.'],
+      body: `
+        <h2>Especializarse obliga a coordinarse</h2>
+        <p>Robinson Crusoe, solo en su isla, no tiene ningún problema de organización: decide él mismo qué producir con sus recursos. Pero la humanidad descubrió hace mucho que conviene <strong>dividir el trabajo</strong>: cada uno se especializa en lo que hace mejor y, con la práctica, gana destreza. El precio de la especialización es la <strong>dependencia</strong>: ahora cada uno necesita lo que producen los demás. Alguien tiene que decidir qué se produce y cómo se reparte. En la historia hubo dos maneras básicas de hacerlo.</p>
+        ${table(['', 'Sistema de autoridad', 'Sistema de mercado'], [
+          ['Quién decide', 'Una persona o un colectivo (en general, el gobierno) con potestad para obligar al resto', 'Nadie en particular: millones de individuos y empresas deciden por separado lo que les conviene'],
+          ['Propiedad de los factores', 'El Estado suele ser dueño de buena parte de la tierra y el capital', 'Privada, con normas que regulan cómo se adquiere y se transfiere'],
+          ['Cómo se coordina', 'Por órdenes', 'Por <strong>precios</strong> e <strong>intercambio voluntario</strong>'],
+          ['Ejemplos', 'Rusia, gran parte de Europa del Este y China durante buena parte del siglo XX', 'La mayoría de las decisiones económicas de casi todos los países actuales'],
+        ])}
+        <h2>La mano invisible</h2>
+        <p>En 1776 Adam Smith se sorprendía de que un sistema en el que cada uno busca su propio interés no terminara en caos sino en armonía: consumidores y empresas promueven el interés general <em>sin pretenderlo</em>, “como guiados por una mano invisible”. La “mano” es una forma de nombrar el complejo sistema de coordinación que forman los precios. El resultado: sin que nadie obligue a nada, las empresas producen lo que desean los consumidores y los consumidores aceptan lo que producen las empresas.</p>
+        <p>El mercado se basa en el <strong>intercambio voluntario</strong>: nadie compra ni vende si no le conviene, así que todo intercambio beneficia a las dos partes. Para eso la sociedad tiene que garantizar la propiedad privada y hacer cumplir los contratos, con sanciones para quien no los respete.</p>
+        <h3>Las tres funciones del precio</h3>
+        ${table(['Función', 'Qué hace', 'Ejemplo de Blanco'], [
+          ['<strong>Información</strong>', 'Transmite los deseos de los consumidores y las condiciones de producción', 'Cambia la moda y se quieren más prendas de algodón: los cultivadores se enteran porque sube el precio del algodón'],
+          ['<strong>Incentivo</strong>', 'Premia o castiga conductas, porque cambia ganancias y costos', 'Con el algodón más caro, plantar algodón rinde más: muchos agricultores plantan más'],
+          ['<strong>Racionamiento</strong>', 'Reparte lo escaso: ante la escasez el precio sube y algunos compradores se retiran', 'Se lo lleva quien está dispuesto a pagar más (Tema IV)'],
+        ])}
+        ${note('El mecanismo funciona bien si <strong>nadie puede fijar o manipular el precio</strong> por su cuenta, es decir, en competencia perfecta. Si un vendedor controla el precio, el precio deja de transmitir la información verdadera.', 'warn')}
+        <h3>Cómo responde el mercado a las tres preguntas</h3>
+        ${table(['Pregunta', 'La responden…', 'Ejemplo'], [
+          ['¿Qué producir?', 'Los precios de los productos', 'Si se quiere más pan, sube el trigo y algunos agricultores pasan campos de cebada a trigo'],
+          ['¿Cómo producir?', 'Los precios de los factores: se usa la combinación más barata', 'Donde los salarios son altos las rutas se hacen con mucha maquinaria; donde son bajos, con muchos trabajadores'],
+          ['¿Para quién producir?', 'Los precios de los factores, que determinan las rentas', 'Si las empresas necesitan más ingenieros, sube su salario y reciben una parte mayor del producto'],
+        ])}
+        <p>No confundas <strong>renta</strong> (lo que una persona percibe en un período: su parte del producto de ese año) con <strong>riqueza</strong> (lo acumulado con el ahorro propio o ajeno en años anteriores).</p>
+
+        <h2>Los fallos del mercado</h2>
+        <p>En ningún país el mercado asigna absolutamente todos los recursos. Hay situaciones en que funciona mal o directamente no funciona: son los <strong>fallos del mercado</strong>.</p>
+        <h3>1. Mercados no competitivos</h3>
+        <p>Si un vendedor produce tanto que puede manipular el precio, tiene <strong>poder de mercado</strong> (un monopolio, por ejemplo). El precio ya no refleja ni los deseos de los consumidores ni las condiciones de producción. Solución: regular precios o fomentar la competencia (defensa de la competencia).</p>
+        <h3>2. Efectos externos (externalidades)</h3>
+        <p>A veces ventajas o desventajas de una decisión no recaen sobre quien compra o vende, sino sobre <strong>terceros</strong> que no decidieron nada. El ejemplo clásico: una fábrica química vierte residuos en un río. Usa un recurso (el río) sin pagar nada por él: el costo recae sobre pescadores, bañistas y poblaciones que toman esa agua. Como el precio no le transmite lo que vale el río, contamina más de lo socialmente deseable.</p>
+        <ul>
+          <li><strong>Externalidad negativa</strong> (contaminación, ruido): el Estado impone sanciones o impuestos para que contaminar tenga un costo. A estos impuestos se los llama <strong>pigovianos</strong>, por Arthur Pigou (1920).</li>
+          <li><strong>Externalidad positiva</strong> (vacunarse, restaurar la fachada de una casa histórica): se subsidia o se incentiva.</li>
+        </ul>
+        ${note('<p><strong>Teorema de Coase</strong> (Ronald Coase, 1960): si las partes pueden negociar sin costos importantes, el propio mercado resuelve la externalidad. Si Pedro perjudica a Juan, Juan puede pagarle a Pedro para que deje de hacerlo cuando su daño supera el beneficio de Pedro. Lo notable es que el resultado no depende de quién tenga el derecho: solo cambia quién le paga a quién. Pero cuando hay muchos afectados, los <strong>costos de transacción</strong> (ponerse de acuerdo y hacer cumplir el acuerdo) son tan altos que la negociación no ocurre y hace falta el Estado.</p>', 'tip')}
+        <h3>3. Bienes públicos</h3>
+        <p>Una vez que alguien adquiere un bien público, todos los demás lo disfrutan, <strong>aunque no lo hayan pagado</strong>: no se puede excluir a nadie. Por eso cada uno tiene incentivo a no pagar y esperar que paguen los otros (el problema del “polizón” o del que viaja gratis). El alumbrado de una calle no lo contrataría nunca un acuerdo voluntario de vecinos: el Estado lo contrata y lo cobra con impuestos. Otros ejemplos: la defensa nacional, la seguridad, el mantenimiento de la vía pública, un faro para los barcos. Un bien público es un caso extremo de externalidad positiva.</p>
+        ${lab(0)}
+
+        <h2>Por qué interviene el Estado</h2>
+        <p>Blanco resume las causas de la intervención en una tabla que conviene saber de memoria:</p>
+        ${table(['Causa', 'Objetivo', 'Medidas'], [
+          ['1a. El mercado funciona mal: mercados no competitivos y externalidades', 'Corregir los fallos: <strong>eficiencia</strong>', 'Regulación, fomento de la competencia, impuestos y sanciones'],
+          ['1b. El mercado no funciona: bienes públicos', '<strong>Eficiencia</strong>', 'Provisión pública de esos bienes'],
+          ['2. El mercado funciona pero da una distribución que la sociedad considera injusta', '<strong>Equidad</strong>', 'Políticas de redistribución: impuestos a los que más ganan, transferencias a los que menos'],
+          ['3. El mercado funciona pero, a veces, con excesiva lentitud (crisis, desempleo)', '<strong>Estabilidad</strong>', 'Políticas de estabilización'],
+        ])}
+        <ul>
+          <li><strong>Equidad y eficiencia chocan</strong>: el esfuerzo, la capacitación y la innovación se hacen porque prometen más ingresos. Redistribuir achica esa diferencia y puede desalentarlos. Por eso se busca redistribuir sin desincentivar demasiado.</li>
+          <li><strong>Estabilidad</strong>: algunos mercados, sobre todo el de trabajo, tardan mucho en volver al equilibrio. Keynes (1936) sostuvo que el Estado puede acelerar la salida de una crisis con una política económica activa. Es el precursor de las políticas de estabilización.</li>
+        </ul>
+        ${note('<p>Hoy predomina el mercado, pero el Estado tiene un papel importante: es la <strong>economía mixta</strong>. Que el Estado deba intervenir más o menos es una discusión de <strong>economía normativa</strong>. Quienes quieren limitarlo hablan de <strong>fallos del Estado</strong>: políticos y funcionarios deciden sobre recursos ajenos en beneficio ajeno, y por eso tendrían menos incentivos que un privado para usarlos bien.</p>', 'exam')}
+
+        <h2>Algo de historia</h2>
+        ${table(['Autor y año', 'Aporte'], [
+          ['Jenofonte (siglo IV a. C.)', '<em>Oeconomicus</em>: el primer texto que usa la palabra “economía”, sobre la gestión del hogar y la agricultura'],
+          ['Cicerón (44 a. C.)', 'Primer uso de <em>ceteris paribus</em> en un contexto económico'],
+          ['François Quesnay (1758)', '<em>Tableau économique</em>: el primer esquema del flujo circular de la renta'],
+          ['Adam Smith (1776)', '<em>La riqueza de las naciones</em>: la mano invisible. Nace la economía moderna'],
+          ['Thomas Malthus', 'El crecimiento de la población llevaría los salarios al nivel de subsistencia'],
+          ['David Ricardo', 'Ley de rendimientos decrecientes y teoría del valor trabajo'],
+          ['Karl Marx', 'Teoría de la explotación (plusvalía); inspiró los sistemas de autoridad del siglo XX'],
+          ['Jevons, Menger, Walras, Marshall (1870–1890)', 'La revolución marginalista o neoclásica: matemáticas y utilidad marginal'],
+          ['John M. Keynes (1936)', '<em>Teoría general</em>: nace la macroeconomía moderna y la idea de estabilizar'],
+          ['Paul Samuelson (1947, 1954)', 'Formalización matemática y tratamiento formal de los bienes públicos'],
+          ['Arthur Pigou (1920) y Ronald Coase (1960)', 'Externalidades: impuestos correctivos y negociación entre las partes'],
+        ])}`,
+      labs: [
+        {
+          type: 'classify', title: '¿Qué fallo del mercado es?', intro: 'Incluye los cuatro casos del ejercicio 1.9.10 de Blanco (¿es un bien público?).', buckets: ['Poder de mercado', 'Externalidad negativa', 'Externalidad positiva', 'Bien público', 'No es un fallo'],
+          items: [
+            { t: 'La defensa nacional', b: 3, why: 'Nadie puede ser excluido de su protección, pague o no.' },
+            { t: 'Un faro para los barcos', b: 3, why: 'Todos los barcos que pasan lo aprovechan, paguen o no.' },
+            { t: 'Un diario de tirada nacional', b: 4, why: 'Quien no lo compra no lo lee: se puede excluir. Es un bien privado.' },
+            { t: 'Una visita al médico', b: 4, why: 'La consulta la aprovecha solo quien la paga: bien privado.' },
+            { t: 'Una curtiembre que vierte residuos en el río Salí', b: 1 },
+            { t: 'Un vecino que se vacuna y reduce el contagio de todo el barrio', b: 2 },
+            { t: 'La única empresa de una provincia que ofrece un servicio sube su tarifa porque nadie puede competirle', b: 0 },
+            { t: 'El alumbrado público de una calle', b: 3, why: 'El ejemplo de Blanco: una vez instaladas las farolas, nadie puede impedir que los que no pagaron también vean.' },
+          ],
+        },
+      ],
+      quiz: [
+        { q: 'En un sistema de mercado, el resultado final depende de…', o: ['las órdenes de una autoridad central', 'las acciones de millones de agentes que deciden por separado', 'un acuerdo entre todas las empresas', 'la tradición'], a: 1, e: 'Nadie decide globalmente; los precios coordinan.' },
+        { q: '¿Cuál NO es una función del precio en un sistema de mercado?', o: ['Transmitir información', 'Crear incentivos', 'Racionar lo escaso', 'Garantizar una distribución equitativa'], a: 3, e: 'El mercado reparte según los “votos monetarios”: por eso existe la función de equidad del Estado.' },
+        { q: 'Una fábrica contamina un río y el costo lo pagan los pescadores. Es…', o: ['un bien público', 'una externalidad negativa', 'poder de mercado', 'un costo explícito de la fábrica'], a: 1, e: 'El costo recae sobre terceros que no decidieron nada.' },
+        { q: 'La característica de un bien público es que…', o: ['lo produce siempre el Estado', 'una vez suministrado no se puede excluir a nadie de su disfrute', 'es gratis', 'todos están dispuestos a pagar por él'], a: 1, e: 'Blanco 1.6.12. Por eso cada uno espera que pague el otro.', src: 'Blanco 1.6.12' },
+        { q: 'Según el teorema de Coase, una externalidad se resuelve sin el Estado si…', o: ['hay muchos afectados', 'las partes pueden negociar con costos de transacción bajos', 'el Estado fija un impuesto', 'el bien es público'], a: 1, e: 'Con muchos afectados, ponerse de acuerdo cuesta demasiado.' },
+        { q: 'Las políticas de redistribución persiguen el objetivo de…', o: ['eficiencia', 'equidad', 'estabilidad', 'competencia perfecta'], a: 1, e: 'Transfieren rentas de quienes ganan más a quienes ganan menos.' },
+        { q: '¿Por qué puede chocar la equidad con la eficiencia?', o: ['Porque los impuestos son ilegales', 'Porque redistribuir reduce la recompensa del esfuerzo y la innovación', 'Porque la eficiencia exige monopolios', 'No pueden chocar'], a: 1, e: 'Es la disyuntiva equidad-eficiencia de Blanco.' },
+        { q: 'El primer esquema del flujo circular de la renta lo describió…', o: ['Adam Smith', 'François Quesnay', 'Keynes', 'Marshall'], a: 1, e: 'En el <em>Tableau économique</em> de 1758.' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 1 (1.3.7 a 1.3.9 y “Algo de historia”)', points: ['Autoridad y mercado; la mano invisible; intercambio voluntario.', 'Precios: información, incentivos; cómo responde el mercado a qué, cómo y para quién.', 'Fallos del mercado: mercados no competitivos, efectos externos (Coase, Pigou) y bienes públicos.', 'Causas de la intervención del Estado (Tabla 1.7) y fallos del Estado.'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, caps. 1, 10 y 11', points: ['Principios 6 y 7: los mercados suelen organizar bien la economía; el Estado puede mejorar a veces sus resultados.', 'Externalidades y bienes públicos.'] },
+      ],
+    },
+
+    {
+      id: 'flujo-circular',
+      module: 't2',
+      title: 'El flujo circular de la renta, paso a paso',
+      keywords: 'flujo circular renta diagrama familias empresas mercado de bienes productos mercado de factores flujo real monetario dinero estado economía mixta impuestos gasto público transferencias subsidios sector externo exportaciones importaciones dibujar parcial',
+      tldr: 'El flujo circular resume toda la economía en dos tipos de agentes y dos mercados. Las familias venden <strong>factores</strong> a las empresas y compran sus <strong>bienes</strong>; por cada flujo <mark>real</mark> (bienes, factores) corre un flujo <mark>monetario</mark> (gasto, rentas) en sentido contrario. En una economía mixta se suma el Estado: cobra impuestos y devuelve compras, transferencias y subsidios. Es una pregunta fija del primer parcial.',
+      goals: ['Dibujar el flujo circular de dos sectores y el de una economía mixta.', 'Distinguir en el diagrama los flujos reales de los monetarios.', 'Ubicar en qué mercado se forma cada precio y de dónde salen las rentas.', 'Conectar el diagrama con el cálculo del PIB.'],
+      body: `
+        ${note('Aparece en los parciales de 2023 y 2024 (y en la resolución del 1er parcial que circula): <em>“Dibuje un diagrama de flujo circular. Identifique las partes del modelo que corresponden al flujo de bienes y servicios y las que corresponden al flujo de dinero, suponiendo una economía mixta.”</em>', 'exam')}
+        <h2>Los protagonistas</h2>
+        <ul>
+          <li><strong>Familias</strong>: son las dueñas de los factores productivos (su trabajo, sus tierras, su capital) y consumen bienes y servicios.</li>
+          <li><strong>Empresas</strong>: compran factores, producen bienes y servicios y los venden.</li>
+          <li><strong>Mercado de bienes y servicios</strong> (de productos): las empresas venden y las familias compran. Ahí se forman los <strong>precios de los productos</strong>.</li>
+          <li><strong>Mercado de factores</strong>: las familias venden trabajo, tierra y capital y las empresas los compran. Ahí se forman los <strong>precios de los factores</strong>: salario, alquiler o renta, interés y beneficio.</li>
+        </ul>
+        <h2>Primero, la economía sin Estado</h2>
+        ${fig(`<svg class="flowc" viewBox="0 0 560 330" role="img" aria-label="Flujo circular con familias, empresas, mercado de bienes y mercado de factores; los bienes y factores circulan en un sentido y el dinero en el contrario">
+          <rect x="200" y="12" width="160" height="54" rx="12" class="fc-mkt"/><text x="280" y="36" class="fc-t">Mercado de bienes</text><text x="280" y="54" class="fc-s">precios de los productos</text>
+          <rect x="200" y="264" width="160" height="54" rx="12" class="fc-mkt"/><text x="280" y="288" class="fc-t">Mercado de factores</text><text x="280" y="306" class="fc-s">salarios, alquileres, intereses</text>
+          <rect x="16" y="138" width="130" height="54" rx="12" class="fc-node"/><text x="81" y="170" class="fc-t">Familias</text>
+          <rect x="414" y="138" width="130" height="54" rx="12" class="fc-node"/><text x="479" y="170" class="fc-t">Empresas</text>
+          <path d="M200 30H90V138" class="fc-real"/><path d="M200 50H110V138" class="fc-money"/>
+          <path d="M360 30H470V138" class="fc-real"/><path d="M360 50H450V138" class="fc-money"/>
+          <path d="M90 192V300H200" class="fc-real"/><path d="M110 192V280H200" class="fc-money"/>
+          <path d="M470 192V300H360" class="fc-real"/><path d="M450 192V280H360" class="fc-money"/>
+          <text x="140" y="24" class="fc-s">bienes que compran</text><text x="160" y="66" class="fc-s">gasto en consumo $</text>
+          <text x="420" y="24" class="fc-s">bienes que venden</text><text x="400" y="66" class="fc-s">ingresos por ventas $</text>
+          <text x="140" y="318" class="fc-s">trabajo, tierra, capital</text><text x="160" y="272" class="fc-s">rentas $</text>
+          <text x="420" y="318" class="fc-s">factores que compran</text><text x="400" y="272" class="fc-s">pagos a factores $</text>
+        </svg>`, 'Economía de mercado de dos sectores. Línea continua azul: flujo real (bienes y factores). Línea naranja punteada: flujo monetario, en sentido contrario. Es la Figura 1.3 de Blanco.')}
+        ${table(['Flujo', 'De → a', 'Pasa por el mercado de…', 'Tipo'], [
+          ['Bienes y servicios', 'Empresas → familias', 'bienes', '<strong>Real</strong>'],
+          ['Gasto en consumo', 'Familias → empresas', 'bienes', '<strong>Monetario</strong> (para las empresas es su ingreso por ventas)'],
+          ['Trabajo, tierra, capital, iniciativa', 'Familias → empresas', 'factores', '<strong>Real</strong>'],
+          ['Salarios, alquileres, intereses, beneficios', 'Empresas → familias', 'factores', '<strong>Monetario</strong> (para las familias son sus rentas)'],
+        ])}
+        <p>Leelo como un círculo cerrado: las familias reciben rentas por sus factores; con esas rentas compran bienes; ese gasto es el ingreso de las empresas; con ese ingreso las empresas pagan los factores… y vuelve a empezar. Por eso <strong>los precios de los factores determinan la distribución</strong>: quien tiene un factor con precio alto obtiene más renta y se lleva una parte mayor de la producción.</p>
+        <h2>Ahora, la economía mixta</h2>
+        <p>En una economía mixta el Estado participa en los dos mercados y, además, quita y da dinero sin contraprestación:</p>
+        ${circular}
+        ${table(['Flujo del Estado', 'De → a', 'Tipo y comentario'], [
+          ['<strong>Impuestos</strong>', 'Familias y empresas → Estado', 'Monetario. Directos (sobre la renta) e indirectos (sobre las ventas)'],
+          ['<strong>Compras de bienes y servicios</strong> (gasto público)', 'Estado → mercado de bienes', 'Monetario hacia las empresas; a cambio recibe bienes (flujo real). Rutas, insumos de hospitales'],
+          ['<strong>Contratación de factores</strong>', 'Estado → mercado de factores', 'Paga salarios a docentes, médicos y policías (monetario) a cambio de su trabajo (real)'],
+          ['<strong>Bienes públicos</strong>', 'Estado → familias y empresas', 'Real: defensa, justicia, alumbrado, educación y salud públicas'],
+          ['<strong>Transferencias</strong>', 'Estado → familias', 'Monetario <em>sin contraprestación</em>: jubilaciones, asignaciones, becas'],
+          ['<strong>Subsidios</strong>', 'Estado → empresas', 'Monetario sin contraprestación: subsidios al transporte o a la energía'],
+        ])}
+        ${note('Las transferencias y los subsidios no son pago por un bien o un factor: por eso no entran en el PIB por el lado del gasto (Tema X).', 'tip')}
+        <h3>Y el resto del mundo</h3>
+        <p>Si la economía está abierta, una parte del gasto de las familias se va a empresas extranjeras (<strong>importaciones</strong>) y una parte de la producción nacional la compran extranjeros (<strong>exportaciones</strong>). En el diagrama, un quinto agente, el “resto del mundo”, conectado al mercado de bienes.</p>
+        <h2>Por qué importa: producción = gasto = renta</h2>
+        <p>Como todo lo que se gasta en bienes es ingreso de alguna empresa, y todo ese ingreso termina pagando factores (incluido el beneficio del empresario), el valor de la <strong>producción</strong>, el <strong>gasto</strong> y las <strong>rentas</strong> es el mismo número medido en tres puntos del círculo. Es la base de los tres enfoques del PIB del segundo parcial.</p>
+        <h2>Cómo dibujarlo en el parcial</h2>
+        <ol>
+          <li>Cuatro cajas: familias a la izquierda, empresas a la derecha, mercado de bienes arriba, mercado de factores abajo. El Estado en el centro.</li>
+          <li>Flujo real con línea continua, en sentido antihorario (en este dibujo): bienes de empresas a familias por arriba; factores de familias a empresas por abajo.</li>
+          <li>Flujo monetario con línea punteada, en sentido contrario: gasto de familias a empresas; rentas de empresas a familias.</li>
+          <li><strong>Rotulá cada flecha</strong> (“gasto en consumo”, “salarios, alquileres, intereses, beneficios”…). Una flecha sin nombre no suma.</li>
+          <li>Estado: impuestos desde familias y desde empresas; gasto público hacia el mercado de bienes; salarios públicos por el de factores; transferencias a familias; subsidios a empresas.</li>
+          <li>Agregá una leyenda: “continua = bienes y servicios / factores; punteada = dinero”. Es exactamente lo que pide la consigna.</li>
+        </ol>
+        ${note('Errores que restan: decir que las familias “compran factores” (los <em>venden</em>); dibujar el dinero en el mismo sentido que los bienes; poner al Estado solo cobrando, sin flechas de vuelta; olvidar que la consigna dice “economía mixta”.', 'warn')}`,
+      quiz: [
+        { q: 'En el flujo circular, las familias…', o: ['compran factores y venden bienes', 'venden factores y compran bienes', 'solo compran bienes', 'producen bienes'], a: 1, e: 'Son las dueñas de los factores.' },
+        { q: '¿Cuál de estos es un flujo monetario?', o: ['El trabajo que las familias ofrecen', 'Los bienes que venden las empresas', 'Los salarios que pagan las empresas', 'La tierra que se alquila'], a: 2, e: 'El salario es dinero que va de empresas a familias.' },
+        { q: 'Los precios de los factores (salarios, alquileres, intereses) se forman en…', o: ['el mercado de bienes', 'el mercado de factores', 'el Estado', 'el resto del mundo'], a: 1, e: 'Y determinan las rentas de las familias.' },
+        { q: 'Una jubilación, en el flujo circular, es…', o: ['una compra de bienes del Estado', 'una transferencia del Estado a las familias', 'un impuesto', 'un pago por factores'], a: 1, e: 'Dinero sin contraprestación.' },
+        { q: 'El flujo real y el monetario circulan…', o: ['en el mismo sentido', 'en sentidos contrarios', 'solo entre familias', 'solo a través del Estado'], a: 1, e: 'Por cada bien que va hacia un lado, el dinero va hacia el otro.' },
+        { q: 'El sueldo de una docente de escuela pública, en el diagrama de economía mixta, pasa por…', o: ['el mercado de factores: el Estado compra trabajo', 'las transferencias', 'el mercado de bienes', 'los subsidios'], a: 0, e: 'Hay contraprestación: la docente entrega su trabajo.' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, caps. 1 (1.3.8) y 10 (10.3.6)', points: ['Familias y empresas en los mercados de productos y de factores (Figura 1.3).', 'Línea continua: bienes y factores; discontinua: dinero.', 'Los precios de los factores determinan las rentas y la distribución.'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, cap. 2', points: ['El diagrama del flujo circular como primer modelo de la economía.'] },
+      ],
+    },
   );
 })();

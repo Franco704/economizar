@@ -138,5 +138,65 @@
       ],
       sources: [{ title: 'Diapositivas del Tema XIII', ref: 'Cátedra de Economía', points: ['Demanda de dinero y tasa de interés de equilibrio; regulación del BC; ecuación cuantitativa.'] }],
     },
+
+    {
+      id: 'politica-monetaria',
+      module: 't13',
+      title: 'Política monetaria expansiva y contractiva: transmisión y consecuencias',
+      keywords: 'política monetaria expansiva contractiva instrumentos consecuencias corto plazo largo plazo mecanismo transmisión tasa de interés inversión demanda agregada oferta agregada creciente vertical neutralidad precios producción inflación recesión independencia banco central facilidades permanentes bonos',
+      tldr: 'Una política monetaria <mark>expansiva</mark> aumenta la oferta monetaria: baja la tasa de interés, sube la inversión y la demanda agregada; a corto plazo crecen la producción y los precios, y a largo plazo <strong>solo los precios</strong>. Una <mark>contractiva</mark> hace lo contrario y se usa para frenar la inflación. Por eso el Banco Central no puede combatir a la vez la inflación y la caída de la producción.',
+      goals: ['Responder la pregunta del 2do parcial: instrumentos, tipos de política y consecuencias de corto plazo.', 'Explicar el mecanismo de transmisión con el mercado de dinero.', 'Distinguir los efectos de corto plazo (oferta agregada creciente) y de largo plazo (vertical).', 'Explicar por qué se busca un Banco Central independiente.'],
+      body: `
+        ${note('Pregunta del 2do parcial 2025, de su otra versión y del recuperatorio de diciembre 2024: “<em>¿Cuáles son los instrumentos del Banco Central para ejercer el control de la política monetaria? ¿Cuáles son los tipos de políticas monetarias que puede llevar a cabo el Banco Central y cuáles sus consecuencias en el corto plazo?</em>”. Abajo está la respuesta armada, sección por sección.', 'exam')}
+        <h2>1. Los instrumentos</h2>
+        ${table(['Instrumento', 'Qué mueve', 'Expansiva', 'Contractiva'], [
+          ['<strong>Coeficiente de caja</strong> (encaje)', 'El multiplicador', 'Bajarlo', 'Subirlo'],
+          ['<strong>Operaciones de mercado abierto</strong>', 'La base monetaria', 'Comprar títulos o divisas', 'Vender títulos o divisas'],
+          ['<strong>Facilidades permanentes</strong>', 'La base, a muy corto plazo', 'Prestar a un día a bancos con falta de liquidez', 'Tomar depósitos a un día de bancos con exceso de liquidez'],
+          ['<strong>Tasa de interés de referencia</strong>', 'El costo del dinero del BC; es además una señal', 'Bajarla', 'Subirla'],
+        ])}
+        <p>Los impuestos sobre los activos financieros <strong>no</strong> son un instrumento de política monetaria: son política fiscal (Blanco 14.6.7). Sobre las facilidades permanentes, Blanco agrega: el BC presta a una tasa bastante superior a la oficial y paga por los depósitos una inferior, así que los bancos solo acuden cuando no les queda otra opción. Si piden prestado, la base aumenta; si depositan, disminuye.</p>
+        <h2>2. Los dos tipos de política</h2>
+        ${table(['', 'Expansiva', 'Contractiva'], [['Qué hace con la OM', 'La aumenta', 'La reduce'], ['Para qué se usa', 'Reactivar la economía en una recesión, bajar el desempleo', 'Frenar la inflación, enfriar una economía recalentada'], ['Riesgo', 'Inflación', 'Recesión y desempleo']])}
+        <h2>3. El mecanismo de transmisión</h2>
+        <p>Todo pasa primero por el mercado de dinero (lección anterior). Si el BC aumenta la oferta monetaria, a la tasa vieja la gente tiene más dinero del que quiere mantener: intenta <strong>comprar bonos</strong>, el precio de los bonos sube y la <strong>tasa de interés baja</strong> (Blanco 14.6.11). Con crédito más barato, empresas y familias invierten más y compran más bienes durables: la <strong>demanda agregada aumenta</strong>.</p>
+        ${flow('BC: OM ↑ (compra títulos, baja el encaje o la tasa)', 'Exceso de dinero: se compran bonos', 'Tasa de interés ↓', 'Inversión y consumo durable ↑', 'Demanda agregada →')}
+        ${flow('BC: OM ↓ (vende títulos, sube el encaje o la tasa)', 'Falta de dinero: se venden bonos', 'Tasa de interés ↑', 'Inversión ↓', 'Demanda agregada ←')}
+        <h2>4. Consecuencias a corto y a largo plazo</h2>
+        <div class="figs-2">
+          ${h.plot({ x: [0, 10], y: [0, 10], h: 250, xl: 'Producción (Y)', yl: 'Nivel de precios (P)', alt: 'Corto plazo: oferta agregada creciente', curves: [{ f: (x) => 9 - 0.8 * x, cls: 'c-d', ghost: true, label: 'DA₀' }, { f: (x) => 11 - 0.8 * x, cls: 'c-d', label: 'DA₁' }, { f: (x) => 1 + 0.8 * x, cls: 'c-s', label: 'OA corto plazo' }], points: [{ x: 5, y: 5, cls: 'pl-old', label: 'A', pos: 'w' }, { x: 6.25, y: 6, cls: 'c-eq', label: 'B' }], guides: [{ x: 5, y: 5, xt: 'Y₀', yt: 'P₀' }, { x: 6.25, y: 6, xt: 'Y₁', yt: 'P₁' }] })}
+          ${h.plot({ x: [0, 10], y: [0, 10], h: 250, xl: 'Producción (Y)', yl: 'Nivel de precios (P)', alt: 'Largo plazo: oferta agregada vertical', curves: [{ f: (x) => 9 - 0.8 * x, cls: 'c-d', ghost: true, label: 'DA₀' }, { f: (x) => 11 - 0.8 * x, cls: 'c-d', label: 'DA₁' }, { pts: [[5, 0.3], [5, 9.6]], cls: 'c-s', label: 'OA largo plazo' }], points: [{ x: 5, y: 5, cls: 'pl-old', label: 'A', pos: 'w' }, { x: 5, y: 7, cls: 'c-eq', label: 'C', pos: 'e' }], guides: [{ x: 5, y: 7, xt: 'Y*', yt: 'P₂' }] })}
+        </div>
+        <p class="muted-s">Izquierda: a corto plazo la oferta agregada es creciente y una política expansiva sube la producción y los precios. Derecha: a largo plazo la oferta agregada es vertical (la producción depende de los recursos y la tecnología) y solo suben los precios.</p>
+        ${table(['Política', 'Corto plazo (OA creciente)', 'Largo plazo (OA vertical)'], [
+          ['<strong>Expansiva</strong>', 'Tasa ↓, Y ↑, P ↑, desempleo ↓', 'Solo P ↑: la producción vuelve a su nivel (Blanco 14.6.10)'],
+          ['<strong>Contractiva</strong>', 'Tasa ↑, Y ↓, P ↓ (o sube menos), desempleo ↑ (Blanco 14.6.9)', 'Solo P ↓ (menos inflación)'],
+        ])}
+        <p>Esa es la <strong>neutralidad del dinero</strong> a largo plazo: más dinero no hace a un país más productivo, solo eleva los precios. Es la ecuación cuantitativa: con V estable e Y fijada por los recursos, M·V = P·Y implica que P sigue a M. Por eso aumentar la oferta monetaria <strong>no</strong> es una buena medida para contener la inflación (Blanco 14.5.13): es su causa.</p>
+        ${note('<p>¿Puede la política monetaria combatir a la vez la inflación y la caída de la producción? <strong>No a corto plazo</strong> (Blanco 14.7.4): para bajar la inflación hay que reducir la demanda agregada, lo que reduce la producción; para reactivar hay que expandirla, lo que sube los precios. Es el décimo principio de Mankiw: a corto plazo hay una disyuntiva entre inflación y desempleo.</p>', 'warn')}
+        <h2>Por qué un Banco Central independiente</h2>
+        <p>Desde que los billetes dejaron de ser convertibles en oro, la cantidad de dinero es una decisión política: el Banco Central podría emitir cuanto quisiera. Históricamente, muchos gobiernos financiaron sus déficits con emisión y llevaron a sus países a procesos inflacionarios. Separar al Banco Central del gobierno busca que las decisiones de emisión no dependan de las necesidades de financiamiento del Tesoro (Blanco 14.7.3). En Argentina, la Carta Orgánica dice que el BCRA no está sujeto a órdenes del Poder Ejecutivo.</p>
+        <h2>La respuesta del parcial, en limpio</h2>
+        <ol>
+          <li><strong>Instrumentos</strong>: coeficiente de caja (encaje), operaciones de mercado abierto, facilidades permanentes de crédito y depósito, y la tasa de interés de referencia como señal. Con ellos el BC mueve la base monetaria o el multiplicador: OM = (1 + e)/(α + e) · BM.</li>
+          <li><strong>Tipos</strong>: expansiva (aumenta la OM) y contractiva (la reduce).</li>
+          <li><strong>Consecuencias en el corto plazo</strong>: la expansiva baja la tasa de interés, aumenta la inversión y la demanda agregada, sube la producción y el empleo, y también los precios. La contractiva sube la tasa, reduce la inversión y la demanda, frena la inflación a costa de producción y empleo. (A largo plazo, solo cambian los precios.)</li>
+          <li><strong>Gráficos</strong>: el mercado de dinero (oferta vertical que se desplaza y nueva tasa) y DA–OA de corto plazo.</li>
+        </ol>`,
+      quiz: [
+        { q: 'Una de las siguientes medidas NO es un instrumento de política monetaria:', o: ['el coeficiente de caja', 'las operaciones de mercado abierto', 'los impuestos sobre el rendimiento de los activos financieros', 'las facilidades permanentes de crédito y depósito'], a: 2, e: 'Los impuestos son política fiscal.', src: 'Blanco 14.6.7' },
+        { q: 'El tipo de interés aumenta si…', o: ['se reduce el coeficiente de caja', 'el Banco Central vende títulos de deuda pública', 'el Banco Central compra títulos', 'aumenta el multiplicador'], a: 1, e: 'Retira dinero: la oferta monetaria baja y la tasa sube.', src: 'Blanco 14.6.8' },
+        { q: 'Al aumentar la oferta monetaria, en el mercado de dinero la gente…', o: ['intenta vender bonos y la tasa sube', 'intenta comprar bonos y la tasa sube', 'intenta vender bonos y la tasa baja', 'intenta comprar bonos y la tasa baja'], a: 3, e: 'Más demanda de bonos sube su precio y baja la tasa.', src: 'Blanco 14.6.11' },
+        { q: 'Con oferta agregada creciente (corto plazo), una reducción de la oferta monetaria nominal da lugar a…', o: ['más producción y precios', 'más producción y menos precios', 'menos producción y menos precios', 'menos producción y más precios'], a: 2, e: 'La demanda agregada se desplaza a la izquierda.', src: 'Blanco 14.6.9' },
+        { q: 'Con oferta agregada vertical (largo plazo), un aumento de la oferta monetaria lleva a que…', o: ['aumenten los precios y la producción se mantenga', 'bajen los precios', 'aumente la producción con precios constantes', 'baje la producción'], a: 0, e: 'Neutralidad del dinero.', src: 'Blanco 14.6.10' },
+        { q: 'El incremento de la oferta monetaria es una buena medida para contener la inflación.', o: ['Verdadero', 'Falso'], a: 1, e: 'Llevaría a un aumento de precios.', src: 'Blanco 14.5.13' },
+        { q: 'Una compra de títulos de deuda pública por parte del Banco Central es una buena medida para reducir el tipo de interés.', o: ['Verdadero', 'Falso'], a: 0, e: 'Aumenta la base y la oferta monetaria.', src: 'Blanco 14.5.12' },
+        { q: '¿Por qué el BC no puede combatir a la vez la inflación y la recesión a corto plazo?', o: ['Porque no tiene instrumentos', 'Porque bajar la inflación exige reducir la demanda, y eso reduce la producción', 'Porque la ley se lo prohíbe', 'Porque la tasa de interés no afecta la inversión'], a: 1, e: 'Disyuntiva inflación-desempleo.' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 14 (14.3.14 a 14.3.18 y ejercicios 14.6 y 14.7)', points: ['Por qué las variaciones de la cantidad de dinero afectan al tipo de interés.', 'Efectos de la oferta monetaria con oferta agregada creciente (corto plazo) y vertical (largo plazo).', 'Instrumentos y diseño de la política monetaria; independencia del Banco Central.'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, caps. 29 y 34', points: ['Herramientas del banco central; influencia de la política monetaria en la demanda agregada.'] },
+      ],
+    },
   );
 })();

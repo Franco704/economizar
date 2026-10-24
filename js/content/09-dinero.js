@@ -138,5 +138,84 @@
       ],
       sources: [{ title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 14', points: ['Base monetaria, oferta monetaria, relación efectivo/depósitos, coeficiente de caja, multiplicador.'] }],
     },
+
+    {
+      id: 'dinero-bancario',
+      module: 't12',
+      title: 'Cómo crean dinero los bancos: el proceso completo y los agregados monetarios',
+      keywords: 'dinero legal bancario creación secundario reservas fraccionarias balance banco préstamos corrida bancaria proceso de multiplicación de qué depende coeficiente de caja relación efectivo depósitos jorge lucía 15000000 base monetaria aumentará compra venta títulos divisas m1 m2 m3 agregados',
+      tldr: 'Hay dos clases de dinero: el <strong>legal</strong> (billetes y monedas, que emite el Banco Central) y el <strong>bancario</strong> (los depósitos). Los bancos crean dinero bancario porque prestan la mayor parte de lo que reciben y ese préstamo vuelve como depósito. El proceso de multiplicación <mark>depende del coeficiente de caja α y de la relación efectivo/depósitos e</mark>: cuanto menores sean, más dinero se crea.',
+      goals: ['Explicar por qué los bancos privados crean dinero y por qué una corrida los deja sin efectivo.', 'Responder “¿de qué depende el proceso de multiplicación de los depósitos?”.', 'Resolver paso a paso el ejercicio de Jorge del 2do parcial 2025 en sus dos versiones.', 'Decidir qué operaciones aumentan la base monetaria.', 'Distinguir M1, M2 y M3.'],
+      body: `
+        <h2>Dinero legal y dinero bancario</h2>
+        <p>Hoy la mayor parte del dinero no son monedas ni billetes: son <strong>depósitos</strong>. Pagamos con transferencias, tarjetas de débito o billeteras virtuales sin tocar un billete. Por eso Blanco distingue el <strong>dinero legal</strong> (el que emite el Banco Central y tiene curso legal) del <strong>dinero bancario</strong> (las cuentas en los bancos, que sirven como medio de pago y se convierten en efectivo cuando uno quiere).</p>
+        <h2>El negocio bancario y las reservas fraccionarias</h2>
+        <p>Un banco recibe depósitos y sabe que no todos sus clientes los retirarán a la vez. Por eso guarda solo una parte como reserva (los <strong>activos de caja</strong>, al menos lo que exige el coeficiente α) y <strong>presta el resto</strong>. Su balance simplificado:</p>
+        ${table(['Activo (lo que tiene)', 'Pasivo (lo que debe)'], [['Reservas o activos de caja (AC = α · D)', 'Depósitos de los clientes (D)'], ['Préstamos ((1 − α) · D)', '']])}
+        <p>Consecuencias que se toman como verdadero/falso:</p>
+        <ul>
+          <li>Si todos los clientes quisieran retirar sus depósitos a la vez (una <strong>corrida bancaria</strong>), el banco no tendría billetes suficientes: está prestado (Blanco 14.5.5: verdadero). Es lo que se vivió en 2001.</li>
+          <li><strong>Los bancos privados crean dinero</strong>: al aceptar depósitos y conceder créditos crean dinero bancario (Blanco 14.5.6: verdadero).</li>
+          <li>Se puede ser muy rico sin tener dinero: la riqueza puede estar en inmuebles, acciones o campos (Blanco 14.5.1: verdadero).</li>
+        </ul>
+        <h2>¿De qué depende el proceso de multiplicación?</h2>
+        ${note('Pregunta del 2do parcial 2024 (6R1) y del recuperatorio de diciembre 2024: “<em>De qué depende el proceso de multiplicación de los depósitos bancarios. JUSTIFIQUE SU RESPUESTA</em>”.', 'exam')}
+        <p>Depende de <strong>dos coeficientes</strong>, y es <strong>tanto más intenso cuanto menores sean</strong> (Blanco 14.5.11):</p>
+        ${table(['Coeficiente', 'Quién lo decide', 'Por qué frena la multiplicación'], [
+          ['<strong>Coeficiente de caja</strong> α = AC / D', 'El Banco Central (encaje mínimo) y la prudencia de cada banco', 'Lo que se encaja no se presta: cuanto mayor es α, menos vuelve al sistema en cada ronda'],
+          ['<strong>Relación efectivo/depósitos</strong> e = EMP / D', 'El público, según su confianza en los bancos y sus hábitos de pago', 'El efectivo que la gente guarda en el bolsillo sale del circuito y no se presta'],
+        ])}
+        ${eq(`D = ${frac('BM', 'α + e')} &nbsp;&nbsp;&nbsp; OM = ${frac('1 + e', 'α + e')} · BM`)}
+        <p>Justificación: en cada ronda, de lo que se recibe se deposita 1/(1 + e); el banco presta (1 − α) de ese depósito, y lo prestado se gasta y lo vuelve a recibir alguien. Cada ronda es (1 − α)/(1 + e) de la anterior. Con α y e más chicos esa proporción se acerca a 1 y la suma de todas las rondas es mucho mayor.</p>
+        <h2>El ejercicio de Jorge (2do parcial 2025), resuelto</h2>
+        <p><em>“En un país en el que el coeficiente de caja que se aplica al sistema bancario es del 10 %, Jorge tiene disponible $15.000.000 que lo deposita en su banco descontando el 20 %, que es la relación efectivo/depósito que las personas mantienen en forma de efectivo. Suponiendo que el banco continuó con el proceso de creación de dinero secundario: calcule, paso a paso, el dinero bancario creado. ¿Qué pasará si el coeficiente de caja se reduce al 5 %?”</em> (El enunciado dice “el depósito de Lucía” al final: es un resto del TP 6, ejercicio 1. Aclarar que se trata del de Jorge.)</p>
+        <p>Interpretación (la misma que la del TP): e = EMP / D = 0,20. De cada peso que se recibe, se deposita 1/1,2 y se guarda 0,2/1,2 en efectivo. Jorge deposita 15.000.000 / 1,2 = 12.500.000 y guarda 2.500.000.</p>
+        ${table(['Ronda', 'Dinero recibido', 'Depósito', 'Efectivo retenido', 'Encaje (10 %)', 'Préstamo'], rondas(15e6, 0.1, 0.2, 5).map((r) => r.map((x, i) => (i ? num(x, 0) : x))).concat([['…', '', '', '', '', ''], ['<strong>Total</strong>', '', '<strong>50.000.000</strong>', '10.000.000', '5.000.000', '45.000.000']]))}
+        <ul>
+          <li>Cada depósito es (1 − 0,1)/1,2 = <strong>75 %</strong> del anterior. Total de depósitos: 12.500.000 / (1 − 0,75) = <strong>50.000.000</strong> = 15.000.000 / (0,1 + 0,2) ✓.</li>
+          <li>Efectivo en manos del público: 0,2 · 50.000.000 = 10.000.000. Encajes: 0,1 · 50.000.000 = 5.000.000. Suman 15.000.000: la base.</li>
+          <li>Oferta monetaria: 10.000.000 + 50.000.000 = <strong>60.000.000</strong>. Multiplicador = 1,2 / 0,3 = <strong>4</strong>.</li>
+          <li>Dinero bancario (secundario) creado por encima del inicial: 60.000.000 − 15.000.000 = <strong>45.000.000</strong>, que es la suma de todos los préstamos.</li>
+        </ul>
+        <p><strong>Si α baja al 5 %</strong>: D = 15.000.000 / 0,25 = <strong>60.000.000</strong>; OM = 1,2 / 0,25 · 15.000.000 = <strong>72.000.000</strong>; multiplicador <strong>4,8</strong>; dinero creado 57.000.000. Con menos encaje, cada ronda presta más y el proceso se multiplica más.</p>
+        <h3>La otra versión (coeficiente 15 % y efectivo 25 %)</h3>
+        ${table(['', 'α = 15 %, e = 25 %', 'α baja a 10 %'], [
+          ['Primer depósito', '15.000.000 / 1,25 = 12.000.000', 'igual'],
+          ['Cada ronda es…', '0,85 / 1,25 = 68 % de la anterior', '0,90 / 1,25 = 72 %'],
+          ['Depósitos totales', '15.000.000 / 0,40 = <strong>37.500.000</strong>', '15.000.000 / 0,35 = <strong>42.857.143</strong>'],
+          ['Efectivo del público', '9.375.000', '10.714.286'],
+          ['Oferta monetaria', '<strong>46.875.000</strong>', '<strong>53.571.429</strong>'],
+          ['Multiplicador', '1,25 / 0,40 = <strong>3,125</strong>', '1,25 / 0,35 = <strong>3,571</strong>'],
+          ['Dinero bancario creado (OM − BM)', '31.875.000', '38.571.429'],
+        ])}
+        ${note('Si se interpreta “descontando el 20 %” como que Jorge guarda el 20 % de lo que recibe (y deposita el 80 %), cada ronda es 0,8 · 0,9 = 72 % de la anterior y D = 12.000.000 / 0,28 = 42.857.143. Las dos lecturas son defendibles: escribí el supuesto antes de calcular.', 'tip')}
+        <h2>“La base monetaria aumentará si…”</h2>
+        <p><em>2do parcial 2024 (6R1), Blanco 14.6.5: a) se incrementa el coeficiente de caja; b) disminuye el coeficiente de caja; c) el Banco Central compra títulos de deuda pública; d) el Banco Central vende títulos de deuda pública.</em></p>
+        ${table(['Opción', '¿Cambia la BM?', 'Por qué'], [
+          ['a) Sube α', 'No', 'Cambia el multiplicador (baja la OM), pero no se emite ni se retira dinero legal'],
+          ['b) Baja α', 'No', 'Sube el multiplicador y la OM; la base sigue igual'],
+          ['<strong>c) El BC compra títulos</strong>', '<strong>Sí, aumenta</strong>', 'Los paga con dinero nuevo: es una operación de mercado abierto expansiva'],
+          ['d) El BC vende títulos', 'Disminuye', 'Recoge dinero a cambio de los títulos'],
+        ])}
+        <p>Lo mismo vale para las divisas: si el Banco Central <strong>compra</strong> dólares, la base aumenta; si los <strong>vende</strong>, disminuye (Blanco 14.5.7: es falso que aumente al vender). Y en una operación de mercado abierto el multiplicador no cambia: cambia la base, y la oferta monetaria cambia en la base por el multiplicador (Blanco 14.5.10).</p>
+        <h2>Los agregados monetarios</h2>
+        <p>Según qué activos se cuenten como dinero, hay definiciones más o menos amplias. Van de lo más líquido a lo menos líquido (las que usa el BCRA, mencionadas en las diapositivas del Tema XIII):</p>
+        ${table(['Agregado', 'Qué incluye', 'Para qué sirve'], [['<strong>Base monetaria</strong>', 'Billetes y monedas en circulación + reservas de los bancos en el BCRA', 'Es lo que controla directamente el Banco Central'], ['<strong>M1</strong>', 'Billetes y monedas en poder del público + depósitos en cuenta corriente', 'El dinero para transacciones'], ['<strong>M2</strong>', 'M1 + cajas de ahorro', 'Agrega depósitos muy líquidos'], ['<strong>M3</strong>', 'M2 + plazos fijos y otros depósitos', 'La definición más amplia']])}
+        <p>La oferta monetaria del modelo (OM = EMP + D) corresponde a un agregado amplio, que incluye todos los depósitos.</p>`,
+      quiz: [
+        { q: 'El proceso de multiplicación de los depósitos será más intenso cuanto…', o: ['mayores sean α y e', 'menores sean α y e', 'mayor sea la base monetaria solamente', 'mayor sea la tasa de interés'], a: 1, e: 'Menos encaje y menos efectivo retenido: más vuelve a prestarse.', src: 'Blanco 14.5.11', exam: ['2p-2024-6r1#2', 'rec-dic-2024#5'] },
+        { q: 'La base monetaria aumentará si…', o: ['se incrementa el coeficiente de caja', 'disminuye el coeficiente de caja', 'el Banco Central compra títulos de deuda pública', 'el Banco Central vende títulos de deuda pública'], a: 2, e: 'Los paga con dinero nuevo.', src: 'Blanco 14.6.5', exam: ['2p-2024-6r1#3'] },
+        { q: 'La oferta monetaria disminuirá si…', o: ['se incrementa el coeficiente de caja', 'disminuye el coeficiente de caja', 'el Banco Central compra títulos', 'disminuye la relación efectivo/depósitos'], a: 0, e: 'Baja el multiplicador.', src: 'Blanco 14.6.6' },
+        { q: 'Con α = 10 % y e = 20 %, una base de $15.000.000 genera depósitos por…', o: ['$15.000.000', '$45.000.000', '$50.000.000', '$60.000.000'], a: 2, e: '15.000.000 / 0,30.' },
+        { q: 'Los bancos privados crean dinero.', o: ['Verdadero', 'Falso'], a: 0, e: 'Dinero bancario: aceptan depósitos y conceden créditos.', src: 'Blanco 14.5.6' },
+        { q: 'Un incremento del coeficiente de caja reduce el multiplicador monetario, pero no altera la base monetaria.', o: ['Verdadero', 'Falso'], a: 0, e: 'El dinero sigue existiendo, como reservas.', src: 'Blanco 14.5.8' },
+        { q: 'La base monetaria aumenta si el Banco Central vende divisas.', o: ['Verdadero', 'Falso'], a: 1, e: 'Al vender divisas recoge pesos: la base baja.', src: 'Blanco 14.5.7' },
+        { q: 'M2 se obtiene sumando a M1…', o: ['los plazos fijos', 'las cajas de ahorro', 'las reservas de los bancos', 'los préstamos'], a: 1, e: 'M3 agrega además los plazos fijos.' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 14 (14.3.7 a 14.3.13 y ejercicios 14.5 a 14.8)', points: ['Dinero legal y dinero bancario; la actividad de los bancos comerciales.', '¿Cuántos depósitos pueden crearse a partir de la base monetaria? Depende de α y de e.', 'Base monetaria y operaciones del Banco Central con títulos y divisas.'] },
+        { title: 'Diapositivas del Tema XIII', ref: 'Cátedra de Economía', points: ['Encaje, relación efectivo/depósitos, creación de dinero secundario, multiplicador; mención de M1, M2 y M3.'] },
+      ],
+    },
   );
 })();

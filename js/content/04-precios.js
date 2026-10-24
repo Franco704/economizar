@@ -160,5 +160,67 @@
       ],
       sources: [{ title: 'Principios de Economía', ref: 'Mankiw, caps. 6 y 7', points: ['Incidencia de un impuesto según las elasticidades.', 'Excedente del consumidor y del productor.'] }],
     },
+
+    {
+      id: 'bienestar',
+      module: 't5',
+      title: 'Excedentes y bienestar: cuánto pierde la sociedad con cada intervención',
+      keywords: 'economía del bienestar disposición a pagar excedente del consumidor productor total coste marginal eficiencia equilibrio competitivo maximiza pérdida irrecuperable precio máximo mínimo impuesto recaudación beneficio coste fijo',
+      tldr: 'El <mark>excedente del consumidor</mark> es lo que se estaba dispuesto a pagar menos lo que se paga; el <mark>del productor</mark>, lo que se cobra menos el costo marginal. Su suma, el <strong>excedente total</strong>, mide el bienestar que deja un mercado, y es <strong>máximo en el equilibrio competitivo</strong>. Precios máximos, mínimos e impuestos achican la cantidad y generan una <mark>pérdida irrecuperable de eficiencia</mark>.',
+      goals: ['Calcular excedentes con tablas y con curvas lineales.', 'Explicar por qué el equilibrio competitivo maximiza el excedente total.', 'Medir la pérdida irrecuperable de un precio máximo, un precio mínimo y un impuesto.', 'Distinguir excedente del productor y beneficio.'],
+      body: `
+        <p>Hasta ahora el análisis fue <strong>positivo</strong>: cómo se forma el precio. La <strong>economía del bienestar</strong> da un paso normativo: ¿es bueno ese resultado? ¿Mejora o empeora la sociedad si el Estado interviene? Para responder hace falta medir cuánto gana cada participante.</p>
+        <h2>El excedente del consumidor</h2>
+        <p>La curva de demanda dice, para cada unidad, cuánto está dispuesto a pagar como máximo el consumidor (su <strong>disposición a pagar</strong>). Si paga menos, gana la diferencia. El ejemplo de Blanco (7.8.1), con un precio de 5 €:</p>
+        ${table(['Unidad', '1.ª', '2.ª', '3.ª', '4.ª', '5.ª', '6.ª', '7.ª', '8.ª'], [['Pagaría como máximo', '15', '14', '12', '10', '8', '5', '4', '3'], ['Excedente (− 5)', '10', '9', '7', '5', '3', '0', '—', '—']])}
+        <p>Compra <strong>6 unidades</strong> (hasta que lo que pagaría iguala lo que paga) y su excedente es 10 + 9 + 7 + 5 + 3 + 0 = <strong>34 €</strong>. Con muchas unidades, el excedente es el <strong>área entre la demanda y el precio</strong>. Se mide en unidades monetarias.</p>
+        <h2>El excedente del productor</h2>
+        <p>Del lado de la oferta, cada unidad tiene un costo marginal: es lo mínimo que el productor aceptaría cobrar por ella. Blanco 7.8.2, con un precio de 20 €:</p>
+        ${table(['Unidad', '1.ª', '2.ª', '3.ª', '4.ª', '5.ª', '6.ª', '7.ª', '8.ª'], [['Costo marginal', '5', '8', '10', '14', '16', '18', '20', '22'], ['Excedente (20 −)', '15', '12', '10', '6', '4', '2', '0', '—']])}
+        <p>Produce <strong>7 unidades</strong> y su excedente es <strong>49 €</strong>: el <strong>área entre el precio y la oferta</strong>.</p>
+        ${note('El excedente del productor <strong>no es el beneficio</strong>: es el beneficio <strong>más el costo fijo</strong> (Blanco 7.6.6). Suma precio menos costo marginal, y los costos marginales no incluyen el fijo.', 'warn')}
+        <h2>El excedente total y la eficiencia del mercado</h2>
+        ${eq('Excedente total = EC + EP = Σ (disposición a pagar − costo marginal)', 'Bienestar')}
+        <p>Con Xd = 38 − P y Xo = P − 2 (Blanco 7.8.6): el equilibrio es P = 20 y X = 18.</p>
+        ${chart({ x: [0, 40], y: [0, 40], curves: [{ f: (x) => 38 - x, dom: [0, 38], cls: 'c-d', label: 'D' }, { f: (x) => x + 2, cls: 'c-s', label: 'O' }],
+          areas: [{ pts: [[0, 38], [18, 20], [0, 20]], cls: 'a-d', label: 'EC = 162', at: [6, 25] }, { pts: [[0, 2], [18, 20], [0, 20]], cls: 'a-s', label: 'EP = 162', at: [6, 15] }],
+          points: [{ x: 18, y: 20, cls: 'c-eq', label: 'E' }], guides: [{ x: 18, y: 20, xt: '18', yt: '20' }] },
+          'EC = ½ · 18 · (38 − 20) = 162. EP = ½ · 18 · (20 − 2) = 162. Excedente total = 324.')}
+        <p>¿Por qué el equilibrio competitivo es <strong>eficiente</strong>? Antes de X = 18, cada unidad que se deja de producir vale para alguien más de lo que cuesta producirla: se pierde excedente. Después de X = 18, cada unidad extra cuesta más de lo que alguien pagaría por ella: produciría pérdidas para la sociedad. Solo en el equilibrio se producen exactamente las unidades cuya disposición a pagar supera al costo marginal. En ningún mercado puede venderse una unidad cuya disposición a pagar sea menor que su costo marginal.</p>
+        ${note('Una transferencia pura no cambia el bienestar: si los productores ganan exactamente lo que pierden los consumidores, el excedente total queda igual (Blanco 7.5.8 es falso). Lo que reduce el bienestar es que dejen de hacerse transacciones que convenían a ambos.', 'tip')}
+
+        <h2>Precio máximo: menos cantidad y pérdida de bienestar</h2>
+        <p>Mismo mercado con un precio máximo de 12 € (Blanco 7.8.7). Los productores ofrecen 12 − 2 = <strong>10</strong> unidades; se intercambian 10 (el lado corto).</p>
+        ${chart({ x: [0, 40], y: [0, 40], curves: [{ f: (x) => 38 - x, dom: [0, 38], cls: 'c-d', label: 'D' }, { f: (x) => x + 2, cls: 'c-s', label: 'O' }], hlines: [{ y: 12, cls: 'c-ctrl', label: 'Pmáx = 12' }],
+          areas: [{ pts: [[0, 38], [10, 28], [10, 12], [0, 12]], cls: 'a-d', label: 'EC = 210', at: [5, 21] }, { pts: [[0, 2], [10, 12], [0, 12]], cls: 'a-s', label: 'EP = 50', at: [3.5, 9.5] }, { pts: [[10, 28], [18, 20], [10, 12]], cls: 'a-bad', label: 'PIE = 64', at: [13, 20] }],
+          points: [{ x: 18, y: 20, cls: 'pl-old', label: 'E', pos: 'e' }], guides: [{ x: 10, y: 28, xt: '10', yt: '28' }] },
+          'Solo se intercambian 10 unidades. El triángulo rojo es la pérdida irrecuperable: transacciones que convenían y ya no se hacen.')}
+        ${table(['', 'Sin intervención', 'Con Pmáx = 12', 'Cambio'], [['EC', '162', '½·10·10 + 10·16 = <strong>210</strong>', '+48'], ['EP', '162', '½·10·10 = <strong>50</strong>', '−112'], ['Total', '324', '<strong>260</strong>', '<strong>−64</strong> (pérdida irrecuperable)']])}
+        <p>Los consumidores que consiguen comprar ganan (pagan menos), los productores pierden mucho y la sociedad pierde 64. Y esto supone que las 10 unidades van a los consumidores que más las valoran: si se reparten por colas o por sorteo, la pérdida es todavía mayor.</p>
+        <h2>Precio mínimo</h2>
+        <p>Con un precio mínimo de 24 €: los consumidores compran 38 − 24 = 14 unidades. Si los productores solo producen lo que venden: EC = ½·14·14 = <strong>98</strong>; EP = área entre 24 y la oferta hasta 14 = <strong>210</strong>; total <strong>308</strong>, pérdida irrecuperable = <strong>16</strong> (el triángulo entre X = 14 y X = 18). Si además producen el excedente y el Estado lo compra y almacena, la pérdida crece.</p>
+        <h2>Impuesto por unidad</h2>
+        <p>Con un impuesto de 4 € (Blanco 7.8.8) la oferta pasa a Xo = P − 6: los compradores pagan 22, los vendedores reciben 18 y se intercambian 16.</p>
+        ${chart({ x: [0, 40], y: [0, 40], curves: [{ f: (x) => 38 - x, dom: [0, 38], cls: 'c-d', label: 'D' }, { f: (x) => x + 2, cls: 'c-s', label: 'O' }, { f: (x) => x + 6, cls: 'c-s c-tax', label: 'O + 4' }],
+          areas: [{ pts: [[0, 38], [16, 22], [0, 22]], cls: 'a-d', label: 'EC = 128', at: [5, 27] }, { pts: [[0, 2], [16, 18], [0, 18]], cls: 'a-s', label: 'EP = 128', at: [5, 13] }, { pts: [[0, 18], [16, 18], [16, 22], [0, 22]], cls: 'a-tax', label: 'Recaudación = 64', at: [8, 20] }, { pts: [[16, 22], [18, 20], [16, 18]], cls: 'a-bad' }],
+          points: [{ x: 16, y: 22, cls: 'c-eq', label: 'Pc', pos: 'ne' }, { x: 16, y: 18, cls: 'c-s', label: 'Pv', pos: 'se' }] },
+          'EC 128 + EP 128 + recaudación 64 = 320. La pérdida irrecuperable es 324 − 320 = 4 (el triángulo rojo).')}
+        ${table(['Intervención', 'Cantidad', 'Excedente total', 'Pérdida irrecuperable'], [['Ninguna', '18', '324', '0'], ['Precio máximo 12', '10', '260', '64'], ['Precio mínimo 24', '14', '308', '16'], ['Impuesto de 4 (contando la recaudación)', '16', '320', '4']])}
+        ${note('Regla general (Blanco 7.6.9 y 7.6.10): un precio máximo efectivo y un impuesto <strong>reducen la cantidad producida y el excedente total</strong>. El Estado puede tener buenas razones para intervenir (equidad, Tema II), pero el modelo dice que tiene un costo de eficiencia, y conviene saber medirlo.', 'exam')}`,
+      quiz: [
+        { q: 'El excedente del consumidor es…', o: ['lo que el consumidor paga', 'lo que está dispuesto a pagar menos lo que paga', 'lo que paga menos lo que está dispuesto a pagar', 'el gasto total'], a: 1, e: 'Blanco 7.5.2 invierte la resta: es falso.', src: 'Blanco 7.6.1' },
+        { q: 'Al disminuir el precio de un producto…', o: ['aumentan los dos excedentes', 'disminuyen los dos excedentes', 'disminuye el del consumidor y aumenta el del productor', 'aumenta el del consumidor y disminuye el del productor'], a: 3, e: 'El consumidor paga menos y el productor cobra menos.', src: 'Blanco 7.6.3' },
+        { q: 'En una empresa, el excedente del productor es igual…', o: ['al beneficio', 'al beneficio más el costo marginal', 'al beneficio más el costo medio', 'al beneficio más el costo fijo'], a: 3, e: 'Suma P − CMg, que no descuenta el costo fijo.', src: 'Blanco 7.6.6' },
+        { q: 'El excedente total, por unidad, se mide como…', o: ['lo que paga el consumidor menos el costo marginal', 'lo que está dispuesto a pagar el consumidor menos el costo marginal', 'el costo marginal menos el precio', 'lo que está dispuesto a pagar menos lo que paga'], a: 1, e: 'El precio se cancela: lo que gana uno al pagar menos lo pierde el otro.', src: 'Blanco 7.6.8' },
+        { q: 'Un precio máximo efectivo…', o: ['aumenta la cantidad y reduce el excedente total', 'reduce la cantidad y aumenta el excedente total', 'aumenta los dos', 'reduce la cantidad y el excedente total'], a: 3, e: 'Se pierden transacciones que convenían a ambas partes.', src: 'Blanco 7.6.9' },
+        { q: 'Xd = 38 − P y Xo = P − 2. ¿Cuál es el excedente total en el equilibrio?', o: ['162', '324', '360', '18'], a: 1, e: 'EC = EP = 162.' },
+        { q: 'Con el mismo mercado y un impuesto de 4 por unidad, la pérdida irrecuperable es…', o: ['64', '4', '16', '0'], a: 1, e: '½ · 4 · (18 − 16) = 4.' },
+        { q: 'En un mercado competitivo, la última unidad vendida proporciona un excedente total…', o: ['máximo', 'nulo', 'negativo', 'igual al precio'], a: 1, e: 'En el equilibrio la disposición a pagar iguala al costo marginal (Blanco 7.5.4).' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 7', points: ['Excedente del consumidor y del productor: concepto y medición.', 'El excedente total como medida del bienestar; eficiencia del equilibrio competitivo.', 'Efectos sobre el bienestar de un precio máximo y de un impuesto (ejercicios 7.8.6 a 7.8.8).'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, caps. 7 y 8', points: ['Consumidores, productores y eficiencia de los mercados; costos de los impuestos.'] },
+      ],
+    },
   );
 })();

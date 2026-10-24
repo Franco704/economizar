@@ -140,5 +140,80 @@
       ],
       sources: [{ title: 'Diapositivas del Tema VIII', ref: 'Cátedra de Economía', points: ['Entrada de empresas por beneficio extraordinario y efecto del cambio de demanda.', 'El largo plazo: entrada y salida de empresas.'] }],
     },
+
+    {
+      id: 'nivelacion-parcial',
+      module: 't8',
+      title: 'Nivelación, cierre y largo plazo: las preguntas que siempre toman',
+      keywords: 'punto de nivelación precio inferior superior largo plazo saldrán entrarán empresas precio aumentará disminuirá corto plazo pérdidas cierre costos fijos irrecuperables vuelo avería vino agregación oferta de mercado helados caída de la demanda oferta a largo plazo horizontal clasificación de mercados máximo beneficio',
+      tldr: 'La pregunta más repetida de los parciales: <em>“En un mercado competitivo, el precio es inferior al punto de nivelación. A largo plazo…”</em>. Respuesta: <mark>saldrán empresas y el precio aumentará</mark> hasta el mínimo del CTMe. A corto plazo, en cambio, las empresas tienen pérdidas pero <strong>siguen produciendo mientras el precio cubra el CVMe</strong>, porque los costos fijos ya están perdidos.',
+      goals: ['Responder con gráficos (mercado y empresa) qué pasa a corto y a largo plazo si el precio está por debajo o por encima del punto de nivelación.', 'Explicar por qué los costos fijos no afectan las decisiones de corto plazo.', 'Agregar ofertas individuales en una oferta de mercado.', 'Analizar una caída de la demanda a corto y largo plazo y dibujar la oferta de largo plazo.'],
+      body: `
+        ${note('<p>Tomada en el 1er parcial 2024, en el 2do parcial 2024 (6R1), en el recuperatorio integral 2024 y en el recuperatorio de diciembre 2024, y con variantes en los parciales 2025. Es la 6.6.4 de Blanco:</p><p><em>En un mercado competitivo, el precio es inferior al punto de nivelación. A largo plazo: a) saldrán empresas del mercado y el precio disminuirá; b) entrarán empresas y el precio disminuirá; <strong>c) saldrán empresas del mercado y el precio aumentará</strong>; d) entrarán empresas y el precio aumentará. Explique y grafique.</em></p>', 'exam')}
+        <h2>Primero, los dos puntos</h2>
+        ${table(['Punto', 'Dónde está', 'Qué significa'], [['<strong>Nivelación</strong>', 'Mínimo del <strong>CTMe</strong> (donde lo corta el CMg)', 'Con ese precio el beneficio económico es cero: beneficio normal'], ['<strong>Cierre</strong>', 'Mínimo del <strong>CVMe</strong>', 'Con ese precio la pérdida es igual al costo fijo: da lo mismo producir que cerrar']])}
+        <h2>La respuesta completa, en cuatro pasos</h2>
+        <div class="figs-2">
+          ${plot({ x: [0, 700], y: [0, 20], h: 270, xl: 'X mercado', alt: 'Mercado: salen empresas y la oferta se desplaza a la izquierda',
+            curves: [{ f: (x) => 20 - x / 50, dom: [0, 700], cls: 'c-d', label: 'D' }, { f: (x) => 4 + x / 110, cls: 'c-s', ghost: true, label: 'O₁' }, { f: (x) => 4 + x / 50, cls: 'c-s', label: 'O₂' }],
+            points: [{ x: 550, y: 9, cls: 'pl-old', label: 'A', pos: 'se' }, { x: 400, y: 12, cls: 'c-eq', label: 'B', pos: 'ne' }], guides: [{ x: 550, y: 9, xt: 'X₁', yt: 'P₁' }, { x: 400, y: 12, xt: 'X₂', yt: 'P₂' }],
+            arrows: [{ from: [660, 10.2], to: [470, 13.6], cls: 'c-s' }] })}
+          ${plot({ x: [0, 8], y: [0, 20], h: 270, xl: 'X empresa', alt: 'Empresa: pierde con P1 y llega a beneficio cero con P2',
+            curves: [{ f: (x) => 2 * x + 4, cls: 'c-cmg', label: 'CMg' }, { f: (x) => x + 4 + 16 / x, dom: [1.2, 8], cls: 'c-ctme', label: 'CTMe' }, { f: (x) => x + 4, cls: 'c-cvme', label: 'CVMe' }],
+            hlines: [{ y: 9, cls: 'c-price', label: 'P₁' }, { y: 12, cls: 'c-price pl-faint', label: 'P₂ = mín CTMe' }],
+            areas: [{ pts: [[0, 9], [2.5, 9], [2.5, 12.9], [0, 12.9]], cls: 'a-bad', label: 'pérdida', at: [1.25, 15.5] }],
+            points: [{ x: 2.5, y: 9, cls: 'pl-old', label: 'a', pos: 'se' }, { x: 4, y: 12, cls: 'c-eq', label: 'b (nivelación)', pos: 'se' }] })}
+        </div>
+        <p class="muted-s">Datos: cada empresa tiene CT = X² + 4X + 16 (nivelación en X = 4 con P = 12) y la demanda del mercado es X = 1.000 − 50P. Con 220 empresas el precio es 9; a largo plazo quedan 100.</p>
+        <ol>
+          <li><strong>Diagnóstico</strong>: el precio P₁ = 9 está por debajo del mínimo del CTMe (12). Cada empresa produce donde P = CMg (punto a, X = 2,5) y su CTMe es 12,9: tiene <strong>pérdidas económicas</strong> de (9 − 12,9) · 2,5 = −9,75. Gana menos que en su mejor alternativa.</li>
+          <li><strong>Corto plazo</strong>: no cierra todavía. P₁ = 9 es mayor que el CVMe (6,5 en X = 2,5): cubre todo el costo variable y parte del fijo. Si cerrara perdería el costo fijo entero, 16, más que 9,75.</li>
+          <li><strong>Largo plazo</strong>: como no hay barreras, las empresas con pérdidas <strong>salen</strong> del sector para usar sus recursos donde rindan más. La <strong>oferta del mercado se desplaza a la izquierda</strong> (de O₁ a O₂) y el <strong>precio sube</strong>.</li>
+          <li><strong>Final</strong>: la salida se detiene cuando el precio llega al mínimo del CTMe (P₂ = 12, punto b). Las que quedan obtienen beneficio normal (cero) y no hay incentivo a entrar ni a salir: equilibrio de largo plazo. Respuesta: <strong>c)</strong>.</li>
+        </ol>
+        ${table(['Si el precio es…', 'Beneficios', 'A largo plazo', 'Oferta del mercado', 'El precio'], [['Superior al punto de nivelación', 'Extraordinarios', 'Entran empresas', 'Se desplaza a la derecha', 'Baja hasta el mín CTMe'], ['Igual', 'Normales', 'Nadie entra ni sale', 'No se mueve', 'Se mantiene'], ['Inferior', 'Pérdidas', 'Salen empresas', 'Se desplaza a la izquierda', 'Sube hasta el mín CTMe']])}
+        ${note('<p>Las variantes de 2025: “<em>En un mercado competitivo, en donde el precio es inferior al punto de nivelación, ¿a corto plazo las empresas tendrán beneficios o pérdidas? ¿Entonces las empresas cerrarán?</em>”. Respuesta: <strong>pérdidas</strong>; cierran <strong>solo si el precio es menor que el mínimo del CVMe</strong>. Si está entre el CVMe y el CTMe siguen produciendo a corto plazo y salen a largo plazo. Y “<em>el precio es superior al punto de nivelación, ¿cuál es el comportamiento de las empresas a largo plazo?</em>”: entran empresas y el precio baja hasta el mínimo del CTMe.</p>', 'exam')}
+        <h2>Por qué los costos fijos no cuentan: costos irrecuperables</h2>
+        <p>Para decidir cuánto producir, la empresa mira el CMg; para decidir si cierra, compara el ingreso con el costo variable. Ninguno de los dos depende del costo fijo: ya se comprometió a pagarlo y no puede echarse atrás. Esos costos que pertenecen al pasado y no se recuperan se llaman <strong>costos irrecuperables</strong>. “Agua pasada no mueve molino”.</p>
+        ${table(['Ejemplo de Blanco', 'La decisión correcta'], [
+          ['Un avión de 150 asientos despega con 15 pasajeros', 'Si lo que pagan los 15 cubre el combustible y la comida, debe despegar: sueldos y avión se pagan igual'],
+          ['Reparaste el auto por 1.000 € hace dos meses y ahora tiene otra avería que no conviene arreglar', 'No repararlo: los 1.000 € ya se perdieron y no deben influir'],
+          ['“Mi empresa no cubre ni las materias primas, pero no la cierro porque gasté mucho en maquinaria”', 'Error: si el ingreso no cubre el costo variable, conviene cerrar; la maquinaria es irrecuperable'],
+          ['Una botella de vino carísima se echó a perder: “como la pagué cara, debo tomarla”', 'Lo que pagaste ya no vuelve: decidí como si fuera un vino cualquiera'],
+        ])}
+        <p>En la tabla 6.3 de Blanco (costo fijo 40, precio 7), la mejor producción es 11 toneladas con una pérdida de 5 mil euros: ingresa 77 y sus costos variables son 42. Produce, porque cerrando perdería 40.</p>
+        <h2>De la empresa al mercado: la agregación</h2>
+        <p>La oferta del mercado a corto plazo es la <strong>suma horizontal</strong> de las ofertas de las empresas: a cada precio, se suma lo que ofrece cada una. Con 2.000 heladerías iguales que ofrecen 20 t a 3 mil euros: el mercado ofrece 40.000 t a ese precio. Por debajo del punto de cierre de cada empresa (2 mil euros), la oferta del mercado es cero.</p>
+        <h2>Si cae la demanda: corto y largo plazo</h2>
+        <ol>
+          <li>Partimos de un equilibrio de largo plazo: P en el mínimo del CTMe y beneficio cero.</li>
+          <li><strong>Corto plazo</strong>: la demanda se desplaza a la izquierda; aparece exceso de oferta, bajan el precio y la cantidad. Cada empresa reduce su producción a lo largo de su CMg y tiene pérdidas.</li>
+          <li><strong>Largo plazo</strong>: salen empresas, la oferta del mercado se desplaza a la izquierda y el precio <strong>vuelve</strong> a su nivel inicial. La cantidad del mercado es menor porque hay menos empresas; cada una que queda produce lo mismo que al principio.</li>
+        </ol>
+        ${note('Por eso la <strong>oferta de largo plazo</strong> de un mercado competitivo es una <strong>recta horizontal</strong> al nivel del mínimo del CTMe: a largo plazo el sector ofrece cualquier cantidad a ese precio, entrando o saliendo empresas. Y es falso que ante una caída de la demanda “a largo plazo solo se reduzca el precio” (Blanco 6.5.13): lo que se reduce es la cantidad.', 'tip')}
+        <h2>Otros resultados que se toman</h2>
+        <ul>
+          <li>Si suben en la misma proporción el precio del producto y el de todos los factores, la empresa competitiva <strong>no cambia</strong> la cantidad que produce: su CMg sube en la misma proporción que el precio (Blanco 6.3.10).</li>
+          <li>El máximo beneficio puede ser negativo: “máximo” significa la menor pérdida posible a ese precio (Blanco 6.5.15 y TP 5, ejercicio 14).</li>
+          <li>Una empresa con beneficio económico nulo <strong>no</strong> cierra a largo plazo: gana lo mismo que en cualquier otra actividad (Blanco 6.5.7).</li>
+          <li>Para que entren empresas alcanza con que el beneficio económico sea positivo, aunque sea pequeño (Blanco 6.5.12).</li>
+        </ul>
+        <h2>¿Qué tipo de mercado es?</h2>
+        <p>Blanco clasifica los mercados por tres elementos: el <strong>número de empresas</strong>, si el producto es <strong>homogéneo o diferenciado</strong> y si hay <strong>barreras de entrada</strong>. Competencia perfecta: muchísimas empresas, producto idéntico y libre entrada. En el otro extremo, el monopolio: una sola empresa y barreras. Entre ambos, la competencia monopolística (muchas empresas, producto diferenciado) y el oligopolio (pocas empresas). La cátedra estudia solo la competencia perfecta, que es el modelo de referencia.</p>`,
+      quiz: [
+        { q: 'En un mercado competitivo el precio es inferior al punto de nivelación. A largo plazo…', o: ['saldrán empresas y el precio disminuirá', 'entrarán empresas y el precio disminuirá', 'saldrán empresas y el precio aumentará', 'entrarán empresas y el precio aumentará'], a: 2, e: 'Con pérdidas salen empresas, la oferta cae y el precio sube hasta el mín CTMe.', src: 'Blanco 6.6.4', exam: ['1p-2024#5', 'rec-2024#3', '2p-2024-6r1#5'] },
+        { q: 'Una empresa competitiva continúa produciendo, en el corto plazo, siempre que el precio sea superior al…', o: ['costo marginal', 'costo total medio', 'costo variable medio', 'costo fijo'], a: 2, e: 'Mínimo del CVMe: punto de cierre.', src: 'Blanco 6.6.1' },
+        { q: 'La desaparición, a largo plazo, de los beneficios extraordinarios en un mercado competitivo se debe a…', o: ['que el CMg es creciente', 'la igualdad entre precio y costo marginal', 'que las empresas no pueden afectar el precio', 'la inexistencia de barreras de entrada'], a: 3, e: 'Entran empresas atraídas por el beneficio.', src: 'Blanco 6.6.3' },
+        { q: 'El punto de nivelación corresponde al mínimo de la curva de…', o: ['costo variable medio', 'costo fijo medio', 'costo total medio', 'costo marginal'], a: 2, e: 'Allí el beneficio económico es cero.', src: 'Blanco 6.6.11' },
+        { q: 'El punto de cierre corresponde al mínimo de la curva de…', o: ['costo variable medio', 'costo fijo medio', 'costo total medio', 'costo marginal'], a: 0, e: 'Allí la pérdida iguala al costo fijo.', src: 'Blanco 6.6.12' },
+        { q: '¿Por qué los costos fijos no afectan las decisiones de corto plazo?', o: ['Porque son pequeños', 'Porque son irrecuperables: se pagan igual produzca o no', 'Porque los paga el Estado', 'Porque son iguales al CMg'], a: 1, e: 'Ni el CMg ni la condición de cierre dependen del CF.' },
+        { q: 'Un mercado competitivo está en equilibrio de largo plazo y cae la demanda. A largo plazo…', o: ['solo baja el precio y la cantidad se mantiene', 'baja la cantidad y el precio vuelve al nivel inicial', 'suben precio y cantidad', 'no cambia nada'], a: 1, e: 'Salen empresas; la oferta de largo plazo es horizontal.' },
+        { q: 'Una empresa competitiva tiene CMg creciente. Si sube el precio del producto, la empresa…', o: ['aumentará su producción y tendrá más beneficios', 'reducirá su producción y tendrá menos beneficios', 'aumentará su producción y tendrá menos beneficios', 'reducirá su producción y tendrá más beneficios'], a: 0, e: 'Sube por su CMg.', src: 'Blanco 6.6.5' },
+      ],
+      sources: [
+        { title: 'Economía: teoría y práctica', ref: 'Blanco, cap. 6 (6.3.2 y 6.3.9 a 6.3.14, ejercicios 6.5 a 6.7)', points: ['Los costes fijos no afectan las decisiones: costes irrecuperables (vuelo, avería).', 'Agregación de las curvas de oferta (Tabla 6.4).', 'Entrada y salida de empresas; hacia dónde tienden la empresa y el mercado.', 'Efecto de un cambio en la demanda a corto y largo plazo; oferta de largo plazo horizontal.'] },
+        { title: 'Principios de Economía', ref: 'Mankiw, cap. 14', points: ['Decisión de cierre a corto plazo y de salida a largo plazo; costos irrecuperables.'] },
+      ],
+    },
   );
 })();

@@ -2,8 +2,8 @@
    Cada lección: { id, module, title, keywords, tldr, goals?, body, labs?, exercises?, quiz?, sources? }
    - body puede incluir lab(i) para ubicar el laboratorio i dentro de la teoría.
    - labs: [{ type, title, ...config }] (los tipos se registran en js/labs/*.js)
-   - exercises: { title, official? ('3.10' = TP 3, ejercicio 10), level (1-3), prompt, hints?, solution: { explain } }
-   - quiz: [{ q, o: [opciones], a: índice correcto, e: explicación }]
+   - exercises: { title, official? ('3.10' = TP 3, ejercicio 10), exam? (['1p-2024#5'] = parcial y número de pregunta), level (1-3), prompt, hints?, solution: { explain } }
+   - quiz: [{ q, o: [opciones], a: índice correcto, e: explicación, src? ('Blanco 2.6.6'), exam? (como en exercises) }]
    - sources: [{ title, ref?, url?, points: [] }] (ref = cita de libro, url = fuente web) */
 (() => {
   const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
@@ -117,5 +117,6 @@
     { id: 't15', unit: 'p2', tema: 'XV', title: 'Desigualdad y pobreza', stop: 'Gini', blurb: 'canastas básicas, NBI, curva de Lorenz y coeficiente de Gini' },
   ];
 
-  window.GUIDE = { UNITS, MODULES, LESSONS: [], LABS: {}, h: { esc, table, note, lab, flow, def, fig, frac, eq, num, plot, chart } };
+  // EXAMS: parciales reales (parciales.js). INTEGRAL: preguntas y casos del integral (integral.js).
+  window.GUIDE = { UNITS, MODULES, LESSONS: [], LABS: {}, EXAMS: [], INTEGRAL: { questions: [], cases: [] }, h: { esc, table, note, lab, flow, def, fig, frac, eq, num, plot, chart } };
 })();
