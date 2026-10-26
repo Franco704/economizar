@@ -39,7 +39,7 @@
         ${note('Un precio máximo fijado <strong>por encima</strong> del de equilibrio no tiene efecto: el mercado sigue en su equilibrio. Probalo moviendo el control del laboratorio por encima de E.', 'tip')}
         ${lab(0)}
         <h2>El caso de los alquileres (TP 3, ejercicio 14)</h2>
-        <p>La nota de Vozpópuli cuenta que, tras dos años con precios de alquiler intervenidos, Barcelona se afianzó como la capital más cara para alquilar. El modelo lo explica: con un tope, los propietarios retiran viviendas del mercado de alquiler tradicional (las venden, las pasan a alquiler turístico o de temporada, que no está topeado), la cantidad ofrecida cae y la escasez aumenta. Quien consigue un contrato topeado se beneficia; el que busca, enfrenta menos oferta y precios más altos en los segmentos no regulados.</p>`,
+        <p>La nota de Vozpópuli cuenta que, tras dos años con precios de alquiler intervenidos, Barcelona se afianzó como la capital más cara para alquilar y la oferta de alquiler cayó un 28 % (el desarrollo completo, con la gráfica, está en los ejercicios). El modelo lo explica: con un tope, los propietarios retiran viviendas del mercado de alquiler tradicional (las venden, las pasan a alquiler turístico o de temporada, que no está topeado), la cantidad ofrecida cae y la escasez aumenta. Quien consigue un contrato topeado se beneficia; el que busca, enfrenta menos oferta y precios más altos en los segmentos no regulados.</p>`,
       labs: [{ type: 'market', title: 'Precio máximo y mínimo sobre un mercado', intro: 'Elegí el tipo de control y mové el precio fijado. Mirá cuándo genera escasez o excedente y cuándo no tiene efecto.', mode: 'control', kind: 'max', d: [100, 1 / 3], s: [50, 0.5], x: [0, 160], y: [0, 120] }],
       exercises: [
         {
@@ -48,10 +48,25 @@
           solution: { explain: '<p>Ver el primer gráfico de la lección: a) Xd, sobre la demanda al nivel de Pmáx; b) Xo, sobre la oferta; c) y d) Xo, porque los productores no venden más que eso. Coinciden porque toda transacción tiene un comprador y un vendedor. Podrían diferir en las estadísticas si parte de las ventas se hace en el mercado negro (se registra menos de lo vendido) o si se confunde “vendido” con “producido” cuando hay stock acumulado.</p>' },
         },
         {
-          official: '3.14', level: 2, title: 'Alquileres intervenidos en Barcelona',
-          prompt: '<p>Analice la noticia “Barcelona se afianza como capital más cara para alquilar tras dos años con los precios intervenidos” (Vozpópuli) y explique cómo se vincula con el práctico.</p>',
-          hints: ['¿El tope es un precio máximo o mínimo? ¿Por debajo o por encima del equilibrio?', '¿Qué hacen los propietarios cuando el alquiler tradicional rinde menos?'],
-          solution: { explain: '<p>El tope al alquiler es un <strong>precio máximo</strong> efectivo (por debajo del equilibrio). Genera escasez: muchos buscan y pocos ofrecen. Además, con el tiempo la oferta se vuelve más elástica y se contrae: viviendas que pasan a venta, a alquiler de temporada o turístico, menos construcción para alquilar. Por eso, aunque los contratos regulados sean más baratos, el precio que enfrenta quien busca hoy (en los segmentos libres o en el mercado informal) termina siendo mayor. Es la consecuencia que predice el modelo: escasez, racionamiento y mercados paralelos.</p>' },
+          official: '3.14', research: true, level: 2, title: 'Alquileres intervenidos en Barcelona',
+          prompt: '<p>Analice la noticia “Barcelona se afianza como capital más cara para alquilar tras dos años con los precios intervenidos” (Vozpópuli, 11/03/2026) y explique cómo se vincula con el práctico.</p>',
+          hints: ['¿El tope es un precio máximo o mínimo? ¿Por debajo o por encima del equilibrio?', '¿Qué hacen los propietarios cuando el alquiler tradicional rinde menos? ¿La oferta es igual de elástica a corto y a largo plazo?'],
+          solution: { explain: `
+            <p><strong>Los datos de la nota</strong> (<a href="https://www.vozpopuli.com/espana/cataluna/barcelona-se-afianza-como-capital-mas-cara-para-alquilar-tras-dos-anos-con-los-precios-intervenidos.html" target="_blank" rel="noopener">Vozpópuli</a>, con datos de pisos.com): en marzo de 2026 se cumplen dos años del tope a los alquileres en Cataluña; Barcelona sigue siendo la capital más cara de España (30,04 €/m², apenas 2,44 % menos que un año antes); en toda Cataluña el alquiler subió 9,74 % en un año; y la <strong>oferta de alquiler cayó un 28 %</strong>. Los portales explican la caída porque los propietarios se retiran por la inseguridad jurídica y los límites a la actualización de rentas.</p>
+            <p><strong>Vínculo con el práctico.</strong> El tope es un <strong>precio máximo</strong> efectivo (por debajo del equilibrio). Como dice el cuadro de Blanco, genera <strong>escasez</strong> y la cantidad que se intercambia es la del lado corto del mercado: la oferta.</p>
+            ${chart({ x: [0, 100], y: [0, 30], xl: 'Viviendas en alquiler', yl: 'Alquiler', alt: 'Precio máximo de alquiler con oferta de corto plazo inelástica y de largo plazo más elástica',
+              curves: [{ f: (x) => 25 - 0.2 * x, cls: 'c-d', label: 'D' }, { f: (x) => 15 + 0.6 * (x - 50), dom: [25, 72], cls: 'c-s', label: 'O corto plazo' }, { f: (x) => 15 + 0.15 * (x - 50), dom: [0, 100], cls: 'c-s', dash: true, label: 'O largo plazo' }],
+              hlines: [{ y: 10, cls: 'c-ctrl', label: 'Pmáx (tope)' }],
+              points: [{ x: 50, y: 15, label: 'E', cls: 'c-eq' }, { x: 75, y: 10, label: 'Xd', cls: 'c-d', pos: 'se' }, { x: 41.7, y: 10, label: 'Xo CP', cls: 'c-s', pos: 'sw' }, { x: 16.7, y: 10, label: 'Xo LP', cls: 'c-s', pos: 'sw' }, { x: 16.7, y: 21.7, label: 'lo que pagaría el último inquilino', cls: 'c-err', pos: 'e' }],
+              guides: [{ x: 50, y: 15, xt: 'X*', yt: 'P*' }] },
+            'Con el tope, a corto plazo la oferta casi no cambia y la escasez es Xd − Xo CP. Con el tiempo la oferta se vuelve más elástica (los dueños venden, pasan a alquiler de temporada o turístico, se construye menos para alquilar): la cantidad ofrecida cae a Xo LP y la escasez crece. Quien no consigue contrato topeado está dispuesto a pagar mucho más que P* (punto rojo): eso alimenta el mercado no regulado y los pagos por fuera.')}
+            <ul>
+              <li><strong>Escasez</strong>: muchos buscan y pocos ofrecen; la caída del 28 % de la oferta es exactamente la contracción de Xo que predice el modelo.</li>
+              <li><strong>Racionamiento y mercados paralelos</strong>: el precio ya no asigna; aparecen listas de espera, requisitos más duros para el inquilino y alquileres de temporada que esquivan el tope.</li>
+              <li><strong>Elasticidad</strong> (Tema VI): la oferta es más elástica a largo plazo, por eso el efecto del tope empeora con los años.</li>
+              <li><strong>Bienestar</strong>: hay pérdida irrecuperable de eficiencia (viviendas que dejan de alquilarse aunque alguien pagaría más que su costo). Gana quien ya tiene un contrato topeado; pierde quien busca.</li>
+              <li><strong>Positivo y normativo</strong>: que la oferta cayó un 28 % es positivo; si el tope es buena o mala política es normativo (equidad para los inquilinos actuales contra eficiencia del mercado).</li>
+            </ul>` },
         },
       ],
       quiz: [

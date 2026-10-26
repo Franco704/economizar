@@ -701,3 +701,13 @@ pre.code, .lab-out, .table-wrap, .fig { scrollbar-width: thin; scrollbar-color: 
 .timer.low { color: var(--err); border-color: var(--err); }
 .int-rules { font-family: var(--sans); font-size: .95rem; }
 .int-part { margin-top: 2.4em; }
+
+/* Cuadros grises de Blanco: el resumen del libro, destacado como en el original */
+.cuadros { margin: 0 0 1.8em; display: grid; gap: 10px; }
+.cuadros-k { font: 700 .85rem var(--sans); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin: 0; display: flex; justify-content: space-between; gap: 12px; }
+.cuadros-k a { text-transform: none; letter-spacing: 0; font-weight: 600; }
+.gris { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px; margin: 0 0 10px; }
+.gris p { font-size: 1rem; line-height: 1.6; margin: 0; color: var(--ink); }
+.gris p.gris-src { font: 400 .8rem var(--sans); color: var(--muted); margin-top: 8px; }
+.ex-research { font: 700 .75rem var(--sans); color: var(--accent-ink); background: var(--accent-soft); border-radius: 999px; padding: 2px 9px; }
+.research-list { padding-left: 1.2em; line-height: 1.7; }

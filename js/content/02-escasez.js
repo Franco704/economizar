@@ -145,7 +145,7 @@
             ${note('Si en el parcial te piden “costo de oportunidad de asistir” en sentido amplio, es el costo económico total (2.900.000): todo aquello a lo que renuncia por ir, en dinero y en tiempo. Aclará qué estás calculando.', 'tip')}` },
         },
         {
-          official: '1.7', level: 1, title: 'El enfoque económico de la educación',
+          official: '1.7', research: true, level: 1, title: 'El enfoque económico de la educación',
           prompt: '<p>A partir del párrafo de Blanco “¿Cuál es el enfoque económico de la educación?”, responda: a) ¿Estudiar en la universidad tiene costos implícitos? ¿El mayor sacrificio es de tiempo? ¿Cuánto vale ese tiempo? ¿Cuál sería el ingreso renunciado? b) ¿Deben incluirse en los beneficios las satisfacciones intelectuales, emocionales o de reconocimiento social? c) ¿Buena parte de los ingresos adicionales se posponen varios años, con lo que se reduce su valor actual?</p>',
           hints: ['Blanco: “el coste de oportunidad de los años dedicados a estudiar en la universidad es el salario que podría obtenerse trabajando durante esos años”.'],
           solution: { explain: `

@@ -113,6 +113,7 @@
     else if (id.startsWith('simulacro')) renderExam(UNITS.find((u) => u.id === id.slice(10)));
     else if (id === 'graficas') renderGraphs();
     else if (id === 'formulas') renderFormulas();
+    else if (id === 'cuadros') renderCuadros();
     else if (id === 'parciales') renderParciales();
     else if (id === 'integral') renderIntegral();
     else renderHome();
@@ -194,6 +195,7 @@
             <a class="btn" href="#/parciales">Parciales resueltos</a>
             <a class="btn" href="#/graficas">Taller de gráficas</a>
             <a class="btn" href="#/formulas">Fórmulas</a>
+            <a class="btn" href="#/cuadros">Cuadros de Blanco</a>
             <button class="btn" type="button" data-act="also">También probá…</button>
             ${reviewIds().length ? `<a class="btn" href="#/repaso">Repasar ${reviewIds().length} preguntas falladas</a>` : ''}
           </div>
@@ -257,6 +259,7 @@
         <article class="exercise${ex.official ? ' official' : px ? ' parcial' : ''}">
           <header class="ex-head">
             <span class="ex-tag${px ? ' px' : ''}">${tag}</span>
+            ${ex.research ? '<span class="ex-research">Punto de investigación</span>' : ''}
             ${ex.level ? `<span class="ex-level" data-level="${ex.level}">${LEVEL[ex.level]}</span>` : ''}
           </header>
           ${ex.exam ? `<p class="ex-exams">${ex.official ? '<span class="chip">También tomado en</span>' : '<span class="chip">Tomado en</span>'}${examChips(ex.exam)}</p>` : ''}
@@ -298,6 +301,7 @@
         <h1>${l.title}</h1>
         <p class="tldr">${l.tldr}</p>
         ${l.goals ? `<div class="goals"><p>Al terminar vas a poder:</p><ul>${l.goals.map((g) => `<li>${g}</li>`).join('')}</ul></div>` : ''}
+        ${l.cuadros ? `<section class="cuadros" aria-label="Cuadros grises de Blanco"><p class="cuadros-k">Lo que resume Blanco <a href="#/cuadros">ver todos</a></p>${l.cuadros.map(cuadro).join('')}</section>` : ''}
         <div class="body">${l.body}${rest}</div>
         ${quiz.length ? `<section class="check-sec" id="comprobar"><h2>Comprobá lo que entendiste</h2><p class="sec-lede">Elegí una respuesta: la corrección es inmediata. Lo que falles queda guardado para repasar.</p><div class="quiz-mount"></div></section>` : ''}
         ${exercises ? `<section class="practice" id="ejercicios"><h2>Ejercicios</h2><p class="sec-lede">Resolvelos en papel, con la gráfica, antes de abrir la solución. Equivocarse acá es gratis.</p>${exercises}</section>` : ''}
@@ -511,6 +515,29 @@
         </section>`).join('')}
       </article>`;
     main.querySelectorAll('[data-g]').forEach((el) => mountLab(el, all[+el.dataset.g].c));
+  }
+
+  // ---------- Cuadros grises de Blanco y puntos de investigación de los TP ----------
+  const cuadro = (c) => `<aside class="gris"><p>${c.t}</p><p class="gris-src">Blanco, <em>Economía: teoría y práctica</em>, cap. ${c.cap}</p></aside>`;
+  function renderCuadros() {
+    document.title = 'Cuadros de Blanco, Economizar';
+    const C = window.GUIDE.CUADROS || [];
+    const research = LESSONS.flatMap((l) => (l.exercises || []).filter((e) => e.research).map((ex) => ({ l, ex })))
+      .sort((a, b) => a.ex.official.localeCompare(b.ex.official, 'es', { numeric: true }));
+    main.innerHTML = `
+      <article class="lesson cuadros-page">
+        <p class="crumb">Para el parcial</p>
+        <h1>Cuadros de Blanco e investigación</h1>
+        <p class="tldr">Los ${C.length} <mark>cuadros grises</mark> de Blanco, donde el libro resume cada concepto en pocas líneas: son las definiciones que se esperan en el parcial. Abajo, los ${research.length} puntos de investigación de los TP desarrollados con sus fuentes.</p>
+        ${UNITS.map((u) => `<section data-u="${u.id}"><h2><span class="unit-tag">${u.title}</span>${u.name}</h2>
+          ${MODULES.filter((m) => m.unit === u.id && C.some((c) => lessonById[c.l].module === m.id)).map((m) => `<h3>Tema ${m.tema}: ${m.title}</h3>
+            ${lessonsOf(m.id).filter((l) => l.cuadros).map((l) => `<p class="q-link"><a href="#/${l.id}">${l.title}</a></p>${l.cuadros.map(cuadro).join('')}`).join('')}`).join('')}
+        </section>`).join('')}
+        <section id="investigacion"><h2>Puntos de investigación de los TP</h2>
+          <p class="sec-lede">Noticias, informes y datos que piden los prácticos, con la fuente, los conceptos de la materia y una opinión de ejemplo.</p>
+          <ul class="research-list">${research.map(({ l, ex }) => `<li><a href="#/${l.id}"><strong>TP ${ex.official.replace('.', ', ejercicio ')}</strong>: ${ex.title}</a> <small>· Tema ${modOf(l.module).tema}</small></li>`).join('')}</ul>
+        </section>
+      </article>`;
   }
 
   // ---------- Fórmulas: hoja de repaso armada desde GUIDE.FORMULAS ----------

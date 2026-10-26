@@ -6,7 +6,8 @@ Guía de estudio de **Economía 2026 (UTN-FRT)**, cátedra Ing. Ramón A. Aranda
 - **Segundo parcial, Macroeconomía**: PIB, dinero, Banco Central, inflación, desigualdad y pobreza.
 - 55 lecciones a partir de las diapositivas de la cátedra y la bibliografía (Blanco y Mankiw), con lecciones “a fondo” por tema: fallos del mercado, flujo circular, la FPP del parcial, el ajuste al equilibrio, excedentes y bienestar, elasticidad en el parcial, escala y costos, nivelación y cierre, PIB, dinero bancario, política monetaria, inflación y desigualdad.
 - 28 laboratorios interactivos: curvas que se desplazan, equilibrio, controles de precios, impuestos, elasticidad e ingreso total, FPP, producción, costos, decisión de la empresa, largo plazo, multiplicador monetario, mercado de dinero y curva de Lorenz.
-- Los ejercicios de los TP 1 a 6 con pistas y solución paso a paso (51 ejercicios).
+- Los ejercicios de los TP 1 a 6 con pistas y solución paso a paso (56 ejercicios), incluidos los **puntos de investigación** (noticias, datos del INDEC, informe de la CEPAL) desarrollados con sus fuentes.
+- Los **69 cuadros grises de Blanco**, donde el libro resume cada concepto: destacados al comienzo de cada lección y todos juntos en la página Cuadros.
 - **Parciales resueltos**: 15 parciales y recuperatorios reales de la cátedra (2022 a 2025), pregunta por pregunta, con lo que más se repite y qué temas pesan más (52 ejercicios nuevos).
 - 489 preguntas de repaso, incluido el banco de verdadero/falso y opción múltiple de Blanco (de donde salen muchas preguntas de parcial), cuestionario por tema, simulacro por parcial, **integral** con reloj (preguntas que cruzan temas y 6 problemas con grilla de corrección), repaso de las falladas, taller de gráficas y hoja de fórmulas.
 
