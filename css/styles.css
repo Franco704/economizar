@@ -711,3 +711,7 @@ pre.code, .lab-out, .table-wrap, .fig { scrollbar-width: thin; scrollbar-color: 
 .gris p.gris-src { font: 400 .8rem var(--sans); color: var(--muted); margin-top: 8px; }
 .ex-research { font: 700 .75rem var(--sans); color: var(--accent-ink); background: var(--accent-soft); border-radius: 999px; padding: 2px 9px; }
 .research-list { padding-left: 1.2em; line-height: 1.7; }
+
+/* Otras guías agrupadas por año de la carrera */
+.also-y { font-size: .95rem; font-weight: 700; margin: 18px 0 8px; opacity: .75; }
+.also-h + .also-y { margin-top: 4px; }
